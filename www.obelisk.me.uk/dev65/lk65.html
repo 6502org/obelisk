@@ -1,0 +1,102 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+    <title>Lk65 Linker</title>
+    <link rel="StyleSheet" href="../obelisk.css" type="text/css" media="screen,print"/>
+</head>
+<body>
+    <script type="text/javascript"><!--
+google_ad_client = "pub-0826595092783671";
+/* Electronics Header */
+google_ad_slot = "0606506508";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+    </script>
+
+    <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+    </script>
+
+    <hr />
+    <h1>
+        Linker (Lk65)</h1>
+    <p>
+        The linker Lk65 combines a selection of individually assembled object files and
+        libraries into a complete application and writes it out as a single HEX, S19 or
+        binary file. The syntax of the link command is</p>
+    <pre>
+Lk65 [-65C816|-65832][-code/data/bss regions][-bin|hex|s19][-output &lt;file&gt;]  object ... library ...</pre>
+    <p>
+        The linker will complain if an output format has not been specified.</p>
+    <p>
+        The -65C816 option informs the linker that it is building for this processor. The
+        code, data and bss options tell the linker where these areas will be in memory and
+        consist of a series of memory addresses. For example my home brew has a 4K ROM from
+        $F000 to $FFFF but one page ($FE00-$FEFF) is reserved for I/O hardware mapping,
+        so I would tell the linker to place code as follows:</p>
+    <pre>
+Lk65 -code $F000-FD00,$FF00-$FFFF rtos.obj</pre>
+    <p>
+        You need only define the areas for the section types you have used. If the linker
+        finds a section type that you have not specified it will produce an error (and crash
+        at the moment) and you can add a definition to the command line and rerun the link.</p>
+    <p>
+        At the moment the code, data and bss areas should not overlap! Additionally the
+        bss page should be somewhere other than page zero.</p>
+    <p>
+        The linker can produces a binary file by default or when -bin is specified on the
+        command line. You can generate a HEX file by specifying -hex instead.</p>
+    <table border="0" cellpadding="0" cellspacing="0" height="30" width="100%">
+        <tr>
+            <td bgcolor="#aaaaff" width="25%">
+                &nbsp;<a href="as65.html">&lt;&lt; Back</a></td>
+            <td bgcolor="#aaaaff" width="25%">
+                <center>
+                    <a href="../index.html" target="_parent">Home</a></center>
+            </td>
+            <td bgcolor="#aaaaff" style="text-align: center" width="25%">
+                <a href="index.html">Contents</a></td>
+            <td align="right" bgcolor="#aaaaff" width="25%">
+                <a href="lb65.html">Next &gt;&gt;</a></td>
+        </tr>
+    </table>
+    <hr/>
+    <script type="text/javascript"><!--
+google_ad_client = "pub-0826595092783671";
+/* Electronics Footer */
+google_ad_slot = "1675902091";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+    </script>
+
+    <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+    </script>
+
+    <hr/>
+
+    <script type="text/javascript"><!--
+google_ad_client = "pub-0826595092783671";
+/* Electronics Links */
+google_ad_slot = "3690256994";
+google_ad_width = 728;
+google_ad_height = 15;
+//-->
+    </script>
+
+    <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+    </script>
+
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-9026746-2");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+    <hr />
+    <p class="timestamp">
+        This page was last updated on 17th September 2009</p>
+    <p class="copyright">
+        © Copyright 2009 Andrew John Jacobs. All rights reserved.<br />
+        All trademarks and service marks are the properties of their respective owners.</p>
+</body>
+</html>
