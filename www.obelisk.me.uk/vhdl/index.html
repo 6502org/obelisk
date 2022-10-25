@@ -1,0 +1,143 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title>VHDL > Introduction</title>
+    <link rel="StyleSheet" href="../obelisk.css" type="text/css" media="screen,print" />
+</head>
+<body>
+
+    <script type="text/javascript"><!--
+google_ad_client = "pub-0826595092783671";
+/* VHDL Header */
+google_ad_slot = "0606506508";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+    </script>
+
+    <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+    </script>
+
+    <hr />
+    <h1>
+        VHDL:
+        Introduction</h1>
+    <p>
+        I've never been very good with a soldering iron but at the same time I've always
+        wanted to understand electronics better, especially digital electronics . Early
+        in 2004 I was surfing around cyberspace when I came across the home pages of someone
+        who had built a Motorola 6809 based system running Flex using a Field Programmable
+        Gate Array (FPGA). I was intrigued and decided to learn more about these devices
+        and how you program them to simulate microprocessors.</p>
+    <p>
+        Since March 2004 I've been playing with VHDL. My initial experiments were too ambitious
+        and recently I decided to go back to basics and simulate some simple logic components
+        before attempting more complex devices (like the Intel 4004, MOS 6502, WDC 65C02
+        and 65816).</p>
+    <p>
+        In January 2005 I finally bought a <a href="http://www.xess.com" target="_blank">XESS</a>
+        XSA-3M1000 development board with 1,000,000 gate Spartan-3 FPGA but I'm still working
+        on the VHDL model for my CPU.</p>
+    <p>
+        There is a lot of information about VHDL on the Internet but surprisingly few examples
+        of simple designs for beginners so I've been downloading data sheets for CMOS and
+        74 Series logic chips and working out how to code them. I use two development environments
+        to check my models, the <a href="http://www.xilinx.com" target="_blank">Xilinx</a>
+        ISE 6.3 (a free download but you need cable/DSL as it's huge) with ModelSim XE and
+        <a href="http://www.gmvhdl.com" target="_blank">Green Mountain</a> DirectVHDL 1.1.2
+        (reasonably priced for a beginner).</p>
+    <p>
+        I'm a professional software engineer by training and not an electronics engineer
+        so it has taken me a while to get my head around differences between '0' and 'L'
+        and propagation delays. If you have any comments on my models then drop me an <a
+            href="mailto:andrew-AT-obelisk.demon.co.uk">e-mail</a> (removing the SPAM protection)
+        and tell me what I've done wrong or how to improve them.</p>
+    <p>
+        In writing my models I've adopted a number of conventions, namely:</p>
+    <ul>
+        <li>I write my VHDL in 'lower case' with 4 space tabs. If you don't like this then tough!
+        </li>
+        <li>I indicate active low signals by suffixing them with '_n' (as in 'clk_n'). </li>
+        <li>I try to make my models work with '0', '1', 'L' and 'H' inputs. Outputs are normally
+            '0' or '1'. </li>
+        <li>My components uses generic constants to define 'High-to-Low' and 'Low-to-High' propagation
+            times. In the models these&nbsp; time constants are zero but you can substitute
+            real values when you create instances of them as components (see the test benches
+            for examples).</li>
+        <li>Lots of device names are not valid VHDL identifiers. I add an 'A' prefix to my model
+            names (e.g. 4001B =&gt; A4001B).</li>
+        <li>Some devices names include codes to indicate the technology they are manufactured
+            with (e.g. 74LSxxx and 74HCxxx). This typically does not affect the function only
+            its speed which in my models is determined at instantiation, so I put 'XX' in the
+            device name (e.g. 74LS138 =&gt; A74XX138).</li>
+    </ul>
+    <p>
+        I only upload design files that compile and produce reasonable looking schematics,
+        but if it doesn't have a test bench then its behaviour has not been fully tested.
+        I'll be adding more designs and test benches over time so check back occasionally
+        to see what's changed.</p>
+    <p>
+        <i>A word to students:</i></p>
+    <p>
+        <i>I don't mind you looking at my code to see how I wrote it but I wouldn't advise copying
+            it verbatim and trying to pass it off as your own. If you found this page then your
+            lecturer probably has too! Have an attempt at working out how to code a problem
+            yourself first then compare it to mine.</i></p>
+    <p>
+        <table border="0" cellpadding="0" cellspacing="0" width="100%" height="30">
+            <tr>
+                <td align="left" width="25%" bgcolor="#aaaaff">
+                </td>
+                <td align="center" width="25%" bgcolor="#aaaaff">
+                    <a href="../index.html" target="_parent">Home</a>
+                </td>
+                <td align="center" width="25%" bgcolor="#aaaaff">
+                    <a href="index.html">Contents</a>
+                </td>
+                <td align="right" width="25%" bgcolor="#aaaaff">
+                    <a href="cmos.html">Next &gt;&gt;</a>
+                </td>
+            </tr>
+        </table>
+    </p>
+    <hr />
+
+    <script type="text/javascript"><!--
+google_ad_client = "pub-0826595092783671";
+/* VHDL Footer */
+google_ad_slot = "1675902091";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+    </script>
+
+    <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+    </script>
+
+    <hr>
+
+    <script type="text/javascript"><!--
+google_ad_client = "pub-0826595092783671";
+/* VHDL Links */
+google_ad_slot = "3690256994";
+google_ad_width = 728;
+google_ad_height = 15;
+//-->
+    </script>
+
+    <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+    </script>
+
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-9026746-2");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+    <hr />
+    <p class="timestamp">
+        This page was last updated on 21st April 2009</p>
+    <p class="copyright">
+        © Copyright 2009 Andrew John Jacobs. All rights reserved.<br />
+        All trademarks and service marks are the properties of their respective owners.</p>
+</body>
+</html>

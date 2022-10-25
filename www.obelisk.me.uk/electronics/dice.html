@@ -1,0 +1,105 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title>Electronic Dice</title>
+    <link rel="StyleSheet" href="../obelisk.css" type="text/css" media="screen,print" />
+</head>
+<body>
+
+    <script type="text/javascript"><!--
+google_ad_client = "pub-0826595092783671";
+/* Electronics Header */
+google_ad_slot = "0606506508";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+    </script>
+
+    <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+    </script>
+
+    <hr />
+    <h1>
+        Electronic Dice</h1>
+    <p>
+        My first simple PIC design was for an electronic dice. The circuit was pretty simple,
+        basically a just a set of seven LEDs driven from output pins driven from PORTB of
+        a 16F628 through load resistors. A switch connected to RB0 triggers the rolling
+        and the device is clocked by an RC oscillator.&nbsp;Click the image for a
+        larger picture.</p>
+    <a href="dice/schematic.png" target="_blank">
+        <img src="dice/schematic.png" alt="Schematic" width="600" />
+    </a>
+    <p>
+        Unfortunately I can no longer find the code for this. My home machine suffered a
+        disk crash and this was one of the casualties.</p>
+    <p>
+        The random roll of the dice was based on the time between button presses. While
+        the code was waiting for a button press it incremented a counter from 1 upto 6 and
+        repeatedly. As this increment is happening thousands of times a second its impossible
+        for a user to time presses to get a predicable outcome.</p>
+    <p>
+        If I was designing this again I would do a few things differently. For starters
+        I'd use a smaller device with a built in oscillator like the 12F629, possibly even
+        a baseline chip like a 12F508. Also you don't need individual lines to each LED
+        to draw dice face patterns. You can control the seven LEDs with just four signals.
+        Also I'd try to eliminate the pull up on the switch input by using a pin with an
+        internal weak pull up.</p>
+    <table border="0" cellpadding="0" cellspacing="0" height="30" width="100%">
+        <tr>
+            <td bgcolor="#aaaaff" width="25%">
+                &nbsp;</td>
+            <td bgcolor="#aaaaff" width="25%">
+                <p>
+                </p>
+                <center>
+                    <a href="../index.html" target="_parent">Home</a></center>
+            </td>
+            <td bgcolor="#aaaaff" style="text-align: center" width="25%">
+                <a href="index.html">Contents</a></td>
+            <td align="right" bgcolor="#aaaaff" width="25%">
+                <a href="alarm.html">Next &gt;&gt;</a></td>
+        </tr>
+    </table>
+    <hr />
+
+    <script type="text/javascript"><!--
+google_ad_client = "pub-0826595092783671";
+/* Electronics Footer */
+google_ad_slot = "1675902091";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+    </script>
+
+    <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+    </script>
+
+    <hr>
+
+    <script type="text/javascript"><!--
+google_ad_client = "pub-0826595092783671";
+/* Electronics Links */
+google_ad_slot = "3690256994";
+google_ad_width = 728;
+google_ad_height = 15;
+//-->
+    </script>
+
+    <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+    </script>
+
+    <script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-9026746-2");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+    <hr />
+    <p class="timestamp">
+        This page was last updated on 9th September 2009</p>
+    <p class="copyright">
+        © Copyright 2009 Andrew John Jacobs. All rights reserved.<br />
+        All trademarks and service marks are the properties of their respective owners.</p>
+</body>
+</html>

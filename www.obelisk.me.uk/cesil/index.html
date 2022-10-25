@@ -1,0 +1,222 @@
+<HTML>
+	<HEAD>
+		<META NAME="GENERATOR" CONTENT="Microsoft FrontPage 4.0">
+		<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+		<TITLE>CESIL</TITLE>
+		<LINK REL="StyleSheet" HREF="../obelisk.css" TYPE="text/css" media="screen,print">
+	</HEAD>
+	<BODY>
+<script type="text/javascript"><!--
+google_ad_client = "pub-0826595092783671";
+/* VHDL Header */
+google_ad_slot = "0606506508";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+<HR ALIGN=LEFT>
+		<H1>CESIL</H1>
+
+        <p>Way back in the mists of time (or at least the late 1960's) someone
+        decided that it would be a good idea for young and impressionable 'O'
+        level computer science students to have a really simple programming
+        language to cut their teeth on. And so CESIL was created.</p>
+        <p>I seem to remember that CESIL stood for 'Computer Education in
+        Schools Instructional Language' and that it was supported by ICL. It was
+        a very simple assembly language supporting only integer operations and a
+        little bit of string output. (<i>Sounds fun eh? Don't worry you'll get
+        your chance later</i>.)</p>
+        <p>If programming in CESIL wasn't challenging enough the act of
+        actually running it added to the overall excitement. At the time very
+        few schools had a computer that could run the code written by the
+        students and the few that could had a teletype (a kind of very slow
+        mechanical typewriter) connected to remote mainframe. Those of us
+        without a teletype had to either write out out programs neatly on coding
+        sheets or use optical cards (and a special black felt tip) to lay out
+        our master pieces. Either way the teacher had to post them away and if
+        you were lucky the results had come back a week later. Inevitably the
+        first time you sent cards or coding sheets the result would be a listing
+        of all the compilation errors in your code, fix these and if you're
+        really lucky the next listing might actually have some execution output
+        in it and then you could start debugging!</p>
+        <h2>What does CESIL look like?</h2>
+        <p>A CESIL program consists of two parts, the instruction code followed
+        by a runtime data set. The instruction code laid out like an assembly
+        language program with each line consisting of up to three parts namely a
+        label (for lines that will be subsequently referenced by jumps), an
+        instruction and an operand (which depends on the type of instruction).</p>
+        <p>All memory, arithmetic and comparisons act on the current value of
+        the integer accumulator. Named integer variables are used to store
+        values when they are not being operated upon. </p>
+        <p>The start of the runtime data section is identified by a percent
+        character ('%') and followed by lines containing a single integer value.</p>
+        <p>For example the following program totals the integers in runtime data
+        section until it encounters a negative value and prints the total.</p>
+        <pre>        LOAD    0
+LOOP    STORE   TOTAL
+        IN
+        JINEG   DONE
+        ADD     TOTAL
+        JUMP    LOOP
+
+DONE    PRINT   &quot;The total is: &quot;
+        LOAD    TOTAL
+        OUT
+        LINE
+        HALT
+
+        %
+        1
+        2
+        3
+        -1</pre>
+        <h2>Reference</h2>
+        <p>CESIL doesn't have very many instructions and the previous example used
+        most of them. The following sections give a complete reference of all
+        the instructions I can remember. <i>(If I've missed any, or your memory
+        is better than mine, then please let me know.)</i></p>
+        <h3>Identifiers</h3>
+        <p>In CESIL variables and labels are identified by alphanumeric symbols.
+        The first character in an identifier must be a letter (e.g. 'a'-'z' or
+        'A'-'Z') but any subsequent characters may be either letters or digits.
+        The compiler is not case sensitive, it converts all identifiers and
+        keywords to upper case during processing.</p>
+        <h3>Labels</h3>
+        <p>Any CESIL instruction may the labeled to indicate that it may be the
+        target of a branch instruction elsewhere in the program. Instructions
+        that are not labeled should be preceded by at least one space or TAB
+        character. It is common practice to layout CESIL programs so the labels,
+        instructions and operands are in three columns by using TAB characters
+        to space them.</p>
+        <h3>Comments</h3>
+        <p>Lines beginning with an asterisk are considered comments and are
+        ignored my the compiler, as are blank lines.</p>
+        <h3>Memory Operations</h3>
+        <p>LOAD <i>literal</i><br>
+        LOAD <i>identifier</i></p>
+        <p>Put the value specified by the operand (either a literal value or a
+        stored named value) into the accumulator.</p>
+        <p>STORE <i>identifier</i></p>
+        <p>Copy the current value of the accumulator into the named storage
+        location.</p>
+        <p>IN</p>
+        <p>Read the next value from the runtime data section into the
+        accumulator.</p>
+        <h3>Arithmetic Operations</h3>
+        <p>Arithmetic operations apply a basic mathematical function to the
+        integer value held in the accumulator.</p>
+        <p>ADD <i>literal</i><br>
+        ADD <i>identifier</i></p>
+        <p>Adds the specified literal value or stored named value to the
+        accumulator.</p>
+        <p>SUBTRACT <i>literal</i><br>
+        SUBTRACT <i>identifier</i></p>
+        <p>Subtracts the specified literal value or stored named value from the
+        accumulator.</p>
+        <p>MULTIPLY <i>literal</i><br>
+        MULTIPLY <i>identifier</i></p>
+        <p>Multiplies the accumulator by the specified literal value or stored
+        named value.</p>
+        <p>DIVIDE <i>literal</i><br>
+        DIVIDE <i>identifier</i></p>
+        <p>Divides the accumulator by the specified literal value or stored
+        named value. Dividing by zero will generate an error and halt execution.</p>
+        <h3>Jump Operations</h3>
+        <p>JUMP <i>label</i></p>
+        <p>Causes an unconditional jump to the named label.</p>
+        <p>JIZERO <i>label</i></p>
+        <p>Jumps to the specified label if the current value of the accumulator
+        is zero.</p>
+        <p>JINEG <i>label</i></p>
+        <p>Jumps to the specified label if the current value of the accumulator
+        is negative.</p>
+        <h3>Output Operations</h3>
+        <p>PRINT <i>string</i></p>
+        <p>Prints the string (e.g. &quot;Hello World&quot;) to the output
+        stream. The cursor is left after the last character printed and does not
+        move to a new line.</p>
+        <p>OUT</p>
+        <p>Prints the current value of the accumulator in a right justified
+        field x characters wide. The cursor is left after the last character
+        printed and does not move to a new line.</p>
+        <p>LINE</p>
+        <p>Moves the cursor to the start of a new line.</p>
+        <h3>Control Operations</h3>
+        <p>HALT</p>
+        <p>Causes the execution of the current program to stop.</p>
+        <h2>Visual CESIL</h2>
+        <p>OK, now its your chance to try this wonderful language for yourself.
+            (<i>Is that good news?</i>)
+            Visual CESIL was originally written as an exercise in Java programming (in Visual J++)
+            but Microsoft dropped support for this environment so I&#39;ve ported the code to C#
+            and .Net 2.0.</p>
+        <p><img border="0" src="cesil-ide.gif" alt="CESIL IDE Image" width="600" height="469"></p>
+        <p>To get started with Visual CESIL you will need one of the following zip files
+        which contains the IDE packaged as a standalone Windows .EXE and a few
+        examples. Versions 1.1 and 1.2 need the Microsoft Java JVM to operate
+        and may not work on newly installed machines. I've also made a command
+        line version of the compiler and runtime which should work on any
+        Java platform.</p>
+        <p id="download">Click on the item below to start a download:</p>
+        <ul>
+          <li><a href="cesil-2-0.zip">Visual CESIL 2.0 and examples</a> (31K) (Released 20-Jun-10)<br />
+              <br />
+          </li>
+          <li><a href="CESIL-2008-01-22.zip">Java based command line CESIL for Windows &amp; *NIX</a> (18K) (Released 22-Jan-08)<br />
+          </li>
+          <li><a href="cesil-1-2.zip">Visual CESIL 1.2 and examples</a> (31K)</li>
+          <li><a href="cesil-1-1.zip">Visual CESIL 1.1 and examples</a> (29K)</li>
+        </ul>
+        <p>Please let me know how you get on with it and send me copies of any
+        interesting programs you come up with. I'll add the best submissions to
+        future releases.</p>
+<HR ALIGN=LEFT>
+<script type="text/javascript"><!--
+google_ad_client = "pub-0826595092783671";
+/* VHDL Footer */
+google_ad_slot = "1675902091";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+<HR>
+<script type="text/javascript"><!--
+google_ad_client = "pub-0826595092783671";
+/* VHDL Links */
+google_ad_slot = "3690256994";
+google_ad_width = 728;
+google_ad_height = 15;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-9026746-2");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+<hr>
+        <script language=javascript type="text/javascript"
+src="http://ss.webring.com/navbar?f=j;y=andrew_jacobs;u=10119779">
+</script><noscript><center>
+<table bgcolor=gray cellspacing=0 border=2><tr>
+<td><table cellpadding=2 cellspacing=0 border=0><tr><td align=center>
+<font face=arial size=-1>This site is a member of WebRing.
+<br>To browse visit <a href="http://ss.webring.com/navbar?f=l;y=andrew_jacobs;u=10119779">
+Here</a>.</font></td></tr></table></td></tr></table>
+</center></noscript>
+    <hr />
+    <p class="timestamp">
+        This page was last updated on 20th June 2010</p>
+    <p class="copyright">
+        © Copyright 1999-2010 Andrew John Jacobs. All rights reserved.<br />
+        All trademarks and service marks are the properties of their respective owners.</p>
+	</BODY>
+</HTML>

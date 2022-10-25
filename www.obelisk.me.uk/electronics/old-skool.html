@@ -1,0 +1,126 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title>A BASIC Computer</title>
+    <link rel="StyleSheet" href="../obelisk.css" type="text/css" media="screen,print" />
+</head>
+<body>
+
+    <script type="text/javascript"><!--
+google_ad_client = "pub-0826595092783671";
+/* Electronics Header */
+google_ad_slot = "0606506508";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+    </script>
+
+    <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+    </script>
+
+    <hr />
+    <h1>
+        Old Skool - A BASIC Computer</h1>
+    <p>
+        Once upon a time computers used to be really simple but now they have evolved into
+        continually updating behemoths with so many commands, languages and APIs that I
+        wonder how anyone is ever expected to learn how to program them.</p>
+    <p>
+        I thought I'd try to reverse the trend and design something with the same kind
+        of power as a Sinclair ZX80/81 or Apple I with the minimum of chips. The result
+        is 'Old Skool' a three (maybe four later) chip computer for running BASIC programs
+        that plugs into your telly.</p>
+    <h2>
+        Hardware Design</h2>
+    <p>
+        'Old Skool' is pretty simple; two microcontrollers and a 32K RAM chip. The board
+        slots into a small aluminum enclosure which has a power switch on the front; &nbsp;A/V,
+        PS/2 and power sockets on the back. The chip socket on the left will house a 18F4620
+        programmed with a dialect of BASIC. It can generate a 15-bit address to select a
+        location to read or write in the static RAM chip (centre).</p>
+    <img src="old-skool/cimg0532.jpg" alt="Unpopulated Board" />
+    <p>
+        The socket on the right holds an 18F4525 or another 18F4620 which uses the 'Parallel
+        Slave Port' feature so it can be read or written like the RAM but without an address.
+        This second microcontroller generates a PAL or NTSC composite video picture and
+        is interfaced to a standard PS/2 keyboard.</p>
+    <p>
+        The asute will have noticed that there is no way to load or save programs in this
+        configuration. A later phase will add an SD/MMC card interface to support this.</p>
+    <h2>
+        Current Status</h2>
+    <h3>
+        Hardware:</h3>
+    <p>
+        The card is built and tested for both devices. Although both the 18F4525 and 18F4620
+        are part of the same 'family' of chips there appears to some important internal
+        differences which affects the video generation. I get slightly different pixel images
+        from each of them.</p>
+    <h3>
+        Software:</h3>
+    <p>
+        The video chip generates a blank and white 40x25 character based screen which supports
+        inverse video and blinking. I'm working on code to support VT-100 like control sequences.
+        The code can read the PS/2 key presses as they occur but I haven't managed to write
+        back to the keyboard yet (e.g. to change the Caps Lock/Num Lock LEDs). &nbsp;</p>
+    <p>
+        I've only written enough code for the interpreter chip to test the access to the
+        RAM at the moment. I want to get the video and keyboard working before getting stuck
+        into this.</p>
+    <table border="0" cellpadding="0" cellspacing="0" height="30" width="100%">
+        <tr>
+            <td bgcolor="#aaaaff" width="25%">
+                &nbsp;<a href="miranda.html">&lt;&lt; Back</a></td>
+            <td bgcolor="#aaaaff" width="25%">
+                <p>
+                </p>
+                <center>
+                    <a href="../index.html" target="_parent">Home</a></center>
+            </td>
+            <td bgcolor="#aaaaff" style="text-align: center" width="25%">
+                <a href="index.html">Contents</a></td>
+            <td align="right" bgcolor="#aaaaff" width="25%">
+                <a href="alarm.html"></a></td>
+        </tr>
+    </table>
+    <hr>
+
+    <script type="text/javascript"><!--
+google_ad_client = "pub-0826595092783671";
+/* Electronics Footer */
+google_ad_slot = "1675902091";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+    </script>
+
+    <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+    </script>
+
+    <hr>
+
+    <script type="text/javascript"><!--
+google_ad_client = "pub-0826595092783671";
+/* Electronics Links */
+google_ad_slot = "3690256994";
+google_ad_width = 728;
+google_ad_height = 15;
+//-->
+    </script>
+
+    <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+    </script>
+
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-9026746-2");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+    <hr />
+    <p class="timestamp">
+        This page was last updated on 22nd April 2009</p>
+    <p class="copyright">
+        © Copyright 2009 Andrew John Jacobs. All rights reserved.<br />
+        All trademarks and service marks are the properties of their respective owners.</p>
+</body>
+</html>

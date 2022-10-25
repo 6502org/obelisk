@@ -1,0 +1,118 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+    <title>PIC Controlled Metronome</title>
+    <link rel="StyleSheet" href="../obelisk.css" type="text/css" media="screen,print"/>
+</head>
+<body>
+
+    <script type="text/javascript"><!--
+google_ad_client = "pub-0826595092783671";
+/* Electronics Header */
+google_ad_slot = "0606506508";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+    </script>
+
+    <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+    </script>
+
+    <hr/>
+    <h1>
+        Metronome</h1>
+    <p>
+        There are several guitarists in my household so on a trip to the local Maplin I
+        bought a Velleman metronome kit but was rather disappointed by the result. The circuit
+        used a variable resister and capacitor arrangement to tune the beats per minute
+        buts its very hard to set to a specific BPM rate.</p>
+    <p>
+        I thought I must be able to do better with a PIC! The resulting design uses a 16F628
+        running off its internal oscillator to beat out time. Click <a href="metronome/metronome1.gif"
+            target="_blank">here</a> to see the schematics in a new window.</p>
+    <p>
+        The firmware uses all three timers available on this device. The 8-bit TMR0 is used
+        to generate an interrupt source for the display multiplexing and is used during
+        button debouncing. The 16-bit TMR1 is used in conjunction with hardware pre-scaling
+        and software post-scaling to generate the BPM period. Finally the 8-bit TMR2 is
+        used to generate a PWM signal to produce a tone on the speaker when its is enabled.
+        The built in EEPROM memory is used to save the state of the device between uses.</p>
+    <p align="center">
+        <img border="0" src="metronome/metro-front.jpg"></p>
+    <p>
+        As you can see from the picture above I built the metronome on standard strip board
+        (running top to bottom).&nbsp; The buttons beside the LEDs select the BPM rate.
+        The lower button toggles the speaker mute function. The speaker and battery holder
+        are on the back recessed into holes cut into a foam block (itself made from several
+        thin foam sheets glued together). Not especially neat but it does the job.</p>
+    <p align="center">
+        <img border="0" src="metronome/metro-back.jpg"></p>
+    <p>
+        Let me know if you build one.</p>
+    <h2>
+        Source Code</h2>
+    <p>
+        The following ZIP contains all the PIC assembler need to program the metronome.
+        The code is in two pieces: one project builds a library of PIC routines (including
+        start power up modules) and another contains the project specific code. Build the
+        library first.</p>
+    <ul>
+        <li><a href="metronome/metronome.zip">Source Code ZIP </a>(51.6Kb)</li>
+    </ul>
+    <table border="0" cellpadding="0" cellspacing="0" height="30" width="100%">
+        <tr>
+            <td bgcolor="#aaaaff" style="height: 30px" width="25%">
+                &nbsp;<a href="alarm.html">&lt;&lt; Back</a></td>
+            <td bgcolor="#aaaaff" style="height: 30px" width="25%">
+                <p>
+                </p>
+                <center>
+                    <a href="../index.html" target="_parent">Home</a></center>
+            </td>
+            <td bgcolor="#aaaaff" style="height: 30px; text-align: center" width="25%">
+                <a href="index.html">Contents</a></td>
+            <td align="right" bgcolor="#aaaaff" style="height: 30px" width="25%">
+                <a href="clock.html">Next &gt;&gt;</a></td>
+        </tr>
+    </table>
+    <hr>
+
+    <script type="text/javascript"><!--
+google_ad_client = "pub-0826595092783671";
+/* Electronics Footer */
+google_ad_slot = "1675902091";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+    </script>
+
+    <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+    </script>
+
+    <hr>
+
+    <script type="text/javascript"><!--
+google_ad_client = "pub-0826595092783671";
+/* Electronics Links */
+google_ad_slot = "3690256994";
+google_ad_width = 728;
+google_ad_height = 15;
+//-->
+    </script>
+
+    <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+    </script>
+
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-9026746-2");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+    <hr />
+    <p class="timestamp">
+        This page was last updated on 22nd April 2009</p>
+    <p class="copyright">
+        © Copyright 2009 Andrew John Jacobs. All rights reserved.<br />
+        All trademarks and service marks are the properties of their respective owners.</p>
+</body>
+</html>

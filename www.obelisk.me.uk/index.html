@@ -1,0 +1,311 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+<title>Obelisk Home Pages</title>
+</head>
+<script language="JavaScript"><!--
+// Begin Hiding
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// start() - GENERAL FUNCTION - called by the HTML document once loaded - starts OmenTree by
+//					  first loading the user data, and then drawing the tree.
+
+function start() {
+	loadData();
+	drawTree();
+}
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// drawTree() - GENERAL FUNCTION - starts the recursive tree drawing process by first writing
+//					     the root node, and then all subordinate branches.
+
+function drawTree() {
+	outputFrame = top.treeFrame.window.document;	// If you really must, you can change the name of the treeFrame here to match your new name defined at the bottom.
+	outputFrame.open("text/html");
+	outputFrame.write("<! HTML Generated Dynamically by OmenTree - (C) 1998 Colin Tucker / OmenSoft >\n");
+	outputFrame.write("<! http://omensoft.home.ml.org/                   e-mail: semi@earthcorp.com >\n");
+	outputFrame.write("<HTML>\n<BODY BGCOLOR='" + backgroundColor + "' BACKGROUND='" + backgroundImage + "' LINK='" + linkColor + "' ALINK='" + aLinkColor + "' VLINK='" + vLinkColor + "'>\n");
+	outputFrame.write("<FONT FACE='" + omenTreeFont + "' SIZE=" + omenTreeFontSize + " COLOR='" + textColor + "'>\n");
+	outputFrame.write(prefixHTML + "\n<NOBR>\n");
+	if (treeData[1].target == "") {var targetFrame = defaultTargetFrame} else {var targetFrame = treeData[1].target}
+	if (treeData[1].icon == "") {var imageString = defaultImageURL + 'img-globe-' + structureStyle + '.gif'} else {imageString = defaultImageURL + treeData[1].icon}
+	outputFrame.write("<A HREF='" + treeData[1].url + "' TARGET='" + targetFrame + "' onMouseOver=\"window.status='" + treeData[1].url + "'; return true\"><IMG SRC='" + imageString + "' WIDTH=16 HEIGHT=16 ALIGN=TEXTTOP BORDER=0 ALT='" + treeData[1].url + "'></A>&nbsp;<B>" + treeData[1].name + "</B><BR>\n");
+	drawBranch("root","");
+	outputFrame.write("</NOBR>\n" + suffixHTML + "\n");
+	outputFrame.write("</FONT>\n</BODY>\n</HTML>");
+	outputFrame.close();
+	//window.status="OmenTree v1.0 - (C) 1998 Colin Tucker/OmenSoft - http://omensoft.home.ml.org";
+}
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// drawBranch() - GENERAL FUNCTION - used by the drawTree() function to recursively draw all
+//						 visable nodes in the tree structure.
+
+function drawBranch(startNode,structureString) {
+	var children = extractChildrenOf(startNode);
+	var currentIndex = 1;
+	while (currentIndex <= children.length) {
+		outputFrame.write(structureString);
+		if (children[currentIndex].type == 'link') {
+			if (children[currentIndex].icon == "") {
+				var imageString = defaultImageURL + defaultLinkIcon;
+			}
+			else {var imageString = defaultImageURL + children[currentIndex].icon}
+			if (children[currentIndex].target == "") {
+				var targetFrame = defaultTargetFrame;
+			}
+			else {var targetFrame = children[currentIndex].target}
+			if (currentIndex != children.length) {
+				outputFrame.write("<IMG SRC='" + defaultImageURL + "img-branch-cont-" + structureStyle + ".gif' WIDTH=19 HEIGHT=16 ALIGN=TEXTTOP>")
+			}
+			else {
+				outputFrame.write("<IMG SRC='" + defaultImageURL + "img-branch-end-" + structureStyle + ".gif' WIDTH=19 HEIGHT=16 ALIGN=TEXTTOP>")
+			}
+			outputFrame.write("<A HREF='" + children[currentIndex].url + "' TARGET='" + targetFrame + "' onMouseOver=\"window.status='" + children[currentIndex].url + "'; return true\"><IMG SRC='" + imageString + "' WIDTH=16 HEIGHT=16 ALIGN=TEXTTOP BORDER=0 ALT='" + children[currentIndex].url + "'></A>&nbsp;" + children[currentIndex].name + "<BR>\n")
+		}
+		else {
+			var newStructure = structureString;
+			if (children[currentIndex].iconClosed == "") {var iconClosed = "img-folder-closed-" + structureStyle + ".gif"} else {var iconClosed = children[currentIndex].iconClosed}
+			if (children[currentIndex].iconOpen == "") {var iconOpen = "img-folder-open-" + structureStyle + ".gif"} else {var iconOpen = children[currentIndex].iconOpen}
+			if (currentIndex != children.length) {
+				if (children[currentIndex].open == 0) {
+					outputFrame.write("<A HREF=\"javascript:top.toggleFolder('" + children[currentIndex].id + "',1)\" onMouseOver=\"window.status='Click to open this folder'; return true\"><IMG SRC='" + defaultImageURL + "img-plus-cont-" + structureStyle + ".gif' WIDTH=19 HEIGHT=16 ALT='Click to open this folder' ALIGN=TEXTTOP BORDER=0>")
+					outputFrame.write("<IMG SRC='" + defaultImageURL + iconClosed + "' WIDTH=16 HEIGHT=16 ALT='Click to open this folder' ALIGN=TEXTTOP BORDER=0></A>&nbsp;" + children[currentIndex].name + "<BR>\n")
+				}
+				else {
+					outputFrame.write("<A HREF=\"javascript:top.toggleFolder('" + children[currentIndex].id + "',0)\" onMouseOver=\"window.status='Click to close this folder'; return true\"><IMG SRC='" + defaultImageURL + "img-minus-cont-" + structureStyle + ".gif' WIDTH=19 HEIGHT=16 ALT='Click to close this folder' ALIGN=TEXTTOP BORDER=0>");
+					outputFrame.write("<IMG SRC='" + defaultImageURL + iconOpen + "' WIDTH=16 HEIGHT=16 ALT='Click to close this folder' ALIGN=TEXTTOP BORDER=0></A>&nbsp;" + children[currentIndex].name + "<BR>\n");
+					newStructure = newStructure + "<IMG SRC='" + defaultImageURL + "img-vert-line-" + structureStyle + ".gif' WIDTH=19 HEIGHT=16 ALIGN=TEXTTOP>";
+					drawBranch(children[currentIndex].id,newStructure);
+				}
+			}
+			else {
+				if (children[currentIndex].open == 0) {
+					outputFrame.write("<A HREF=\"javascript:top.toggleFolder('" + children[currentIndex].id + "',1)\" onMouseOver=\"window.status='Click to open this folder'; return true\"><IMG SRC='" + defaultImageURL + "img-plus-end-" + structureStyle + ".gif' WIDTH=19 HEIGHT=16 ALT='Click to open this folder' ALIGN=TEXTTOP BORDER=0>")
+					outputFrame.write("<IMG SRC='" + defaultImageURL + iconClosed + "' WIDTH=16 HEIGHT=16 ALT='Click to open this folder' ALIGN=TEXTTOP BORDER=0></A>&nbsp;" + children[currentIndex].name + "<BR>\n")
+				}
+				else {
+					outputFrame.write("<A HREF=\"javascript:top.toggleFolder('" + children[currentIndex].id + "',0)\" onMouseOver=\"window.status='Click to close this folder'; return true\"><IMG SRC='" + defaultImageURL + "img-minus-end-" + structureStyle + ".gif' WIDTH=19 HEIGHT=16 ALT='Click to close this folder' ALIGN=TEXTTOP BORDER=0>");
+					outputFrame.write("<IMG SRC='" + defaultImageURL + iconOpen + "' WIDTH=16 HEIGHT=16 ALT='Click to close this folder' ALIGN=TEXTTOP BORDER=0></A>&nbsp;" + children[currentIndex].name + "<BR>\n");
+					newStructure = newStructure + "<IMG SRC='" + defaultImageURL + "img-blank.gif' WIDTH=19 HEIGHT=16 ALIGN=TEXTTOP>";
+					drawBranch(children[currentIndex].id,newStructure);
+				}
+			}
+		}
+		currentIndex++;
+	}
+}
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// toggleFolder() - GENERAL FUNCTION - opens/closes folder nodes.
+
+function toggleFolder(id,status) {
+	var nodeIndex = indexOfNode(id);
+	treeData[nodeIndex].open = status;
+	timeOutId = setTimeout("drawTree()",100)}
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// indexOfNode() - GENERAL FUNCTION - finds the index in the treeData Collection of the node
+//						  with the given id.
+
+function indexOfNode(id) {
+	var currentIndex = 1;
+	while (currentIndex <= treeData.length) {
+		if ((treeData[currentIndex].type == 'root') || (treeData[currentIndex].type == 'folder')) {
+			if (treeData[currentIndex].id == id) {return currentIndex}}
+		currentIndex++}
+	return -1}
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// extractChildrenOf() - GENERAL FUNCTION - extracts and returns a Collection containing all
+//							  of the node's immediate children nodes.
+
+function extractChildrenOf(node) {
+	var children = new Collection();
+	var currentIndex = 1;
+	while (currentIndex <= treeData.length) {
+		if ((treeData[currentIndex].type == 'folder') || (treeData[currentIndex].type == 'link')) {
+			if (treeData[currentIndex].parent == node) {
+				children.add(treeData[currentIndex])}}
+		currentIndex++}
+	return children}
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Collection() - OBJECT - a dynamic storage structure similar to an Array.
+
+function Collection() {
+	this.length = 0;
+	this.add = add;
+	return this}
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// add() - METHOD of Collection - adds an object to a Collection.
+
+function add(object) {
+	this.length++;
+	this[this.length] = object}
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// RootNode() - OBJECT - represents the top-most node of the hierarchial tree.
+
+function RootNode(id,name,url,target,icon) {
+	this.id = id;
+	this.name = name;
+	this.url = url;
+	this.target = target;
+	this.icon = icon;
+	this.type = 'root';
+	return this}
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// FolderNode() - OBJECT - represents a node which branches to contain other nodes.
+
+function FolderNode(id,parent,name,iconClosed,iconOpen) {
+	this.id = id;
+	this.parent = parent;
+	this.name = name;
+	this.iconClosed = iconClosed;
+	this.iconOpen = iconOpen;
+	this.type = 'folder';
+	this.open = 0;
+	return this}
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// LinkNode() - OBJECT - a node that represents a link using a URL.
+
+function LinkNode(parent,name,url,target,icon) {
+	this.parent = parent;
+	this.name = name;
+	this.url = url;
+	this.target = target;
+	this.icon = icon;
+	this.type = 'link';
+	return this}
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// loadData() - GENERAL FUNCTION - user defined data and variables exist in this function.
+
+function loadData() {
+
+      // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      // Tree structure definitions:
+
+      // Syntax:
+
+      // ROOT NODE:
+      // treeData.add(new RootNode("<ID>","<NAME>","<URL>","<TARGET>","<ALT ICON>"));
+      // NOTE: There must be only ONE root node, and it MUST be the FIRST node.
+      //       <TARGET> and <ALT ICON> can be left null - defaults will be used.
+
+      // FOLDER NODE:
+      // treeData.add(new FolderNode("<ID>","<PARENT ID>","<NAME>","<ALT ICON CLOSED>","<ALT ICON OPEN>"));
+      // NOTE: Folder nodes MUST have a valid parent node, and they SHOULD have children nodes.
+      //       <ALT ICON CLOSED> and <ALT ICON OPEN> can be left null - OmenTree will use the
+      //       default images.
+
+      // LINK NODE:
+      // treeData.add(new LinkNode("<PARENT ID>","<NAME>","<URL>","<TARGET>","<ALT ICON>"));
+      // NOTE: <TARGET> and <ALT ICON> may be left null - defaults specified in the user
+      //       defined variables section will be used.
+
+      // Consult the OmenTree documentation for further assistance.
+
+	treeData = new Collection();
+
+	treeData.add(new RootNode('root','What\'s New?','home.html','',''));
+	treeData.add(new FolderNode('code','root','Programming','',''));
+		treeData.add(new LinkNode('code','Introduction','programming.html','',''));
+		treeData.add(new FolderNode('6502','code','6502','',''));
+			treeData.add(new LinkNode('6502','Introduction','6502/index.html','',''));
+			treeData.add(new LinkNode('6502','Architecture','6502/architecture.html','',''));
+			treeData.add(new LinkNode('6502','Registers','6502/registers.html','',''));
+			treeData.add(new LinkNode('6502','Instructions','6502/instructions.html','',''));
+			treeData.add(new LinkNode('6502','Addressing','6502/addressing.html','',''));
+			treeData.add(new LinkNode('6502','Algorithms','6502/algorithms.html','',''));
+			treeData.add(new LinkNode('6502','Reference','6502/reference.html','',''));
+			treeData.add(new LinkNode('6502','Downloads','6502/downloads.html','',''));
+			treeData.add(new LinkNode('6502','Links','6502/links.html','',''));
+		treeData.add(new FolderNode('65C02','code','65C02','',''));
+			treeData.add(new LinkNode('65C02','Introduction','65C02/index.html','',''));
+			treeData.add(new LinkNode('65C02','Addressing','65C02/addressing.html','',''));
+			treeData.add(new LinkNode('65C02','Reference','65C02/reference.html','',''));
+		treeData.add(new FolderNode('dev65','code','Dev65','',''));
+			treeData.add(new LinkNode('dev65','Introduction','dev65/index.html','',''));
+			treeData.add(new LinkNode('dev65','As65','dev65/as65.html','',''));
+			treeData.add(new LinkNode('dev65','Lk65','dev65/lk65.html','',''));
+			treeData.add(new LinkNode('dev65','Lb65','dev65/lb65.html','',''));
+		treeData.add(new FolderNode('cesil','code','CESIL','',''));
+			treeData.add(new LinkNode('cesil','Introduction','cesil/index.html','',''));
+		treeData.add(new FolderNode('vhdl','code','VHDL','',''));
+			treeData.add(new LinkNode('vhdl','Introduction','vhdl/index.html','',''));
+			treeData.add(new LinkNode('vhdl','CMOS Logic','vhdl/cmos.html','',''));
+			treeData.add(new LinkNode('vhdl','74 Series Logic','vhdl/74series.html','',''));
+			treeData.add(new LinkNode('vhdl','Links','vhdl/links.html','',''));
+		treeData.add(new FolderNode('pic','code','Microchip PIC','',''));
+			treeData.add(new LinkNode('pic','Multi-byte Add/Sub','pic/addsub.html','',''));
+			treeData.add(new LinkNode('pic','Multi-byte Inc/Dec','pic/incdec.html','',''));
+	treeData.add(new FolderNode('elec','root','Electronics','',''));
+		treeData.add(new LinkNode('elec','Introduction','electronics/index.html','',''));
+		treeData.add(new FolderNode('projects','elec','Projects','',''));
+			treeData.add(new LinkNode('projects','Electronic Dice','electronics/dice.html','',''));
+			treeData.add(new LinkNode('projects','Alarm Clock','electronics/alarm.html','',''));
+			treeData.add(new LinkNode('projects','Metronome','electronics/metronome.html','',''));
+			treeData.add(new LinkNode('projects','Binary Clock','electronics/clock.html','',''));
+			treeData.add(new LinkNode('projects','R6501 SBC','electronics/R6501.html','',''));
+			treeData.add(new LinkNode('projects','EM-65C02','electronics/em-65c02.html','',''));
+			treeData.add(new LinkNode('projects','SB-65C02','electronics/sb-6502.html','',''));
+		treeData.add(new FolderNode('proto','elec','Prototypes','',''));
+			treeData.add(new LinkNode('proto','Chess Computer','electronics/miranda.html','',''));
+			treeData.add(new LinkNode('proto','BASIC Computer','electronics/old-skool.html','',''));
+//			treeData.add(new LinkNode('proto','6502 Home Brew','electronics/R6502.html','',''));
+	treeData.add(new FolderNode('about','root','About...','',''));
+		treeData.add(new LinkNode('about','About this site','about.html','',''));
+		treeData.add(new LinkNode('about','Privacy','privacy.html','',''));
+		treeData.add(new LinkNode('email','Andrew Jacobs','mailto:andrew-AT-obelisk.me.uk','','img-email.gif'));
+
+      // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      // User defined variables:
+
+       structureStyle = 0;                   // 0 for light background, 1 for dark background
+
+      backgroundColor = '#FFFFFF';           // sets the bgColor of the menu
+            textColor = '#000000';           // sets the color of the text used in the menu
+            linkColor = '#0000AA';           // sets the color of any text links (usually defined in additional HTML sources)
+           aLinkColor = '#FF0000';           // sets the active link color (when you click on the link)
+           vLinkColor = '#880088';           // sets the visited link color
+
+      backgroundImage = '';                  // give the complete path to a gif or jpeg to use as a background image
+
+      defaultTargetFrame = 'pageFrame';      // the name of the frame that links will load into by default
+         defaultImageURL = 'images/';        // the URL or path where the OmenTree images are located
+
+       defaultLinkIcon = 'img-page-globe.gif';  // the default icon image used for links
+
+          omenTreeFont = 'Verdana,MS Sans Serif,Arial,Helvetica';  // the font used for the menu
+      omenTreeFontSize = 1;                                // its size - don't make it too big!
+
+      // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      // Additional HTML sources:
+
+      prefixHTML = "<B>Site Index:</B><HR>";
+      suffixHTML = "<HR><B>Site contents<BR>Copyright (C)1999-2015<BR>Andrew John Jacobs</B><P><B>OmenTree</B> navigation menu provided by <B>OmenSoft</B>.";
+}
+
+</script>
+<frameset cols="180,*" onload="start()">
+    <frame name="treeFrame" src="preload.html" marginwidth="2"
+    marginheight="2" scrolling="Auto">
+    <frame name="pageFrame" src="home.html" marginwidth="8"
+    marginheight="4" scrolling="Auto">
+    <noframes>
+    <body>
+
+    </body>
+    </noframes>
+</frameset>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-9026746-2");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+</html>

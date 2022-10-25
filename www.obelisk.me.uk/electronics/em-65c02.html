@@ -1,0 +1,313 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title>65C02 Emulation</title>
+    <link rel="StyleSheet" href="../obelisk.css" type="text/css" media="screen,print" />
+    <style type="text/css">
+        .style1
+        {
+            width: 43%;
+        }
+        .style2
+        {
+            width: 234px;
+        }
+        .style3
+        {
+            width: 199px;
+        }
+        .style4
+        {
+            width: 234px;
+            height: 22px;
+        }
+        .style5
+        {
+            width: 199px;
+            height: 22px;
+        }
+        .style6
+        {
+            width: 257px;
+        }
+        .style7
+        {
+            width: 257px;
+            height: 22px;
+        }
+        .style8
+        {
+            width: 257px;
+            font-weight: bold;
+            font-style: italic;
+        }
+        .style9
+        {
+            width: 199px;
+            font-weight: bold;
+            font-style: italic;
+        }
+        .style10
+        {
+            width: 234px;
+            font-weight: bold;
+            font-style: italic;
+        }
+        .style11
+        {
+            width: 257px;
+            font-weight: bold;
+        }
+        .style12
+        {
+            width: 199px;
+            font-weight: bold;
+        }
+        .style13
+        {
+            width: 234px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <script type="text/javascript"><!--
+google_ad_client = "pub-0826595092783671";
+/* Electronics Header */
+google_ad_slot = "0606506508";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+    </script>
+
+    <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+    </script>
+
+    <hr />
+    <h1>
+        EM-65C02 -&nbsp; A PIC based 65C02 Emulation</h1>
+    <p>
+        I started this project in 2010 following a discussion on 6502.org about using 
+        microcontrollers to emulate first generation microprocessors.</p>
+    <p>
+        As I have lots of experience using Microchip devices I thought I&#39;d see what I 
+        could make one of them do. The results has been quite interesting.</p>
+    <h2>
+        Features</h2>
+    <p>
+        The latest version of the EM-65C02 firmware supports:</p>
+    <ul>
+        <li>WDC 65C02 instruction set (tested with Klaus Dormanns
+            <a target="_blank" href="https://github.com/redline6561/cl-6502/blob/b0087903428ec2a3794ba4219494005174d1b09f/tests/6502_functional_test.a65">
+            test suite</a>)<ul>
+                <li>supports decimal mode</li>
+                <li>support for interrupts (with WAI and STP instructions)</li>
+            </ul>
+        </li>
+        <li>2, 4, 8, 16 or 64K of RAM (depending on host device)</li>
+        <li>32K of ROM (copied to RAM on power up if possible)</li>
+        <li>Access to dsPIC perpherials and memory via COP opcode ($02)</li>
+     </ul>
+    <p>
+        The source code for EM-65C02 is compatible with most 24F/30F/33F/33EP dsPIC 
+        devices. If the hosting device has a small RAM area then a 2, 4, 8 or 16K region 
+        is mapped to $0000-$7FFF by repeating it to fill the 32K range, while the 32K 
+        ROM area is mapped to $8000-$FFFF. Devices with Extended Data Space (EDS) can 
+        have a full 64K of RAM which is initialised with 32K of ROM image on power up.</p>
+    <p>
+        The speed of the emulation depends on the oscillator frequency of the host 
+        device. A 24F device is typically 32MHz (16 MIPS) and gives an emulated 65C02 
+        performance of 1MIP (e.g. 16 PIC instruction to emulate one 65C02 instruction).
+        Other device families can run significantly faster as shown below but support
+        less RAM. The 24EP/33EP
+        devices have a highest clock rate but changes to the instruction execution cycles
+        make some &nbsp;</p>
+    <table class="style1">
+        <tr>
+            <td class="style10">
+                Host</td>
+            <td class="style9">
+                &nbsp;</td>
+            <td class="style9">
+                &nbsp;</td>
+            <td class="style8">
+                65C02</td>
+            <td class="style8">
+                &nbsp;</td>
+            <td class="style8">
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td class="style13">
+                Family</td>
+            <td class="style12">
+                Mhz</td>
+            <td class="style12">
+                MIPS</td>
+            <td class="style11">
+                Mhz</td>
+            <td class="style11">
+                MIPS</td>
+            <td class="style11">
+                RAM</td>
+        </tr>
+        <tr>
+            <td class="style2">
+                24F</td>
+            <td class="style3">
+                32</td>
+            <td class="style3">
+                16</td>
+            <td class="style6">
+                2.0</td>
+            <td class="style6">
+                1</td>
+            <td class="style6">
+                2-64K&nbsp;</td>
+        </tr>
+        <tr>
+            <td class="style4">
+                30F</td>
+            <td class="style5">
+                60</td>
+            <td class="style5">
+                30</td>
+            <td class="style7">
+                3.6</td>
+            <td class="style7">
+                1.8</td>
+            <td class="style7">
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td class="style4">
+                33F</td>
+            <td class="style5">
+                80</td>
+            <td class="style5">
+                40</td>
+            <td class="style7">
+                5.0</td>
+            <td class="style7">
+                2.5</td>
+            <td class="style7">
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td class="style2">
+                24EP</td>
+            <td class="style3">
+                140</td>
+            <td class="style3">
+                70</td>
+            <td class="style6">
+                6.0</td>
+            <td class="style6">
+                3.0</td>
+            <td class="style6">
+                2-28K</td>
+        </tr>
+        <tr>
+            <td class="style2">
+                33EP</td>
+            <td class="style3">
+                140</td>
+            <td class="style3">
+                70</td>
+            <td class="style6">
+                6.0</td>
+            <td class="style6">
+                3.0</td>
+            <td class="style6">
+                2-28K</td>
+        </tr>
+    </table>
+    <p>
+        Normally I/O peripherals are memory mapped on 65C02 systems but the cost of 
+        checking a target memory address to determine if it should resolve to RAM, ROM 
+        or a peripheral register would serious impact on execution speed so I decided to 
+        borrow the coprocessor (COP) instruction from the 65C816 as a means of accessing 
+        the host&#39;s hardware.</p>
+    <h2>
+        Development Platform</h2>
+    <p>
+        My main development platform at the moment is a
+        <a href="http://www.robot-electronics.co.uk/acatalog/Processor_Modules.html">
+        DEV-PIC24FJ256GB206</a> module supplied by
+        <a href="http://www.robot-electronics.co.uk">Robot-Electronics</a>. The 
+        PIC24FJ256GB206 contains 66K of Extended Data Space (EDS) which can be mapped in 
+        32K chunks into the data address space however it executes relatively slowly.</p>
+    <img src="em-65c02/DSCN0234.JPG" cellpadding="0" cellspacing="0" width="75%" height="75%"/>
+    <p>The enclosure has a hole for a DB9 serial connector which connects to the board. I use a
+    USB Serial adapter to access the device from my PC. Eventually it will have a USB CDC driver
+    in firmware to allow it to be connected directly to a USB socket.</p>
+    <img src="em-65c02/DSCN0233.JPG" cellpadding="0" cellspacing="0" width="75%" height="75%"/>
+    <p>I've only broken out two pins from the module for serial interfacing. I want to add
+    an SPI interface to an SD card to give the emulated 65C02 a virtual hard drive.</p>
+    <p>
+        The second developement board I've build uses an Arduino style prototype board and
+        uses a 28 SPDIP device like a 24EP128GP202</p>
+    <p>
+        <img src="em-65c02/DSCN1529.JPG" cellpadding="0" cellspacing="0" width="75%" height="75%"/>&nbsp;</p>
+    <p>The source code and more information about this project can be found at <a target="_blank" href="https://sourceforge.net/projects/em-65c02/">
+            https://sourceforge.net/projects/em-65c02/</a></p>
+    <p>
+        The same approach used here could be applied to emulate other 8-bit devices like the 8080,
+    Z-80, 6800, 6809, 6502, 6501, 1802, etc. or even a 16-bit device like the 65C816.</p>
+    <table border="0" cellpadding="0" cellspacing="0" height="30" width="100%">
+        <tr>
+            <td bgcolor="#aaaaff" style="height: 30px" width="25%">
+                <a href="R6501.html">&lt;&lt; Back</a></td>
+            <td bgcolor="#aaaaff" style="height: 30px" width="25%">
+                <center>
+                    <a href="../index.html" target="_parent">Home</a></center>
+            </td>
+            <td bgcolor="#aaaaff" style="height: 30px; text-align: center" width="25%">
+                <a href="index.html">Contents</a></td>
+            <td align="right" bgcolor="#aaaaff" style="height: 30px" width="25%">
+                <a href="sb-6502.html">Next &gt;&gt;</a>
+            </td>
+        </tr>
+    </table>
+    <hr>
+
+    <script type="text/javascript"><!--
+google_ad_client = "pub-0826595092783671";
+/* Electronics Footer */
+google_ad_slot = "1675902091";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+    </script>
+
+    <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+    </script>
+
+    <hr>
+
+    <script type="text/javascript"><!--
+google_ad_client = "pub-0826595092783671";
+/* Electronics Links */
+google_ad_slot = "3690256994";
+google_ad_width = 728;
+google_ad_height = 15;
+//-->
+    </script>
+
+    <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+    </script>
+
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-9026746-2");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+    <hr />
+    <p class="timestamp">
+        This page was last updated on 8th July 2013</p>
+    <p class="copyright">
+        © Copyright 2013 Andrew John Jacobs. All rights reserved.<br />
+        All trademarks and service marks are the properties of their respective owners.</p>
+</body>
+</html>
