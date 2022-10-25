@@ -1,32 +1,22 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<title>Multi-byte Increment &amp; Decrement</title>
-	<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+	<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
 	<link REL="StyleSheet" HREF="../obelisk.css" TYPE="text/css" media="screen,print">
 </head>
 <body>
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- Programming Header -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:728px;height:90px"
-     data-ad-client="ca-pub-0826595092783671"
-     data-ad-slot="9208748029"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-	<hr/>
 	<h2>Multi-byte Increment &amp; Decrement</h2>
 	<dd><p><i>This page was originally published by me on a site called pic-projects.net.</i></p></dd>
-    <p>All Microchip devices can increment and decrement an 8-bit file register in a 
-        single instruction. This article examines how a value spread over multiple file registers 
-        can be efficiently adjusted. Examples are included for 16-, 24- and 32-bit 
+    <p>All Microchip devices can increment and decrement an 8-bit file register in a
+        single instruction. This article examines how a value spread over multiple file registers
+        can be efficiently adjusted. Examples are included for 16-, 24- and 32-bit
         values.</p>
     <h1>Incrementing</h1>
-    <p>The key to multi-byte incrementing is spotting when a value rolls over from h'ff' 
-        to h'00' as this is the trigger to increment the next most significant byte of 
-        the value. This turns out to be very easy as the <b>INCF</b> instruction 
-        automatically sets the <b>Z</b> bit in the <b>STATUS</b> register to reflect the 
-        result of the increment and when used in conjunction with <b>BTFSC</b> instruction to 
+    <p>The key to multi-byte incrementing is spotting when a value rolls over from h'ff'
+        to h'00' as this is the trigger to increment the next most significant byte of
+        the value. This turns out to be very easy as the <b>INCF</b> instruction
+        automatically sets the <b>Z</b> bit in the <b>STATUS</b> register to reflect the
+        result of the increment and when used in conjunction with <b>BTFSC</b> instruction to
         test the flag</p>
     <pre> ; (All devices)
         incf    FILE0,F         ; Increment 16-bits in FILE0 &amp; FILE1
@@ -38,7 +28,7 @@
         incf    FILE1,F
         btfsc   STATUS,Z
         incf    FILE2,F
-     
+
         incf    FILE0,F         ; Increment 32-bits in FILE0, FILE1, FILE2 and FILE3
         btfsc   STATUS,Z
         incf    FILE1,F
@@ -46,9 +36,9 @@
         incf    FILE2,F
         btfsc   STATUS,Z
         incf    FILE3,F</pre>
-    <p>The pattern here pretty obvious and can be extended for values of greater 
-        length. High performance processors have an <b>INFSNZ</b> (increment file 
-        register and skip if not zero) instruction that can be used to replace the first 
+    <p>The pattern here pretty obvious and can be extended for values of greater
+        length. High performance processors have an <b>INFSNZ</b> (increment file
+        register and skip if not zero) instruction that can be used to replace the first
         increment and test to shorten the sequences slightly.</p>
     <pre>; (High Performance devices)
         infsnz  FILE0,F         ; Increment 16-bits in FILE0 &amp; FILE1
@@ -58,14 +48,14 @@
         incf    FILE1,F
         btfsc   STATUS,Z
         incf    FILE2,F
-     
+
         infsnz  FILE0,F         ; Increment 32-bits in FILE0, FILE1, FILE2 and FILE3
         incf    FILE1,F
         btfsc   STATUS,Z
         incf    FILE2,F
         btfsc   STATUS,Z
         incf    FILE3,F</pre>
-    <p>On high performance and enhanced mid-range devices the <b>ADDWFC</b> instruction 
+    <p>On high performance and enhanced mid-range devices the <b>ADDWFC</b> instruction
         offers an alternative means to adjust the value which is as fast for 32-bits
 	and faster for larger values.</p>
     <pre>; (Enhanced Mid-Range and High Performance devices)
@@ -76,7 +66,7 @@
         addwfc  FILE2,F
         addwfc  FILE3,F</pre>
     <h1>Decrementing</h1>
-    <p>When decrementing a value we need to know when a value will change from h'00' to 
+    <p>When decrementing a value we need to know when a value will change from h'00' to
         h'ff' but the <b>DECF</b> instruction sets the <b>Z</b> bit in the status on a
 	transition from h'01' to h'00' so instead we must test the value to see if it
 	is zero before decrementing.</p>
@@ -140,26 +130,6 @@ DEC0:   decf    FILE0,F
         subfwb  FILE1,F
         subfwb  FILE2,F
         subfwb  FILE3,F</pre>
-	<hr/>
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- Programming Footer -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:728px;height:90px"
-     data-ad-client="ca-pub-0826595092783671"
-     data-ad-slot="9966603696"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-	<hr/>
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- Programming Links -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:728px;height:15px"
-     data-ad-client="ca-pub-0826595092783671"
-     data-ad-slot="4173075094"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
 	<hr/>
     <p class="timestamp">
         This page was last updated on 2nd February 2018</p>

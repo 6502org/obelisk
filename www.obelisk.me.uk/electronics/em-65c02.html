@@ -1,6 +1,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>65C02 Emulation</title>
     <link rel="StyleSheet" href="../obelisk.css" type="text/css" media="screen,print" />
     <style type="text/css">
@@ -71,27 +71,13 @@
     </style>
 </head>
 <body>
-
-    <script type="text/javascript"><!--
-google_ad_client = "pub-0826595092783671";
-/* Electronics Header */
-google_ad_slot = "0606506508";
-google_ad_width = 728;
-google_ad_height = 90;
-//-->
-    </script>
-
-    <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-    </script>
-
-    <hr />
     <h1>
         EM-65C02 -&nbsp; A PIC based 65C02 Emulation</h1>
     <p>
-        I started this project in 2010 following a discussion on 6502.org about using 
+        I started this project in 2010 following a discussion on 6502.org about using
         microcontrollers to emulate first generation microprocessors.</p>
     <p>
-        As I have lots of experience using Microchip devices I thought I&#39;d see what I 
+        As I have lots of experience using Microchip devices I thought I&#39;d see what I
         could make one of them do. The results has been quite interesting.</p>
     <h2>
         Features</h2>
@@ -110,14 +96,14 @@ google_ad_height = 90;
         <li>Access to dsPIC perpherials and memory via COP opcode ($02)</li>
      </ul>
     <p>
-        The source code for EM-65C02 is compatible with most 24F/30F/33F/33EP dsPIC 
-        devices. If the hosting device has a small RAM area then a 2, 4, 8 or 16K region 
-        is mapped to $0000-$7FFF by repeating it to fill the 32K range, while the 32K 
-        ROM area is mapped to $8000-$FFFF. Devices with Extended Data Space (EDS) can 
+        The source code for EM-65C02 is compatible with most 24F/30F/33F/33EP dsPIC
+        devices. If the hosting device has a small RAM area then a 2, 4, 8 or 16K region
+        is mapped to $0000-$7FFF by repeating it to fill the 32K range, while the 32K
+        ROM area is mapped to $8000-$FFFF. Devices with Extended Data Space (EDS) can
         have a full 64K of RAM which is initialised with 32K of ROM image on power up.</p>
     <p>
-        The speed of the emulation depends on the oscillator frequency of the host 
-        device. A 24F device is typically 32MHz (16 MIPS) and gives an emulated 65C02 
+        The speed of the emulation depends on the oscillator frequency of the host
+        device. A 24F device is typically 32MHz (16 MIPS) and gives an emulated 65C02
         performance of 1MIP (e.g. 16 PIC instruction to emulate one 65C02 instruction).
         Other device families can run significantly faster as shown below but support
         less RAM. The 24EP/33EP
@@ -224,10 +210,10 @@ google_ad_height = 90;
         </tr>
     </table>
     <p>
-        Normally I/O peripherals are memory mapped on 65C02 systems but the cost of 
-        checking a target memory address to determine if it should resolve to RAM, ROM 
-        or a peripheral register would serious impact on execution speed so I decided to 
-        borrow the coprocessor (COP) instruction from the 65C816 as a means of accessing 
+        Normally I/O peripherals are memory mapped on 65C02 systems but the cost of
+        checking a target memory address to determine if it should resolve to RAM, ROM
+        or a peripheral register would serious impact on execution speed so I decided to
+        borrow the coprocessor (COP) instruction from the 65C816 as a means of accessing
         the host&#39;s hardware.</p>
     <h2>
         Development Platform</h2>
@@ -235,8 +221,8 @@ google_ad_height = 90;
         My main development platform at the moment is a
         <a href="http://www.robot-electronics.co.uk/acatalog/Processor_Modules.html">
         DEV-PIC24FJ256GB206</a> module supplied by
-        <a href="http://www.robot-electronics.co.uk">Robot-Electronics</a>. The 
-        PIC24FJ256GB206 contains 66K of Extended Data Space (EDS) which can be mapped in 
+        <a href="http://www.robot-electronics.co.uk">Robot-Electronics</a>. The
+        PIC24FJ256GB206 contains 66K of Extended Data Space (EDS) which can be mapped in
         32K chunks into the data address space however it executes relatively slowly.</p>
     <img src="em-65c02/DSCN0234.JPG" cellpadding="0" cellspacing="0" width="75%" height="75%"/>
     <p>The enclosure has a hole for a DB9 serial connector which connects to the board. I use a
@@ -270,44 +256,11 @@ google_ad_height = 90;
             </td>
         </tr>
     </table>
-    <hr>
-
-    <script type="text/javascript"><!--
-google_ad_client = "pub-0826595092783671";
-/* Electronics Footer */
-google_ad_slot = "1675902091";
-google_ad_width = 728;
-google_ad_height = 90;
-//-->
-    </script>
-
-    <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-    </script>
-
-    <hr>
-
-    <script type="text/javascript"><!--
-google_ad_client = "pub-0826595092783671";
-/* Electronics Links */
-google_ad_slot = "3690256994";
-google_ad_width = 728;
-google_ad_height = 15;
-//-->
-    </script>
-
-    <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-    </script>
-
-<script type="text/javascript">
-try {
-var pageTracker = _gat._getTracker("UA-9026746-2");
-pageTracker._trackPageview();
-} catch(err) {}</script>
     <hr />
     <p class="timestamp">
         This page was last updated on 8th July 2013</p>
     <p class="copyright">
-        © Copyright 2013 Andrew John Jacobs. All rights reserved.<br />
+        &copy; Copyright 2013 Andrew John Jacobs. All rights reserved.<br />
         All trademarks and service marks are the properties of their respective owners.</p>
 </body>
 </html>
