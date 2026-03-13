@@ -1,462 +1,470 @@
-<HTML>
-<HEAD>
-  <META NAME="GENERATOR" CONTENT="Adobe PageMill 3.0 Win">
-  <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
-  <TITLE>6502 Instructions</TITLE>
-  <LINK REL="StyleSheet" HREF="../obelisk.css" TYPE="text/css" media="screen,print">
-</HEAD>
-<BODY>
-<H2><STRONG>The Instruction Set</STRONG></H2>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>6502 Instructions - Obelisk by Andrew Jacobs</title>
+  <link rel="StyleSheet" href="../obelisk.css" type="text/css" media="screen,print">
+</head>
+<body>
+<div class="page-wrapper">
+<nav class="sidebar" id="sidebar"></nav>
+<main class="content">
 
-<P>The 6502 has a relatively basic set of instructions, many having
+<h2><strong>The Instruction Set</strong></h2>
+
+<p>The 6502 has a relatively basic set of instructions, many having
 similar functions (e.g. memory access, arithmetic, etc.). The
 following sections list the complete set of 56 instructions in
-functional groups.</P>
+functional groups.</p>
 
-<H3>Load/Store Operations</H3>
+<h3>Load/Store Operations</h3>
 
-<P>These instructions transfer a single byte between memory and
-one of the registers. Load operations set the negative (<A HREF="registers.html#N">N</A>)
-and zero (<A HREF="registers.html#Z">Z</A>) flags depending on
+<p>These instructions transfer a single byte between memory and
+one of the registers. Load operations set the negative (<a href="registers.html#N">N</a>)
+and zero (<a href="registers.html#Z">Z</a>) flags depending on
 the value of transferred. Store operations do not affect the flag
-settings.</P>
+settings.</p>
 
-<P><TABLE BORDER="1" CELLPADDING="0" CELLSPACING="0" WIDTH="450">
-  <TR>
-    <TD ALIGN="MIDDLE" WIDTH="10%"><A HREF="reference.html#LDA">LDA</A></TD>
-    <TD>Load Accumulator</TD>
-    <TD ALIGN="MIDDLE" WIDTH="15%"><A HREF="registers.html#N">N</A>,<A
-      HREF="registers.html#Z">Z</A></TD>
-  </TR>
-  <TR>
-    <TD ALIGN="MIDDLE" WIDTH="10%"><A HREF="reference.html#LDX">LDX</A></TD>
-    <TD>Load X Register</TD>
-    <TD ALIGN="MIDDLE" WIDTH="15%"><A HREF="registers.html#N">N</A>,<A
-      HREF="registers.html#Z">Z</A></TD>
-  </TR>
-  <TR>
-    <TD ALIGN="MIDDLE" WIDTH="10%"><A HREF="reference.html#LDY">LDY</A></TD>
-    <TD>Load Y Register</TD>
-    <TD ALIGN="MIDDLE" WIDTH="15%"><A HREF="registers.html#N">N</A>,<A
-      HREF="registers.html#Z">Z</A></TD>
-  </TR>
-  <TR>
-    <TD ALIGN="MIDDLE" WIDTH="10%"><A HREF="reference.html#STA">STA</A></TD>
-    <TD>Store Accumulator</TD>
-    <TD ALIGN="MIDDLE" WIDTH="15%">&nbsp;</TD>
-  </TR>
-  <TR>
-    <TD ALIGN="MIDDLE" WIDTH="10%"><A HREF="reference.html#STX">STX</A></TD>
-    <TD>Store X Register</TD>
-    <TD ALIGN="MIDDLE" WIDTH="15%">&nbsp;</TD>
-  </TR>
-  <TR>
-    <TD ALIGN="MIDDLE" WIDTH="10%"><A HREF="reference.html#STY">STY</A></TD>
-    <TD>Store Y Register</TD>
-    <TD ALIGN="MIDDLE" WIDTH="15%">&nbsp;</TD>
-  </TR>
-</TABLE></P>
+<p><table border="1" cellpadding="0" cellspacing="0" width="450">
+  <tr>
+    <td align="middle" width="10%"><a href="reference.html#LDA">LDA</a></td>
+    <td>Load Accumulator</td>
+    <td align="middle" width="15%"><a href="registers.html#N">N</a>,<a
+      href="registers.html#Z">Z</a></td>
+  </tr>
+  <tr>
+    <td align="middle" width="10%"><a href="reference.html#LDX">LDX</a></td>
+    <td>Load X Register</td>
+    <td align="middle" width="15%"><a href="registers.html#N">N</a>,<a
+      href="registers.html#Z">Z</a></td>
+  </tr>
+  <tr>
+    <td align="middle" width="10%"><a href="reference.html#LDY">LDY</a></td>
+    <td>Load Y Register</td>
+    <td align="middle" width="15%"><a href="registers.html#N">N</a>,<a
+      href="registers.html#Z">Z</a></td>
+  </tr>
+  <tr>
+    <td align="middle" width="10%"><a href="reference.html#STA">STA</a></td>
+    <td>Store Accumulator</td>
+    <td align="middle" width="15%">&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="middle" width="10%"><a href="reference.html#STX">STX</a></td>
+    <td>Store X Register</td>
+    <td align="middle" width="15%">&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="middle" width="10%"><a href="reference.html#STY">STY</a></td>
+    <td>Store Y Register</td>
+    <td align="middle" width="15%">&nbsp;</td>
+  </tr>
+</table></p>
 
-<H3>Register Transfers</H3>
+<h3>Register Transfers</h3>
 
-<P>The contents of the X and Y registers can be moved to or from
-the accumulator, setting the negative (<A HREF="registers.html#N">N</A>)
-and zero (<A HREF="registers.html#Z">Z</A>) flags as appropriate.</P>
+<p>The contents of the X and Y registers can be moved to or from
+the accumulator, setting the negative (<a href="registers.html#N">N</a>)
+and zero (<a href="registers.html#Z">Z</a>) flags as appropriate.</p>
 
-<P><TABLE BORDER="1" CELLPADDING="0" CELLSPACING="0" WIDTH="450">
-  <TR>
-    <TD ALIGN="MIDDLE" WIDTH="10%"><A HREF="reference.html#TAX">TAX</A></TD>
-    <TD>Transfer accumulator to X</TD>
-    <TD ALIGN="MIDDLE" WIDTH="15%"><A HREF="registers.html#N">N</A>,<A
-      HREF="registers.html#Z">Z</A></TD>
-  </TR>
-  <TR>
-    <TD ALIGN="MIDDLE" WIDTH="10%"><A HREF="reference.html#TAY">TAY</A></TD>
-    <TD>Transfer accumulator to Y</TD>
-    <TD ALIGN="MIDDLE" WIDTH="15%"><A HREF="registers.html#N">N</A>,<A
-      HREF="registers.html#Z">Z</A></TD>
-  </TR>
-  <TR>
-    <TD ALIGN="MIDDLE" WIDTH="10%"><A HREF="reference.html#TXA">TXA</A></TD>
-    <TD>Transfer X to accumulator</TD>
-    <TD ALIGN="MIDDLE" WIDTH="15%"><A HREF="registers.html#N">N</A>,<A
-      HREF="registers.html#Z">Z</A></TD>
-  </TR>
-  <TR>
-    <TD ALIGN="MIDDLE" WIDTH="10%"><A HREF="reference.html#TYA">TYA</A></TD>
-    <TD>Transfer Y to accumulator</TD>
-    <TD ALIGN="MIDDLE" WIDTH="15%"><A HREF="registers.html#N">N</A>,<A
-      HREF="registers.html#Z">Z</A></TD>
-  </TR>
-</TABLE></P>
+<p><table border="1" cellpadding="0" cellspacing="0" width="450">
+  <tr>
+    <td align="middle" width="10%"><a href="reference.html#TAX">TAX</a></td>
+    <td>Transfer accumulator to X</td>
+    <td align="middle" width="15%"><a href="registers.html#N">N</a>,<a
+      href="registers.html#Z">Z</a></td>
+  </tr>
+  <tr>
+    <td align="middle" width="10%"><a href="reference.html#TAY">TAY</a></td>
+    <td>Transfer accumulator to Y</td>
+    <td align="middle" width="15%"><a href="registers.html#N">N</a>,<a
+      href="registers.html#Z">Z</a></td>
+  </tr>
+  <tr>
+    <td align="middle" width="10%"><a href="reference.html#TXA">TXA</a></td>
+    <td>Transfer X to accumulator</td>
+    <td align="middle" width="15%"><a href="registers.html#N">N</a>,<a
+      href="registers.html#Z">Z</a></td>
+  </tr>
+  <tr>
+    <td align="middle" width="10%"><a href="reference.html#TYA">TYA</a></td>
+    <td>Transfer Y to accumulator</td>
+    <td align="middle" width="15%"><a href="registers.html#N">N</a>,<a
+      href="registers.html#Z">Z</a></td>
+  </tr>
+</table></p>
 
-<H3>Stack Operations</H3>
+<h3>Stack Operations</h3>
 
-<P>The 6502 microprocessor supports a 256 byte stack fixed between
+<p>The 6502 microprocessor supports a 256 byte stack fixed between
 memory locations $0100 and $01FF. A special 8-bit register, S,
 is used to keep track of the next free byte of stack space. Pushing
 a byte on to the stack causes the value to be stored at the current
 free location (e.g. $0100,S) and then the stack pointer is post
-decremented. Pull operations reverse this procedure.</P>
+decremented. Pull operations reverse this procedure.</p>
 
-<P>The stack register can only be accessed by transferring its
+<p>The stack register can only be accessed by transferring its
 value to or from the X register. Its value is automatically modified
 by push/pull instructions, subroutine calls and returns, interrupts
-and returns from interrupts.</P>
+and returns from interrupts.</p>
 
-<P><TABLE BORDER="1" CELLPADDING="0" CELLSPACING="0" WIDTH="450">
-  <TR>
-    <TD ALIGN="MIDDLE" WIDTH="10%"><A HREF="reference.html#TSX">TSX</A></TD>
-    <TD>Transfer stack pointer to X</TD>
-    <TD ALIGN="MIDDLE" WIDTH="15%"><A HREF="registers.html#N">N</A>,<A
-      HREF="registers.html#Z">Z</A></TD>
-  </TR>
-  <TR>
-    <TD ALIGN="MIDDLE" WIDTH="10%"><A HREF="reference.html#TXS">TXS</A></TD>
-    <TD>Transfer X to stack pointer</TD>
-    <TD ALIGN="MIDDLE" WIDTH="15%">&nbsp;</TD>
-  </TR>
-  <TR>
-    <TD ALIGN="MIDDLE" WIDTH="10%"><A HREF="reference.html#PHA">PHA</A></TD>
-    <TD>Push accumulator on stack</TD>
-    <TD ALIGN="MIDDLE" WIDTH="15%">&nbsp;</TD>
-  </TR>
-  <TR>
-    <TD ALIGN="MIDDLE" WIDTH="10%"><A HREF="reference.html#PHP">PHP</A></TD>
-    <TD>Push processor status on stack</TD>
-    <TD ALIGN="MIDDLE" WIDTH="15%">&nbsp;</TD>
-  </TR>
-  <TR>
-    <TD ALIGN="MIDDLE" WIDTH="10%"><A HREF="reference.html#PLA">PLA</A></TD>
-    <TD>Pull accumulator from stack</TD>
-    <TD ALIGN="MIDDLE" WIDTH="15%"><A HREF="registers.html#N">N</A>,<A
-      HREF="registers.html#Z">Z</A></TD>
-  </TR>
-  <TR>
-    <TD ALIGN="MIDDLE" WIDTH="10%"><A HREF="reference.html#PLP">PLP</A></TD>
-    <TD>Pull processor status from stack</TD>
-    <TD ALIGN="MIDDLE" WIDTH="15%">All</TD>
-  </TR>
-</TABLE></P>
+<p><table border="1" cellpadding="0" cellspacing="0" width="450">
+  <tr>
+    <td align="middle" width="10%"><a href="reference.html#TSX">TSX</a></td>
+    <td>Transfer stack pointer to X</td>
+    <td align="middle" width="15%"><a href="registers.html#N">N</a>,<a
+      href="registers.html#Z">Z</a></td>
+  </tr>
+  <tr>
+    <td align="middle" width="10%"><a href="reference.html#TXS">TXS</a></td>
+    <td>Transfer X to stack pointer</td>
+    <td align="middle" width="15%">&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="middle" width="10%"><a href="reference.html#PHA">PHA</a></td>
+    <td>Push accumulator on stack</td>
+    <td align="middle" width="15%">&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="middle" width="10%"><a href="reference.html#PHP">PHP</a></td>
+    <td>Push processor status on stack</td>
+    <td align="middle" width="15%">&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="middle" width="10%"><a href="reference.html#PLA">PLA</a></td>
+    <td>Pull accumulator from stack</td>
+    <td align="middle" width="15%"><a href="registers.html#N">N</a>,<a
+      href="registers.html#Z">Z</a></td>
+  </tr>
+  <tr>
+    <td align="middle" width="10%"><a href="reference.html#PLP">PLP</a></td>
+    <td>Pull processor status from stack</td>
+    <td align="middle" width="15%">All</td>
+  </tr>
+</table></p>
 
-<H3>Logical</H3>
+<h3>Logical</h3>
 
-<P>The following instructions perform logical operations on the
+<p>The following instructions perform logical operations on the
 contents of the accumulator and another value held in memory.
 The BIT instruction performs a logical AND to test the presence
 of bits in the memory value to set the flags but does not keep
-the result.</P>
+the result.</p>
 
-<P><TABLE BORDER="1" CELLPADDING="0" CELLSPACING="0" WIDTH="450">
-  <TR>
-    <TD ALIGN="MIDDLE" WIDTH="10%"><A HREF="reference.html#AND">AND</A></TD>
-    <TD>Logical AND</TD>
-    <TD ALIGN="MIDDLE" WIDTH="15%"><A HREF="registers.html#N">N</A>,<A
-      HREF="registers.html#Z">Z</A></TD>
-  </TR>
-  <TR>
-    <TD ALIGN="MIDDLE" WIDTH="10%"><A HREF="reference.html#EOR">EOR</A></TD>
-    <TD>Exclusive OR</TD>
-    <TD ALIGN="MIDDLE" WIDTH="15%"><A HREF="registers.html#N">N</A>,<A
-      HREF="registers.html#Z">Z</A></TD>
-  </TR>
-  <TR>
-    <TD ALIGN="MIDDLE" WIDTH="10%"><A HREF="reference.html#ORA">ORA</A></TD>
-    <TD>Logical Inclusive OR</TD>
-    <TD ALIGN="MIDDLE" WIDTH="15%"><A HREF="registers.html#N">N</A>,<A
-      HREF="registers.html#Z">Z</A></TD>
-  </TR>
-  <TR>
-    <TD ALIGN="MIDDLE" WIDTH="10%"><A HREF="reference.html#BIT">BIT</A></TD>
-    <TD>Bit Test</TD>
-    <TD ALIGN="MIDDLE" WIDTH="15%"><A HREF="registers.html#N">N</A>,<A
-      HREF="registers.html#V">V</A>,<A HREF="registers.html#Z">Z</A></TD>
-  </TR>
-</TABLE></P>
+<p><table border="1" cellpadding="0" cellspacing="0" width="450">
+  <tr>
+    <td align="middle" width="10%"><a href="reference.html#AND">AND</a></td>
+    <td>Logical AND</td>
+    <td align="middle" width="15%"><a href="registers.html#N">N</a>,<a
+      href="registers.html#Z">Z</a></td>
+  </tr>
+  <tr>
+    <td align="middle" width="10%"><a href="reference.html#EOR">EOR</a></td>
+    <td>Exclusive OR</td>
+    <td align="middle" width="15%"><a href="registers.html#N">N</a>,<a
+      href="registers.html#Z">Z</a></td>
+  </tr>
+  <tr>
+    <td align="middle" width="10%"><a href="reference.html#ORA">ORA</a></td>
+    <td>Logical Inclusive OR</td>
+    <td align="middle" width="15%"><a href="registers.html#N">N</a>,<a
+      href="registers.html#Z">Z</a></td>
+  </tr>
+  <tr>
+    <td align="middle" width="10%"><a href="reference.html#BIT">BIT</a></td>
+    <td>Bit Test</td>
+    <td align="middle" width="15%"><a href="registers.html#N">N</a>,<a
+      href="registers.html#V">V</a>,<a href="registers.html#Z">Z</a></td>
+  </tr>
+</table></p>
 
-<H3>Arithmetic</H3>
+<h3>Arithmetic</h3>
 
-<P>The arithmetic operations perform addition and subtraction
+<p>The arithmetic operations perform addition and subtraction
 on the contents of the accumulator. The compare operations allow
-the comparison of the accumulator and X or Y with memory values.</P>
+the comparison of the accumulator and X or Y with memory values.</p>
 
-<P><TABLE BORDER="1" CELLPADDING="0" CELLSPACING="0" WIDTH="450">
-  <TR>
-    <TD ALIGN="MIDDLE" WIDTH="10%"><A HREF="reference.html#ADC">ADC</A></TD>
-    <TD>Add with Carry</TD>
-    <TD ALIGN="MIDDLE" WIDTH="15%"><A HREF="registers.html#N">N</A>,<A
-      HREF="registers.html#V">V</A>,<A HREF="registers.html#Z">Z</A>,<A
-      HREF="registers.html#C">C</A></TD>
-  </TR>
-  <TR>
-    <TD ALIGN="MIDDLE" WIDTH="10%"><A HREF="reference.html#SBC">SBC</A></TD>
-    <TD>Subtract with Carry</TD>
-    <TD ALIGN="MIDDLE" WIDTH="15%"><A HREF="registers.html#N">N</A>,<A
-      HREF="registers.html#V">V</A>,<A HREF="registers.html#Z">Z</A>,<A
-      HREF="registers.html#C">C</A></TD>
-  </TR>
-  <TR>
-    <TD ALIGN="MIDDLE" WIDTH="10%"><A HREF="reference.html#CMP">CMP</A></TD>
-    <TD>Compare accumulator</TD>
-    <TD ALIGN="MIDDLE" WIDTH="15%"><A HREF="registers.html#N">N</A>,<A
-      HREF="registers.html#Z">Z</A>,<A HREF="registers.html#C">C</A></TD>
-  </TR>
-  <TR>
-    <TD ALIGN="MIDDLE" WIDTH="10%"><A HREF="reference.html#CPX">CPX</A></TD>
-    <TD>Compare X register</TD>
-    <TD ALIGN="MIDDLE" WIDTH="15%"><A HREF="registers.html#N">N</A>,<A
-      HREF="registers.html#Z">Z</A>,<A HREF="registers.html#C">C</A></TD>
-  </TR>
-  <TR>
-    <TD ALIGN="MIDDLE" WIDTH="10%"><A HREF="reference.html#CPY">CPY</A></TD>
-    <TD>Compare Y register</TD>
-    <TD ALIGN="MIDDLE" WIDTH="15%"><A HREF="registers.html#N">N</A>,<A
-      HREF="registers.html#Z">Z</A>,<A HREF="registers.html#C">C</A></TD>
-  </TR>
-</TABLE></P>
+<p><table border="1" cellpadding="0" cellspacing="0" width="450">
+  <tr>
+    <td align="middle" width="10%"><a href="reference.html#ADC">ADC</a></td>
+    <td>Add with Carry</td>
+    <td align="middle" width="15%"><a href="registers.html#N">N</a>,<a
+      href="registers.html#V">V</a>,<a href="registers.html#Z">Z</a>,<a
+      href="registers.html#C">C</a></td>
+  </tr>
+  <tr>
+    <td align="middle" width="10%"><a href="reference.html#SBC">SBC</a></td>
+    <td>Subtract with Carry</td>
+    <td align="middle" width="15%"><a href="registers.html#N">N</a>,<a
+      href="registers.html#V">V</a>,<a href="registers.html#Z">Z</a>,<a
+      href="registers.html#C">C</a></td>
+  </tr>
+  <tr>
+    <td align="middle" width="10%"><a href="reference.html#CMP">CMP</a></td>
+    <td>Compare accumulator</td>
+    <td align="middle" width="15%"><a href="registers.html#N">N</a>,<a
+      href="registers.html#Z">Z</a>,<a href="registers.html#C">C</a></td>
+  </tr>
+  <tr>
+    <td align="middle" width="10%"><a href="reference.html#CPX">CPX</a></td>
+    <td>Compare X register</td>
+    <td align="middle" width="15%"><a href="registers.html#N">N</a>,<a
+      href="registers.html#Z">Z</a>,<a href="registers.html#C">C</a></td>
+  </tr>
+  <tr>
+    <td align="middle" width="10%"><a href="reference.html#CPY">CPY</a></td>
+    <td>Compare Y register</td>
+    <td align="middle" width="15%"><a href="registers.html#N">N</a>,<a
+      href="registers.html#Z">Z</a>,<a href="registers.html#C">C</a></td>
+  </tr>
+</table></p>
 
-<H3>Increments &amp; Decrements</H3>
+<h3>Increments &amp; Decrements</h3>
 
-<P>Increment or decrement a memory location or one of the X or
-Y registers by one setting the negative (<A HREF="registers.html#N">N</A>)
-and zero (<A HREF="registers.html#Z">Z</A>) flags as appropriate,</P>
+<p>Increment or decrement a memory location or one of the X or
+Y registers by one setting the negative (<a href="registers.html#N">N</a>)
+and zero (<a href="registers.html#Z">Z</a>) flags as appropriate,</p>
 
-<P><TABLE BORDER="1" CELLPADDING="0" CELLSPACING="0" WIDTH="450">
-  <TR>
-    <TD ALIGN="MIDDLE" WIDTH="10%"><A HREF="reference.html#INC">INC</A></TD>
-    <TD>Increment a memory location</TD>
-    <TD ALIGN="MIDDLE" WIDTH="15%"><A HREF="registers.html#N">N</A>,<A
-      HREF="registers.html#Z">Z</A></TD>
-  </TR>
-  <TR>
-    <TD ALIGN="MIDDLE" WIDTH="10%"><A HREF="reference.html#INX">INX</A></TD>
-    <TD>Increment the X register</TD>
-    <TD ALIGN="MIDDLE" WIDTH="15%"><A HREF="registers.html#N">N</A>,<A
-      HREF="registers.html#Z">Z</A></TD>
-  </TR>
-  <TR>
-    <TD ALIGN="MIDDLE" WIDTH="10%"><A HREF="reference.html#INY">INY</A></TD>
-    <TD>Increment the Y register</TD>
-    <TD ALIGN="MIDDLE" WIDTH="15%"><A HREF="registers.html#N">N</A>,<A
-      HREF="registers.html#Z">Z</A></TD>
-  </TR>
-  <TR>
-    <TD ALIGN="MIDDLE" WIDTH="10%"><A HREF="reference.html#DEC">DEC</A></TD>
-    <TD>Decrement a memory location</TD>
-    <TD ALIGN="MIDDLE" WIDTH="15%"><A HREF="registers.html#N">N</A>,<A
-      HREF="registers.html#Z">Z</A></TD>
-  </TR>
-  <TR>
-    <TD ALIGN="MIDDLE" WIDTH="10%"><A HREF="reference.html#DEX">DEX</A></TD>
-    <TD>Decrement the X register</TD>
-    <TD ALIGN="MIDDLE" WIDTH="15%"><A HREF="#N">N</A>,<A HREF="#Z">Z</A></TD>
-  </TR>
-  <TR>
-    <TD ALIGN="MIDDLE" WIDTH="10%"><A HREF="reference.html#DEY">DEY</A></TD>
-    <TD>Decrement the Y register</TD>
-    <TD ALIGN="MIDDLE" WIDTH="15%"><A HREF="registers.html#N">N</A>,<A
-      HREF="registers.html#Z">Z</A></TD>
-  </TR>
-</TABLE></P>
+<p><table border="1" cellpadding="0" cellspacing="0" width="450">
+  <tr>
+    <td align="middle" width="10%"><a href="reference.html#INC">INC</a></td>
+    <td>Increment a memory location</td>
+    <td align="middle" width="15%"><a href="registers.html#N">N</a>,<a
+      href="registers.html#Z">Z</a></td>
+  </tr>
+  <tr>
+    <td align="middle" width="10%"><a href="reference.html#INX">INX</a></td>
+    <td>Increment the X register</td>
+    <td align="middle" width="15%"><a href="registers.html#N">N</a>,<a
+      href="registers.html#Z">Z</a></td>
+  </tr>
+  <tr>
+    <td align="middle" width="10%"><a href="reference.html#INY">INY</a></td>
+    <td>Increment the Y register</td>
+    <td align="middle" width="15%"><a href="registers.html#N">N</a>,<a
+      href="registers.html#Z">Z</a></td>
+  </tr>
+  <tr>
+    <td align="middle" width="10%"><a href="reference.html#DEC">DEC</a></td>
+    <td>Decrement a memory location</td>
+    <td align="middle" width="15%"><a href="registers.html#N">N</a>,<a
+      href="registers.html#Z">Z</a></td>
+  </tr>
+  <tr>
+    <td align="middle" width="10%"><a href="reference.html#DEX">DEX</a></td>
+    <td>Decrement the X register</td>
+    <td align="middle" width="15%"><a href="#N">N</a>,<a href="#Z">Z</a></td>
+  </tr>
+  <tr>
+    <td align="middle" width="10%"><a href="reference.html#DEY">DEY</a></td>
+    <td>Decrement the Y register</td>
+    <td align="middle" width="15%"><a href="registers.html#N">N</a>,<a
+      href="registers.html#Z">Z</a></td>
+  </tr>
+</table></p>
 
-<H3>Shifts</H3>
+<h3>Shifts</h3>
 
-<P>Shift instructions cause the bits within either a memory location
+<p>Shift instructions cause the bits within either a memory location
 or the accumulator to be shifted by one bit position. The rotate
-instructions use the contents if the carry flag (<A HREF="registers.html#C">C</A>)
+instructions use the contents if the carry flag (<a href="registers.html#C">C</a>)
 to fill the vacant position generated by the shift and to catch
 the overflowing bit. The arithmetic and logical shifts shift in
 an appropriate 0 or 1 bit as appropriate but catch the overflow
-bit in the carry flag (<A HREF="registers.html#C">C</A>).</P>
+bit in the carry flag (<a href="registers.html#C">C</a>).</p>
 
-<P><TABLE BORDER="1" CELLPADDING="0" CELLSPACING="0" WIDTH="450">
-  <TR>
-    <TD ALIGN="MIDDLE" WIDTH="10%"><A HREF="reference.html#ASL">ASL</A></TD>
-    <TD>Arithmetic Shift Left</TD>
-    <TD ALIGN="MIDDLE"><A HREF="registers.html#N">N</A>,<A HREF="registers.html#Z">Z</A>,<A
-      HREF="registers.html#C">C</A></TD>
-  </TR>
-  <TR>
-    <TD ALIGN="MIDDLE" WIDTH="10%"><A HREF="reference.html#LSR">LSR</A></TD>
-    <TD>Logical Shift Right</TD>
-    <TD ALIGN="MIDDLE" WIDTH="15%"><A HREF="registers.html#N">N</A>,<A
-      HREF="registers.html#Z">Z</A>,<A HREF="registers.html#C">C</A></TD>
-  </TR>
-  <TR>
-    <TD ALIGN="MIDDLE" WIDTH="10%"><A HREF="reference.html#ROL">ROL</A></TD>
-    <TD>Rotate Left</TD>
-    <TD ALIGN="MIDDLE" WIDTH="15%"><A HREF="registers.html#N">N</A>,<A
-      HREF="registers.html#Z">Z</A>,<A HREF="registers.html#C">C</A></TD>
-  </TR>
-  <TR>
-    <TD ALIGN="MIDDLE" WIDTH="10%"><A HREF="reference.html#ROR">ROR</A></TD>
-    <TD>Rotate Right</TD>
-    <TD ALIGN="MIDDLE" WIDTH="15%"><A HREF="registers.html#N">N</A>,<A
-      HREF="registers.html#Z">Z</A>,<A HREF="registers.html#C">C</A></TD>
-  </TR>
-</TABLE></P>
+<p><table border="1" cellpadding="0" cellspacing="0" width="450">
+  <tr>
+    <td align="middle" width="10%"><a href="reference.html#ASL">ASL</a></td>
+    <td>Arithmetic Shift Left</td>
+    <td align="middle"><a href="registers.html#N">N</a>,<a href="registers.html#Z">Z</a>,<a
+      href="registers.html#C">C</a></td>
+  </tr>
+  <tr>
+    <td align="middle" width="10%"><a href="reference.html#LSR">LSR</a></td>
+    <td>Logical Shift Right</td>
+    <td align="middle" width="15%"><a href="registers.html#N">N</a>,<a
+      href="registers.html#Z">Z</a>,<a href="registers.html#C">C</a></td>
+  </tr>
+  <tr>
+    <td align="middle" width="10%"><a href="reference.html#ROL">ROL</a></td>
+    <td>Rotate Left</td>
+    <td align="middle" width="15%"><a href="registers.html#N">N</a>,<a
+      href="registers.html#Z">Z</a>,<a href="registers.html#C">C</a></td>
+  </tr>
+  <tr>
+    <td align="middle" width="10%"><a href="reference.html#ROR">ROR</a></td>
+    <td>Rotate Right</td>
+    <td align="middle" width="15%"><a href="registers.html#N">N</a>,<a
+      href="registers.html#Z">Z</a>,<a href="registers.html#C">C</a></td>
+  </tr>
+</table></p>
 
-<H3>Jumps &amp; Calls</H3>
+<h3>Jumps &amp; Calls</h3>
 
-<P>The following instructions modify the program counter causing
-a break to normal sequential execution. The <A HREF="reference.html#JSR">JSR</A>
-instruction pushes the old <A HREF="registers.html#PC">PC</A>
+<p>The following instructions modify the program counter causing
+a break to normal sequential execution. The <a href="reference.html#JSR">JSR</a>
+instruction pushes the old <a href="registers.html#PC">PC</a>
 onto the stack before changing it to the new location allowing
-a subsequent <A HREF="reference.html#RTS">RTS</A> to return execution
-to the instruction after the call.</P>
+a subsequent <a href="reference.html#RTS">RTS</a> to return execution
+to the instruction after the call.</p>
 
-<P><TABLE BORDER="1" CELLPADDING="0" CELLSPACING="0" WIDTH="450">
-  <TR>
-    <TD ALIGN="MIDDLE" WIDTH="10%"><A HREF="reference.html#JMP">JMP</A></TD>
-    <TD>Jump to another location</TD>
-    <TD ALIGN="MIDDLE" WIDTH="15%">&nbsp;</TD>
-  </TR>
-  <TR>
-    <TD ALIGN="MIDDLE" WIDTH="10%"><A HREF="reference.html#JSR">JSR</A></TD>
-    <TD>Jump to a subroutine</TD>
-    <TD ALIGN="MIDDLE" WIDTH="15%">&nbsp;</TD>
-  </TR>
-  <TR>
-    <TD ALIGN="MIDDLE" WIDTH="10%"><A HREF="reference.html#RTS">RTS</A></TD>
-    <TD>Return from subroutine</TD>
-    <TD ALIGN="MIDDLE" WIDTH="15%">&nbsp;</TD>
-  </TR>
-</TABLE></P>
+<p><table border="1" cellpadding="0" cellspacing="0" width="450">
+  <tr>
+    <td align="middle" width="10%"><a href="reference.html#JMP">JMP</a></td>
+    <td>Jump to another location</td>
+    <td align="middle" width="15%">&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="middle" width="10%"><a href="reference.html#JSR">JSR</a></td>
+    <td>Jump to a subroutine</td>
+    <td align="middle" width="15%">&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="middle" width="10%"><a href="reference.html#RTS">RTS</a></td>
+    <td>Return from subroutine</td>
+    <td align="middle" width="15%">&nbsp;</td>
+  </tr>
+</table></p>
 
-<H3>Branches</H3>
+<h3>Branches</h3>
 
-<P>Branch instructions break the normal sequential flow of execution
+<p>Branch instructions break the normal sequential flow of execution
 by changing the program counter if a specified condition is met.
 All the conditions are based on examining a single bit within
-the processor status.</P>
+the processor status.</p>
 
-<P><TABLE BORDER="1" CELLPADDING="0" CELLSPACING="0" WIDTH="450">
-  <TR>
-    <TD ALIGN="MIDDLE" WIDTH="10%"><A HREF="reference.html#BCC">BCC</A></TD>
-    <TD>Branch if carry flag clear</TD>
-    <TD ALIGN="MIDDLE" WIDTH="15%">&nbsp;</TD>
-  </TR>
-  <TR>
-    <TD ALIGN="MIDDLE" WIDTH="10%"><A HREF="reference.html#BCS">BCS</A></TD>
-    <TD>Branch if carry flag set</TD>
-    <TD ALIGN="MIDDLE" WIDTH="15%">&nbsp;</TD>
-  </TR>
-  <TR>
-    <TD ALIGN="MIDDLE" WIDTH="10%"><A HREF="reference.html#BEQ">BEQ</A></TD>
-    <TD>Branch if zero flag set</TD>
-    <TD ALIGN="MIDDLE" WIDTH="15%">&nbsp;</TD>
-  </TR>
-  <TR>
-    <TD ALIGN="MIDDLE" WIDTH="10%"><A HREF="reference.html#BMI">BMI</A></TD>
-    <TD>Branch if negative flag set</TD>
-    <TD ALIGN="MIDDLE" WIDTH="15%">&nbsp;</TD>
-  </TR>
-  <TR>
-    <TD ALIGN="MIDDLE" WIDTH="10%"><A HREF="reference.html#BNE">BNE</A></TD>
-    <TD>Branch if zero flag clear</TD>
-    <TD ALIGN="MIDDLE" WIDTH="15%">&nbsp;</TD>
-  </TR>
-  <TR>
-    <TD ALIGN="MIDDLE" WIDTH="10%"><A HREF="reference.html#BPL">BPL</A></TD>
-    <TD>Branch if negative flag clear</TD>
-    <TD ALIGN="MIDDLE" WIDTH="15%">&nbsp;</TD>
-  </TR>
-  <TR>
-    <TD ALIGN="MIDDLE" WIDTH="10%"><A HREF="reference.html#BVC">BVC</A></TD>
-    <TD>Branch if overflow flag clear</TD>
-    <TD ALIGN="MIDDLE" WIDTH="15%">&nbsp;</TD>
-  </TR>
-  <TR>
-    <TD ALIGN="MIDDLE" WIDTH="10%"><A HREF="reference.html#BVS">BVS</A></TD>
-    <TD>Branch if overflow flag set</TD>
-    <TD ALIGN="MIDDLE" WIDTH="15%">&nbsp;</TD>
-  </TR>
-</TABLE></P>
+<p><table border="1" cellpadding="0" cellspacing="0" width="450">
+  <tr>
+    <td align="middle" width="10%"><a href="reference.html#BCC">BCC</a></td>
+    <td>Branch if carry flag clear</td>
+    <td align="middle" width="15%">&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="middle" width="10%"><a href="reference.html#BCS">BCS</a></td>
+    <td>Branch if carry flag set</td>
+    <td align="middle" width="15%">&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="middle" width="10%"><a href="reference.html#BEQ">BEQ</a></td>
+    <td>Branch if zero flag set</td>
+    <td align="middle" width="15%">&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="middle" width="10%"><a href="reference.html#BMI">BMI</a></td>
+    <td>Branch if negative flag set</td>
+    <td align="middle" width="15%">&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="middle" width="10%"><a href="reference.html#BNE">BNE</a></td>
+    <td>Branch if zero flag clear</td>
+    <td align="middle" width="15%">&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="middle" width="10%"><a href="reference.html#BPL">BPL</a></td>
+    <td>Branch if negative flag clear</td>
+    <td align="middle" width="15%">&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="middle" width="10%"><a href="reference.html#BVC">BVC</a></td>
+    <td>Branch if overflow flag clear</td>
+    <td align="middle" width="15%">&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="middle" width="10%"><a href="reference.html#BVS">BVS</a></td>
+    <td>Branch if overflow flag set</td>
+    <td align="middle" width="15%">&nbsp;</td>
+  </tr>
+</table></p>
 
-<P>Branch instructions use relative address to identify the target
+<p>Branch instructions use relative address to identify the target
 instruction if they are executed. As relative addresses are stored
 using a signed 8 bit byte the target instruction must be within
-126 bytes before the branch or 128 bytes after the branch.</P>
+126 bytes before the branch or 128 bytes after the branch.</p>
 
-<H3>Status Flag Changes</H3>
+<h3>Status Flag Changes</h3>
 
-<P>The following instructions change the values of specific status
-flags.</P>
+<p>The following instructions change the values of specific status
+flags.</p>
 
-<P><TABLE BORDER="1" CELLPADDING="0" CELLSPACING="0" WIDTH="450">
-  <TR>
-    <TD ALIGN="MIDDLE" WIDTH="10%"><A HREF="reference.html#CLC">CLC</A></TD>
-    <TD>Clear carry flag</TD>
-    <TD ALIGN="MIDDLE" WIDTH="15%"><A HREF="registers.html#C">C</A></TD>
-  </TR>
-  <TR>
-    <TD ALIGN="MIDDLE" WIDTH="10%"><A HREF="reference.html#CLD">CLD</A></TD>
-    <TD>Clear decimal mode flag</TD>
-    <TD ALIGN="MIDDLE" WIDTH="15%"><A HREF="registers.html#D">D</A></TD>
-  </TR>
-  <TR>
-    <TD ALIGN="MIDDLE" WIDTH="10%"><A HREF="reference.html#CLI">CLI</A></TD>
-    <TD>Clear interrupt disable flag</TD>
-    <TD ALIGN="MIDDLE" WIDTH="15%"><A HREF="registers.html#I">I</A></TD>
-  </TR>
-  <TR>
-    <TD ALIGN="MIDDLE" WIDTH="10%"><A HREF="reference.html#CLV">CLV</A></TD>
-    <TD>Clear overflow flag</TD>
-    <TD ALIGN="MIDDLE" WIDTH="15%"><A HREF="registers.html#V">V</A></TD>
-  </TR>
-  <TR>
-    <TD ALIGN="MIDDLE" WIDTH="10%"><A HREF="reference.html#SEC">SEC</A></TD>
-    <TD>Set carry flag</TD>
-    <TD ALIGN="MIDDLE" WIDTH="15%"><A HREF="registers.html#C">C</A></TD>
-  </TR>
-  <TR>
-    <TD ALIGN="MIDDLE" WIDTH="10%"><A HREF="reference.html#SED">SED</A></TD>
-    <TD>Set decimal mode flag</TD>
-    <TD ALIGN="MIDDLE" WIDTH="15%"><A HREF="registers.html#D">D</A></TD>
-  </TR>
-  <TR>
-    <TD ALIGN="MIDDLE" WIDTH="10%"><A HREF="reference.html#SEI">SEI</A></TD>
-    <TD>Set interrupt disable flag</TD>
-    <TD ALIGN="MIDDLE" WIDTH="15%"><A HREF="registers.html#I">I</A></TD>
-  </TR>
-</TABLE></P>
+<p><table border="1" cellpadding="0" cellspacing="0" width="450">
+  <tr>
+    <td align="middle" width="10%"><a href="reference.html#CLC">CLC</a></td>
+    <td>Clear carry flag</td>
+    <td align="middle" width="15%"><a href="registers.html#C">C</a></td>
+  </tr>
+  <tr>
+    <td align="middle" width="10%"><a href="reference.html#CLD">CLD</a></td>
+    <td>Clear decimal mode flag</td>
+    <td align="middle" width="15%"><a href="registers.html#D">D</a></td>
+  </tr>
+  <tr>
+    <td align="middle" width="10%"><a href="reference.html#CLI">CLI</a></td>
+    <td>Clear interrupt disable flag</td>
+    <td align="middle" width="15%"><a href="registers.html#I">I</a></td>
+  </tr>
+  <tr>
+    <td align="middle" width="10%"><a href="reference.html#CLV">CLV</a></td>
+    <td>Clear overflow flag</td>
+    <td align="middle" width="15%"><a href="registers.html#V">V</a></td>
+  </tr>
+  <tr>
+    <td align="middle" width="10%"><a href="reference.html#SEC">SEC</a></td>
+    <td>Set carry flag</td>
+    <td align="middle" width="15%"><a href="registers.html#C">C</a></td>
+  </tr>
+  <tr>
+    <td align="middle" width="10%"><a href="reference.html#SED">SED</a></td>
+    <td>Set decimal mode flag</td>
+    <td align="middle" width="15%"><a href="registers.html#D">D</a></td>
+  </tr>
+  <tr>
+    <td align="middle" width="10%"><a href="reference.html#SEI">SEI</a></td>
+    <td>Set interrupt disable flag</td>
+    <td align="middle" width="15%"><a href="registers.html#I">I</a></td>
+  </tr>
+</table></p>
 
-<H3>System Functions</H3>
+<h3>System Functions</h3>
 
-<P>The remaining instructions perform useful but rarely used functions.</P>
+<p>The remaining instructions perform useful but rarely used functions.</p>
 
-<P><TABLE BORDER="1" CELLPADDING="0" CELLSPACING="0" WIDTH="450">
-  <TR>
-    <TD ALIGN="MIDDLE" WIDTH="10%"><A HREF="reference.html#BRK">BRK</A></TD>
-    <TD>Force an interrupt</TD>
-    <TD ALIGN="MIDDLE" WIDTH="15%"><A HREF="registers.html#B">B</A></TD>
-  </TR>
-  <TR>
-    <TD ALIGN="MIDDLE" WIDTH="10%"><A HREF="reference.html#NOP">NOP</A></TD>
-    <TD>No Operation</TD>
-    <TD ALIGN="MIDDLE" WIDTH="15%">&nbsp;</TD>
-  </TR>
-  <TR>
-    <TD ALIGN="MIDDLE" WIDTH="10%"><A HREF="reference.html#RTI">RTI</A></TD>
-    <TD>Return from Interrupt</TD>
-    <TD ALIGN="MIDDLE" WIDTH="15%">All</TD>
-  </TR>
-</TABLE></P>
+<p><table border="1" cellpadding="0" cellspacing="0" width="450">
+  <tr>
+    <td align="middle" width="10%"><a href="reference.html#BRK">BRK</a></td>
+    <td>Force an interrupt</td>
+    <td align="middle" width="15%"><a href="registers.html#B">B</a></td>
+  </tr>
+  <tr>
+    <td align="middle" width="10%"><a href="reference.html#NOP">NOP</a></td>
+    <td>No Operation</td>
+    <td align="middle" width="15%">&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="middle" width="10%"><a href="reference.html#RTI">RTI</a></td>
+    <td>Return from Interrupt</td>
+    <td align="middle" width="15%">All</td>
+  </tr>
+</table></p>
 
-<P><TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="100%"
-HEIGHT="30">
-  <TR>
-    <TD WIDTH="25%" BGCOLOR="#aaaaff">&nbsp;<A HREF="registers.html">&lt;&lt;
-      Back</A></TD>
-    <TD WIDTH="25%" BGCOLOR="#aaaaff">
-      <P><CENTER><A HREF="../index.html" TARGET="_parent">Home</A></CENTER></TD>
-    <TD WIDTH="25%" BGCOLOR="#aaaaff">
-      <P><CENTER><A HREF="index.html">Contents</A></CENTER></TD>
-    <TD ALIGN="RIGHT" WIDTH="25%" BGCOLOR="#aaaaff"><A HREF="addressing.html">Next
-      &gt;&gt;</A></TD>
-  </TR>
-</TABLE></P>
-<P>
-<HR ALIGN=LEFT>This page was last updated on 2nd January 2002
-</BODY>
-</HTML>
+<p><table class="nav-bar">
+  <tr>
+    <td>&nbsp;<a href="registers.html">&lt;&lt;
+      Back</a></td>
+    <td>
+      <p><a href="../index.html">Home</a></td>
+    <td>
+      <p><a href="index.html">Contents</a></td>
+    <td><a href="addressing.html">Next
+      &gt;&gt;</a></td>
+  </tr>
+</table></p>
+<p>
+<hr align=left>This page was last updated on 2nd January 2002
+
+</main>
+</div>
+<script src="../sidebar.js"></script>
+</body>
+</html>

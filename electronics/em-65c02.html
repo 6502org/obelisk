@@ -1,76 +1,16 @@
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>65C02 Emulation</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>65C02 Emulation - Obelisk by Andrew Jacobs</title>
     <link rel="StyleSheet" href="../obelisk.css" type="text/css" media="screen,print" />
-    <style type="text/css">
-        .style1
-        {
-            width: 43%;
-        }
-        .style2
-        {
-            width: 234px;
-        }
-        .style3
-        {
-            width: 199px;
-        }
-        .style4
-        {
-            width: 234px;
-            height: 22px;
-        }
-        .style5
-        {
-            width: 199px;
-            height: 22px;
-        }
-        .style6
-        {
-            width: 257px;
-        }
-        .style7
-        {
-            width: 257px;
-            height: 22px;
-        }
-        .style8
-        {
-            width: 257px;
-            font-weight: bold;
-            font-style: italic;
-        }
-        .style9
-        {
-            width: 199px;
-            font-weight: bold;
-            font-style: italic;
-        }
-        .style10
-        {
-            width: 234px;
-            font-weight: bold;
-            font-style: italic;
-        }
-        .style11
-        {
-            width: 257px;
-            font-weight: bold;
-        }
-        .style12
-        {
-            width: 199px;
-            font-weight: bold;
-        }
-        .style13
-        {
-            width: 234px;
-            font-weight: bold;
-        }
-    </style>
 </head>
 <body>
+<div class="page-wrapper">
+<nav class="sidebar" id="sidebar"></nav>
+<main class="content">
+
     <h1>
         EM-65C02 -&nbsp; A PIC based 65C02 Emulation</h1>
     <p>
@@ -109,104 +49,58 @@
         less RAM. The 24EP/33EP
         devices have a highest clock rate but changes to the instruction execution cycles
         make some &nbsp;</p>
-    <table class="style1">
+    <table>
         <tr>
-            <td class="style10">
-                Host</td>
-            <td class="style9">
-                &nbsp;</td>
-            <td class="style9">
-                &nbsp;</td>
-            <td class="style8">
-                65C02</td>
-            <td class="style8">
-                &nbsp;</td>
-            <td class="style8">
-                &nbsp;</td>
+            <th colspan="3" style="font-style: italic;">Host</th>
+            <th colspan="3" style="font-style: italic;">65C02</th>
         </tr>
         <tr>
-            <td class="style13">
-                Family</td>
-            <td class="style12">
-                Mhz</td>
-            <td class="style12">
-                MIPS</td>
-            <td class="style11">
-                Mhz</td>
-            <td class="style11">
-                MIPS</td>
-            <td class="style11">
-                RAM</td>
+            <th>Family</th>
+            <th>Mhz</th>
+            <th>MIPS</th>
+            <th>Mhz</th>
+            <th>MIPS</th>
+            <th>RAM</th>
         </tr>
         <tr>
-            <td class="style2">
-                24F</td>
-            <td class="style3">
-                32</td>
-            <td class="style3">
-                16</td>
-            <td class="style6">
-                2.0</td>
-            <td class="style6">
-                1</td>
-            <td class="style6">
-                2-64K&nbsp;</td>
+            <td>24F</td>
+            <td>32</td>
+            <td>16</td>
+            <td>2.0</td>
+            <td>1</td>
+            <td>2-64K</td>
         </tr>
         <tr>
-            <td class="style4">
-                30F</td>
-            <td class="style5">
-                60</td>
-            <td class="style5">
-                30</td>
-            <td class="style7">
-                3.6</td>
-            <td class="style7">
-                1.8</td>
-            <td class="style7">
-                &nbsp;</td>
+            <td>30F</td>
+            <td>60</td>
+            <td>30</td>
+            <td>3.6</td>
+            <td>1.8</td>
+            <td></td>
         </tr>
         <tr>
-            <td class="style4">
-                33F</td>
-            <td class="style5">
-                80</td>
-            <td class="style5">
-                40</td>
-            <td class="style7">
-                5.0</td>
-            <td class="style7">
-                2.5</td>
-            <td class="style7">
-                &nbsp;</td>
+            <td>33F</td>
+            <td>80</td>
+            <td>40</td>
+            <td>5.0</td>
+            <td>2.5</td>
+            <td></td>
         </tr>
         <tr>
-            <td class="style2">
-                24EP</td>
-            <td class="style3">
-                140</td>
-            <td class="style3">
-                70</td>
-            <td class="style6">
-                6.0</td>
-            <td class="style6">
-                3.0</td>
-            <td class="style6">
-                2-28K</td>
+            <td>24EP</td>
+            <td>140</td>
+            <td>70</td>
+            <td>6.0</td>
+            <td>3.0</td>
+            <td>2-28K</td>
         </tr>
         <tr>
-            <td class="style2">
-                33EP</td>
-            <td class="style3">
-                140</td>
-            <td class="style3">
-                70</td>
-            <td class="style6">
-                6.0</td>
-            <td class="style6">
-                3.0</td>
-            <td class="style6">
-                2-28K</td>
+            <td>33EP</td>
+            <td>140</td>
+            <td>70</td>
+            <td>6.0</td>
+            <td>3.0</td>
+            <td>2-28K</td>
         </tr>
     </table>
     <p>
@@ -224,34 +118,33 @@
         <a href="http://www.robot-electronics.co.uk">Robot-Electronics</a>. The
         PIC24FJ256GB206 contains 66K of Extended Data Space (EDS) which can be mapped in
         32K chunks into the data address space however it executes relatively slowly.</p>
-    <img src="em-65c02/DSCN0234.JPG" cellpadding="0" cellspacing="0" width="75%" height="75%"/>
+    <img src="em-65c02/dscn0234.jpg" width="75%"/>
     <p>The enclosure has a hole for a DB9 serial connector which connects to the board. I use a
     USB Serial adapter to access the device from my PC. Eventually it will have a USB CDC driver
     in firmware to allow it to be connected directly to a USB socket.</p>
-    <img src="em-65c02/DSCN0233.JPG" cellpadding="0" cellspacing="0" width="75%" height="75%"/>
+    <img src="em-65c02/dscn0233.jpg" width="75%"/>
     <p>I've only broken out two pins from the module for serial interfacing. I want to add
     an SPI interface to an SD card to give the emulated 65C02 a virtual hard drive.</p>
     <p>
         The second developement board I've build uses an Arduino style prototype board and
         uses a 28 SPDIP device like a 24EP128GP202</p>
     <p>
-        <img src="em-65c02/DSCN1529.JPG" cellpadding="0" cellspacing="0" width="75%" height="75%"/>&nbsp;</p>
+        <img src="em-65c02/dscn1529.jpg" width="75%"/>&nbsp;</p>
     <p>The source code and more information about this project can be found at <a target="_blank" href="https://sourceforge.net/projects/em-65c02/">
             https://sourceforge.net/projects/em-65c02/</a></p>
     <p>
         The same approach used here could be applied to emulate other 8-bit devices like the 8080,
     Z-80, 6800, 6809, 6502, 6501, 1802, etc. or even a 16-bit device like the 65C816.</p>
-    <table border="0" cellpadding="0" cellspacing="0" height="30" width="100%">
+    <table class="nav-bar">
         <tr>
-            <td bgcolor="#aaaaff" style="height: 30px" width="25%">
-                <a href="R6501.html">&lt;&lt; Back</a></td>
-            <td bgcolor="#aaaaff" style="height: 30px" width="25%">
-                <center>
-                    <a href="../index.html" target="_parent">Home</a></center>
+            <td>
+                <a href="r6501.html">&lt;&lt; Back</a></td>
+            <td>
+                <a href="../index.html">Home</a>
             </td>
-            <td bgcolor="#aaaaff" style="height: 30px; text-align: center" width="25%">
+            <td>
                 <a href="index.html">Contents</a></td>
-            <td align="right" bgcolor="#aaaaff" style="height: 30px" width="25%">
+            <td>
                 <a href="sb-6502.html">Next &gt;&gt;</a>
             </td>
         </tr>
@@ -260,7 +153,11 @@
     <p class="timestamp">
         This page was last updated on 8th July 2013</p>
     <p class="copyright">
-        &copy; Copyright 2013 <a style="color: black;" target="_top" href="http://forum.6502.org/viewtopic.php?t=6466">Andrew John Jacobs</a>. All rights reserved.<br />
+        &copy; Copyright 2013 <a href="http://forum.6502.org/viewtopic.php?t=6466">Andrew John Jacobs</a>. All rights reserved.<br />
         All trademarks and service marks are the properties of their respective owners.</p>
+
+</main>
+</div>
+<script src="../sidebar.js"></script>
 </body>
 </html>

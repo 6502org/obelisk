@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>6502 Addressing Modes - Obelisk by Andrew Jacobs</title>
+  <title>65C02 Addressing Modes - Obelisk by Andrew Jacobs</title>
   <link rel="StyleSheet" href="../obelisk.css" type="text/css" media="screen,print">
 </head>
 <body>
@@ -13,7 +13,7 @@
 
 <h2>Addressing Modes</h2>
 
-<p>The 6502 processor provides several ways in which memory locations
+<p>The 65C02 processor provides several ways in which memory locations
 can be addressed. Some instructions support several different
 modes while others may only support one. In addition the two index
 registers can not always be used interchangeably. This lack of
@@ -33,10 +33,12 @@ are implicit.</p>
 
 <p>Some instructions have an option to operate directly upon the
 accumulator. The programmer specifies this by using a special
-operand value, 'A'. For example:</p>
+operand value, 'A'. Most notably on the 65C02 the accumulator can now be used
+with increment and decrement instructions. For example:</p>
 
 <pre>        LSR A           ;Logical shift right one bit
-        ROR A           ;Rotate right one bit</pre>
+        ROR A           ;Rotate right one bit
+        DEC A           ;Decrement the accumulator</pre>
 
 <h3><a name="IMM"></a>Immediate</h3>
 
@@ -151,6 +153,18 @@ $0120 and $0121).</p>
 <pre>        JMP ($FFFC)     ;Force a power on reset
         JMP (TARGET)    ;Jump via a labelled memory area</pre>
 
+<h3><a name="IZP"></a>Indirect Zero Page</h3>
+
+<p>Many 65C02 instruction can operate on memory locations specified indirectly
+through zero page.</p>
+
+<p>For example if location $20 contains $31 and location $21
+contains $65 then the instruction LDA ($20) will load the byte stored at $6531
+into the accumulator.</p>
+
+<pre>        LDA ($20)       ;Load a byte indirectly
+        ADC ($32)       ;Add a value to it</pre>
+
 <h3><a name="IDX"></a>Indexed Indirect</h3>
 
 <p>Indexed indirect addressing is normally used in conjunction with a table of address held on zero page. The address of the
@@ -172,20 +186,29 @@ address for operation.</p>
  <pre>        LDA ($40),Y     ;Load a byte indirectly from memory
         STA (DST),Y     ;Store accumulator indirectly into memory</pre>
 
+<h3><a name="IAX"></a>Absolute Indexed Indirect</h3>
+
+<p>This mode has been added to the <a href="reference.html#JMP">JMP</a>
+instruction to support jump tables. The value of the X register is added to the
+absolute location in the instruction to form the address. The 16 bit value held
+at this address is the final target location.</p>
+
+ <pre>        JMP (JMPTBL,X)  ;Jump to a function thru a table</pre>
+
 <p><table class="nav-bar">
   <tr>
-    <td>&nbsp;<a href="instructions.html">&lt;&lt;
+    <td>&nbsp;<a href="index.html">&lt;&lt;
       Back</a></td>
     <td>
       <p><a href="../index.html">Home</a></td>
     <td>
       <p><a href="index.html">Contents</a></td>
-    <td><a href="algorithms.html">Next
+    <td><a href="reference.html">Next
       &gt;&gt;</a></td>
   </tr>
 </table>
 <p>
-<hr align=left>This page was last updated on 28th December 2003
+<hr align=left>This page was last updated on 25th March 2004
 
 </main>
 </div>

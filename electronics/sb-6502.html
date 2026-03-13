@@ -1,7 +1,9 @@
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>A Minimal 65(C)02 Computer </title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>A Minimal 65(C)02 Computer - Obelisk by Andrew Jacobs</title>
     <link rel="StyleSheet" href="../obelisk.css" type="text/css" media="screen,print" />
     <style type="text/css">
         .style1
@@ -71,6 +73,10 @@
     </style>
 </head>
 <body>
+<div class="page-wrapper">
+<nav class="sidebar" id="sidebar"></nav>
+<main class="content">
+
     <h1>SB-6502/65C02 - A Minimal 6502/65C02 Computer</h1>
         <p>How many chips do you need to create a simple 6502 based system? Normally you would
 	expect to have the microprocessor (MPU) plus a ROM containing the firmware, some
@@ -80,7 +86,7 @@
 	forum that used just three chips.
 	A 6502 MPU, a SRAM and a PIC 18F micro-controller that performs the function of all the other
 	chips we would normally have to include.</p>
-	<p><a target="_blank" href="sb-6502/KL8H-SBC.png"><img src="sb-6502/KL8H-SBC.png" cellpadding="0" cellspacing="0" width="75%" height="75%"/></a></p>
+	<p><a target="_blank" href="sb-6502/kl8h-sbc.png"><img src="sb-6502/kl8h-sbc.png" width="75%"/></a></p>
 	<p>I decided to have a go myself but adjusting some of the elements of Mike's design to
 	allow an SPI bus to be added and support for interrupts.</p>
 	<h2>The Prototype</h2>
@@ -93,7 +99,7 @@
 	freeing the other pins on the PIC to signal IRQ interrupts and control an SPI device.</p>
 	<p>This is the schematic for the prototype. The four pins used for SPI (i.e. /CS, SCK, SDI
 	and SDI) are not connected to anything. Click the image for a larger view.</p>
-	<p><a target="_blank" href="sb-6502/schematic.png"><img src="sb-6502/schematic.png" cellpadding="0" cellspacing="0" width="75%" height="75%"/></a></p>
+	<p><a target="_blank" href="sb-6502/schematic.png"><img src="sb-6502/schematic.png" width="75%"/></a></p>
 	<h2>How it Works</h2>
 	<p>The PIC is the heart of the system providing the PHI0 clock signal to the 6502.
 	Initially the PIC keeps the 6502 in a 'reset' state by holding the /RES signal low but
@@ -140,19 +146,18 @@
 	those expected by several micro SD card modules.</p>
 	<p>The photo below shows my 6502 board with the PIC in a Microchip debugging header. When
 	the PIC firmware is complete the chip will be placed directly in the 40 pin socket underneath.</p>
-	<p><img src="sb-6502/sbc-pcb.jpg" cellpadding="0" cellspacing="0" width="75%" height="75%"/></p>
+	<p><img src="sb-6502/sbc-pcb.jpg" width="75%"/></p>
 
-    <table border="0" cellpadding="0" cellspacing="0" height="30" width="100%">
+    <table class="nav-bar">
         <tr>
-            <td bgcolor="#aaaaff" style="height: 30px" width="25%">
+            <td>
                 <a href="em-65c02.html">&lt;&lt; Back</a></td>
-            <td bgcolor="#aaaaff" style="height: 30px" width="25%">
-                <center>
-                    <a href="../index.html" target="_parent">Home</a></center>
+            <td>
+                <a href="../index.html">Home</a>
             </td>
-            <td bgcolor="#aaaaff" style="height: 30px; text-align: center" width="25%">
+            <td>
                 <a href="index.html">Contents</a></td>
-            <td align="right" bgcolor="#aaaaff" style="height: 30px" width="25%">
+            <td>
                 <a href="index.html"></a>
             </td>
         </tr>
@@ -161,7 +166,11 @@
     <p class="timestamp">
         This page was last updated on 30th August 2014</p>
     <p class="copyright">
-        &copy; Copyright 2014 <a style="color: black;" target="_top" href="http://forum.6502.org/viewtopic.php?t=6466">Andrew John Jacobs</a>. All rights reserved.<br />
+        &copy; Copyright 2014 <a href="http://forum.6502.org/viewtopic.php?t=6466">Andrew John Jacobs</a>. All rights reserved.<br />
         All trademarks and service marks are the properties of their respective owners.</p>
+
+</main>
+</div>
+<script src="../sidebar.js"></script>
 </body>
 </html>

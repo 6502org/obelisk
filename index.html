@@ -1,306 +1,138 @@
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<title>Obelisk Home Pages</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Welcome - Obelisk by Andrew Jacobs</title>
+    <link rel="StyleSheet" href="obelisk.css" type="text/css" media="screen,print"/>
 </head>
-<script language="JavaScript"><!--
-// Begin Hiding
+<body>
+<div class="page-wrapper">
+<nav class="sidebar" id="sidebar"></nav>
+<main class="content">
 
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// start() - GENERAL FUNCTION - called by the HTML document once loaded - starts OmenTree by
-//					  first loading the user data, and then drawing the tree.
+    <h1>
+        Welcome</h1>
 
-function start() {
-	loadData();
-	drawTree();
-}
+    <p class="notice">
+      Andrew Jacobs (BitWise) <a href="http://forum.6502.org/viewtopic.php?t=6466">passed away</a> on January 8, 2021.
+      <br clear=all />
+      6502.org hosts <a href="https://github.com/6502org/obelisk">this copy</a> of his website to preserve his memory and ensure the resources he created remain available.
+    </p>
 
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// drawTree() - GENERAL FUNCTION - starts the recursive tree drawing process by first writing
-//					     the root node, and then all subordinate branches.
+    <p>
+        Welcome to my personal web pages. If you're interested in the micro-processors,
+        micro-controllers, retro-programming or electronics then you are in the right place.</p>
+    <p>
+        My old internet hosting company seems to have to decided to abandon 'consumer' web site
+	hosting so I've bought my own hosting somewhere else. As a result my site has moved
+	from www.obelisk.demon.co.uk to www.obelisk.me.uk.</p>
+    <p>
+        <i>Andrew Jacobs, 20th September 2015</i></p>
+    <hr/>
+    <h2>
+        What's New:</h2>
+    <ul>
+        <li><b>02/02/18</b><p>
+            I have started adding some Microchip PIC programming pages I originally hosted at
+	    pic-projects.net (now defunct). The first two are on multi-byte <a href="pic/addsub.html">addition, subtraction</a>,
+	    <a href="pic/incdec.html">increments and decrements</a>.</p>
+        </li>
+        <li><b>24/04/11</b><p>
+            Some details of my Easter project to build a R6501 single board computer.
+            Click <a href="electronics/r6501.html">here</a> for the details.</p>
+        </li>
+        <li><b>20/06/10</b><p>
+            A new version of the CESIL IDE coded in C# for .Net 2.0 has been released. You can
+            experience the joy of CESIL programing under Microsoft Windows again. Click
+            <a href="cesil/index.html#download">here</a> to get the latest files.</p>
+        </li>
+        <li><b>27/03/09</b><p>
+            Added some information about a couple electronics projects I've been working on,
+            a <a href="electronics/miranda.html">Chess Computer</a> and a simple <a href="electronics/old-skool.html">
+                BASIC Computer</a>.</p>
+        </li>
+        <li><b>22/01/08</b><p>
+            The <a href="cesil/index.html">CESIL</a> compiler/interpreter is now available as
+            a command line application base Java application.</p>
+        </li>
+        <li><b>05/10/07</b><p>
+            I've released a new version of my&nbsp; Java based relocatable macro assembler for
+            the 6502/65c02/65816 on the 6502 <a href="6502/downloads.html">downloads</a> page.
+            This update removes a few bugs, adds structured assembly programming and a librarian.</p>
+        </li>
+        <li><b>03/09/06</b><p>
+            San Bergmans (see <a href="http://www.sbprojects.com" target="_blank">http://www.sbprojects.com</a>)
+            spotted a mistake in the <a href="65c02/index.html">65C02</a> reference pages where
+            I had copied three STA instruction modes into the STZ description.&nbsp;I have also
+            added a link to my own portable Java based relocatable macro assembler for the 6502/65c02/65816
+            on the 6502 <a href="6502/downloads.html">downloads</a> page.</p>
+        </li>
+        <li><b>21/08/06</b><p>
+            Here's another simple MicroChip PIC based project. Its a another <a href="electronics/clock.html">
+                clock</a> but this time with a binary LED display.</p>
+        </li>
+        <li><b>20/04/06</b><p>
+            Thought it was time for another update so I've documented another simple PIC project,
+            this time a <a href="electronics/metronome.html">metronome</a>.</p>
+        </li>
+        <li><b>20/02/05</b><p>
+            I've been playing with some simple electronics projects like my Son's <a href="electronics/alarm.html">
+                alarm clock</a> and there have been some updates to the <a href="vhdl/index.html">VHDL</a>
+            section.</p>
+        </li>
+        <li><b>16/09/04</b><p>
+            Added some information, links and resources on <a href="vhdl/index.html">VHDL programming</a>,
+            including some models and test benches for simple CMOS logic devices. I would welcome
+            feedback on my examples.</p>
+        </li>
+        <li><b>25/03/04</b><p>
+            Created a new set of <a href="65c02/index.html">65C02</a> processor reference pages
+            based on the <a href="6502/index.html">6502</a> pages.</p>
+        </li>
+        <li><b>22/09/03</b><p>
+            I have updated the 6502 reference page to correct a mistake in the definition of
+            the LDY abs,X instruction spotted by an eagle eyed 6502 emulator coder from Sweden.
+            Thanks Hobbe.</p>
+        </li>
+        <li><b>24/05/03</b><p>
+            My <a href="cesil/index.html">CESIL</a> IDE has been further bug fixed and extended
+            following some feedback from the Internet. The ZIP contains a couple of additional
+            examples donated to the project.</p>
+        </li>
+        <li><b>09/04/03</b><p>
+            I found a few minor bugs in the <a href="cesil/index.html">CESIL</a> compiler while
+            writing some new examples for Roman numeral conversion. The latest version is now
+            available for downloading.</p>
+        </li>
+        <li><b>12/03/03</b><p>
+            I finally found the time and enthusiasm to finish my IDE for <a href="cesil/index.html">
+                CESIL</a> and upload it to the website with a few examples. Download it and
+            tell me what you think.</p>
+        </li>
+        <li><b>09/11/02</b>
+            <p>
+                Added a new section on an ancient educational programming language called <a href="cesil/index.html">
+                    CESIL</a> and have updated a few other bits of the site after joining the 6502
+                Web Ring.</p>
+        </li>
+        <li><b>31/12/01</b>
+            <p>
+                Added the first release of my guide to <a href="6502/index.html">6502 Assembly Language
+                    Programming</a>. I still have some descriptions to complete for the more complicated
+                algorithms but the main reference sections are ready.</p>
+        </li>
+    </ul>
+<!-- General Footer -->
+    <hr/>
+    <p class="timestamp">
+        This page was last updated on 20th September 2015</p>
+    <p class="copyright">
+        &copy; Copyright 1999-2018 <a href="http://forum.6502.org/viewtopic.php?t=6466">Andrew John Jacobs</a>. All rights reserved.<br />
+        All trademarks and service marks are the properties of their respective owners.</p>
 
-function drawTree() {
-	outputFrame = top.treeFrame.window.document;	// If you really must, you can change the name of the treeFrame here to match your new name defined at the bottom.
-	outputFrame.open("text/html");
-	outputFrame.write("<! HTML Generated Dynamically by OmenTree - (C) 1998 Colin Tucker / OmenSoft >\n");
-	outputFrame.write("<! http://omensoft.home.ml.org/                   e-mail: semi@earthcorp.com >\n");
-	outputFrame.write("<HTML>\n<BODY BGCOLOR='" + backgroundColor + "' BACKGROUND='" + backgroundImage + "' LINK='" + linkColor + "' ALINK='" + aLinkColor + "' VLINK='" + vLinkColor + "'>\n");
-	outputFrame.write("<FONT FACE='" + omenTreeFont + "' SIZE=" + omenTreeFontSize + " COLOR='" + textColor + "'>\n");
-	outputFrame.write(prefixHTML + "\n<NOBR>\n");
-	if (treeData[1].target == "") {var targetFrame = defaultTargetFrame} else {var targetFrame = treeData[1].target}
-	if (treeData[1].icon == "") {var imageString = defaultImageURL + 'img-globe-' + structureStyle + '.gif'} else {imageString = defaultImageURL + treeData[1].icon}
-	outputFrame.write("<A HREF='" + treeData[1].url + "' TARGET='" + targetFrame + "' onMouseOver=\"window.status='" + treeData[1].url + "'; return true\"><IMG SRC='" + imageString + "' WIDTH=16 HEIGHT=16 ALIGN=TEXTTOP BORDER=0 ALT='" + treeData[1].url + "'></A>&nbsp;<B>" + treeData[1].name + "</B><BR>\n");
-	drawBranch("root","");
-	outputFrame.write("</NOBR>\n" + suffixHTML + "\n");
-	outputFrame.write("</FONT>\n</BODY>\n</HTML>");
-	outputFrame.close();
-	//window.status="OmenTree v1.0 - (C) 1998 Colin Tucker/OmenSoft - http://omensoft.home.ml.org";
-}
-
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// drawBranch() - GENERAL FUNCTION - used by the drawTree() function to recursively draw all
-//						 visable nodes in the tree structure.
-
-function drawBranch(startNode,structureString) {
-	var children = extractChildrenOf(startNode);
-	var currentIndex = 1;
-	while (currentIndex <= children.length) {
-		outputFrame.write(structureString);
-		if (children[currentIndex].type == 'link') {
-			if (children[currentIndex].icon == "") {
-				var imageString = defaultImageURL + defaultLinkIcon;
-			}
-			else {var imageString = defaultImageURL + children[currentIndex].icon}
-			if (children[currentIndex].target == "") {
-				var targetFrame = defaultTargetFrame;
-			}
-			else {var targetFrame = children[currentIndex].target}
-			if (currentIndex != children.length) {
-				outputFrame.write("<IMG SRC='" + defaultImageURL + "img-branch-cont-" + structureStyle + ".gif' WIDTH=19 HEIGHT=16 ALIGN=TEXTTOP>")
-			}
-			else {
-				outputFrame.write("<IMG SRC='" + defaultImageURL + "img-branch-end-" + structureStyle + ".gif' WIDTH=19 HEIGHT=16 ALIGN=TEXTTOP>")
-			}
-			outputFrame.write("<A HREF='" + children[currentIndex].url + "' TARGET='" + targetFrame + "' onMouseOver=\"window.status='" + children[currentIndex].url + "'; return true\"><IMG SRC='" + imageString + "' WIDTH=16 HEIGHT=16 ALIGN=TEXTTOP BORDER=0 ALT='" + children[currentIndex].url + "'></A>&nbsp;" + children[currentIndex].name + "<BR>\n")
-		}
-		else {
-			var newStructure = structureString;
-			if (children[currentIndex].iconClosed == "") {var iconClosed = "img-folder-closed-" + structureStyle + ".gif"} else {var iconClosed = children[currentIndex].iconClosed}
-			if (children[currentIndex].iconOpen == "") {var iconOpen = "img-folder-open-" + structureStyle + ".gif"} else {var iconOpen = children[currentIndex].iconOpen}
-			if (currentIndex != children.length) {
-				if (children[currentIndex].open == 0) {
-					outputFrame.write("<A HREF=\"javascript:top.toggleFolder('" + children[currentIndex].id + "',1)\" onMouseOver=\"window.status='Click to open this folder'; return true\"><IMG SRC='" + defaultImageURL + "img-plus-cont-" + structureStyle + ".gif' WIDTH=19 HEIGHT=16 ALT='Click to open this folder' ALIGN=TEXTTOP BORDER=0>")
-					outputFrame.write("<IMG SRC='" + defaultImageURL + iconClosed + "' WIDTH=16 HEIGHT=16 ALT='Click to open this folder' ALIGN=TEXTTOP BORDER=0></A>&nbsp;" + children[currentIndex].name + "<BR>\n")
-				}
-				else {
-					outputFrame.write("<A HREF=\"javascript:top.toggleFolder('" + children[currentIndex].id + "',0)\" onMouseOver=\"window.status='Click to close this folder'; return true\"><IMG SRC='" + defaultImageURL + "img-minus-cont-" + structureStyle + ".gif' WIDTH=19 HEIGHT=16 ALT='Click to close this folder' ALIGN=TEXTTOP BORDER=0>");
-					outputFrame.write("<IMG SRC='" + defaultImageURL + iconOpen + "' WIDTH=16 HEIGHT=16 ALT='Click to close this folder' ALIGN=TEXTTOP BORDER=0></A>&nbsp;" + children[currentIndex].name + "<BR>\n");
-					newStructure = newStructure + "<IMG SRC='" + defaultImageURL + "img-vert-line-" + structureStyle + ".gif' WIDTH=19 HEIGHT=16 ALIGN=TEXTTOP>";
-					drawBranch(children[currentIndex].id,newStructure);
-				}
-			}
-			else {
-				if (children[currentIndex].open == 0) {
-					outputFrame.write("<A HREF=\"javascript:top.toggleFolder('" + children[currentIndex].id + "',1)\" onMouseOver=\"window.status='Click to open this folder'; return true\"><IMG SRC='" + defaultImageURL + "img-plus-end-" + structureStyle + ".gif' WIDTH=19 HEIGHT=16 ALT='Click to open this folder' ALIGN=TEXTTOP BORDER=0>")
-					outputFrame.write("<IMG SRC='" + defaultImageURL + iconClosed + "' WIDTH=16 HEIGHT=16 ALT='Click to open this folder' ALIGN=TEXTTOP BORDER=0></A>&nbsp;" + children[currentIndex].name + "<BR>\n")
-				}
-				else {
-					outputFrame.write("<A HREF=\"javascript:top.toggleFolder('" + children[currentIndex].id + "',0)\" onMouseOver=\"window.status='Click to close this folder'; return true\"><IMG SRC='" + defaultImageURL + "img-minus-end-" + structureStyle + ".gif' WIDTH=19 HEIGHT=16 ALT='Click to close this folder' ALIGN=TEXTTOP BORDER=0>");
-					outputFrame.write("<IMG SRC='" + defaultImageURL + iconOpen + "' WIDTH=16 HEIGHT=16 ALT='Click to close this folder' ALIGN=TEXTTOP BORDER=0></A>&nbsp;" + children[currentIndex].name + "<BR>\n");
-					newStructure = newStructure + "<IMG SRC='" + defaultImageURL + "img-blank.gif' WIDTH=19 HEIGHT=16 ALIGN=TEXTTOP>";
-					drawBranch(children[currentIndex].id,newStructure);
-				}
-			}
-		}
-		currentIndex++;
-	}
-}
-
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// toggleFolder() - GENERAL FUNCTION - opens/closes folder nodes.
-
-function toggleFolder(id,status) {
-	var nodeIndex = indexOfNode(id);
-	treeData[nodeIndex].open = status;
-	timeOutId = setTimeout("drawTree()",100)}
-
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// indexOfNode() - GENERAL FUNCTION - finds the index in the treeData Collection of the node
-//						  with the given id.
-
-function indexOfNode(id) {
-	var currentIndex = 1;
-	while (currentIndex <= treeData.length) {
-		if ((treeData[currentIndex].type == 'root') || (treeData[currentIndex].type == 'folder')) {
-			if (treeData[currentIndex].id == id) {return currentIndex}}
-		currentIndex++}
-	return -1}
-
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// extractChildrenOf() - GENERAL FUNCTION - extracts and returns a Collection containing all
-//							  of the node's immediate children nodes.
-
-function extractChildrenOf(node) {
-	var children = new Collection();
-	var currentIndex = 1;
-	while (currentIndex <= treeData.length) {
-		if ((treeData[currentIndex].type == 'folder') || (treeData[currentIndex].type == 'link')) {
-			if (treeData[currentIndex].parent == node) {
-				children.add(treeData[currentIndex])}}
-		currentIndex++}
-	return children}
-
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// Collection() - OBJECT - a dynamic storage structure similar to an Array.
-
-function Collection() {
-	this.length = 0;
-	this.add = add;
-	return this}
-
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// add() - METHOD of Collection - adds an object to a Collection.
-
-function add(object) {
-	this.length++;
-	this[this.length] = object}
-
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// RootNode() - OBJECT - represents the top-most node of the hierarchial tree.
-
-function RootNode(id,name,url,target,icon) {
-	this.id = id;
-	this.name = name;
-	this.url = url;
-	this.target = target;
-	this.icon = icon;
-	this.type = 'root';
-	return this}
-
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// FolderNode() - OBJECT - represents a node which branches to contain other nodes.
-
-function FolderNode(id,parent,name,iconClosed,iconOpen) {
-	this.id = id;
-	this.parent = parent;
-	this.name = name;
-	this.iconClosed = iconClosed;
-	this.iconOpen = iconOpen;
-	this.type = 'folder';
-	this.open = 0;
-	return this}
-
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// LinkNode() - OBJECT - a node that represents a link using a URL.
-
-function LinkNode(parent,name,url,target,icon) {
-	this.parent = parent;
-	this.name = name;
-	this.url = url;
-	this.target = target;
-	this.icon = icon;
-	this.type = 'link';
-	return this}
-
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// loadData() - GENERAL FUNCTION - user defined data and variables exist in this function.
-
-function loadData() {
-
-      // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-      // Tree structure definitions:
-
-      // Syntax:
-
-      // ROOT NODE:
-      // treeData.add(new RootNode("<ID>","<NAME>","<URL>","<TARGET>","<ALT ICON>"));
-      // NOTE: There must be only ONE root node, and it MUST be the FIRST node.
-      //       <TARGET> and <ALT ICON> can be left null - defaults will be used.
-
-      // FOLDER NODE:
-      // treeData.add(new FolderNode("<ID>","<PARENT ID>","<NAME>","<ALT ICON CLOSED>","<ALT ICON OPEN>"));
-      // NOTE: Folder nodes MUST have a valid parent node, and they SHOULD have children nodes.
-      //       <ALT ICON CLOSED> and <ALT ICON OPEN> can be left null - OmenTree will use the
-      //       default images.
-
-      // LINK NODE:
-      // treeData.add(new LinkNode("<PARENT ID>","<NAME>","<URL>","<TARGET>","<ALT ICON>"));
-      // NOTE: <TARGET> and <ALT ICON> may be left null - defaults specified in the user
-      //       defined variables section will be used.
-
-      // Consult the OmenTree documentation for further assistance.
-
-	treeData = new Collection();
-
-	treeData.add(new RootNode('root','What\'s New?','home.html','',''));
-	treeData.add(new FolderNode('code','root','Programming','',''));
-		treeData.add(new LinkNode('code','Introduction','programming.html','',''));
-		treeData.add(new FolderNode('6502','code','6502','',''));
-			treeData.add(new LinkNode('6502','Introduction','6502/index.html','',''));
-			treeData.add(new LinkNode('6502','Architecture','6502/architecture.html','',''));
-			treeData.add(new LinkNode('6502','Registers','6502/registers.html','',''));
-			treeData.add(new LinkNode('6502','Instructions','6502/instructions.html','',''));
-			treeData.add(new LinkNode('6502','Addressing','6502/addressing.html','',''));
-			treeData.add(new LinkNode('6502','Algorithms','6502/algorithms.html','',''));
-			treeData.add(new LinkNode('6502','Reference','6502/reference.html','',''));
-			treeData.add(new LinkNode('6502','Downloads','6502/downloads.html','',''));
-			treeData.add(new LinkNode('6502','Links','6502/links.html','',''));
-		treeData.add(new FolderNode('65C02','code','65C02','',''));
-			treeData.add(new LinkNode('65C02','Introduction','65C02/index.html','',''));
-			treeData.add(new LinkNode('65C02','Addressing','65C02/addressing.html','',''));
-			treeData.add(new LinkNode('65C02','Reference','65C02/reference.html','',''));
-		treeData.add(new FolderNode('dev65','code','Dev65','',''));
-			treeData.add(new LinkNode('dev65','Introduction','dev65/index.html','',''));
-			treeData.add(new LinkNode('dev65','As65','dev65/as65.html','',''));
-			treeData.add(new LinkNode('dev65','Lk65','dev65/lk65.html','',''));
-			treeData.add(new LinkNode('dev65','Lb65','dev65/lb65.html','',''));
-		treeData.add(new FolderNode('cesil','code','CESIL','',''));
-			treeData.add(new LinkNode('cesil','Introduction','cesil/index.html','',''));
-		treeData.add(new FolderNode('vhdl','code','VHDL','',''));
-			treeData.add(new LinkNode('vhdl','Introduction','vhdl/index.html','',''));
-			treeData.add(new LinkNode('vhdl','CMOS Logic','vhdl/cmos.html','',''));
-			treeData.add(new LinkNode('vhdl','74 Series Logic','vhdl/74series.html','',''));
-			treeData.add(new LinkNode('vhdl','Links','vhdl/links.html','',''));
-		treeData.add(new FolderNode('pic','code','Microchip PIC','',''));
-			treeData.add(new LinkNode('pic','Multi-byte Add/Sub','pic/addsub.html','',''));
-			treeData.add(new LinkNode('pic','Multi-byte Inc/Dec','pic/incdec.html','',''));
-	treeData.add(new FolderNode('elec','root','Electronics','',''));
-		treeData.add(new LinkNode('elec','Introduction','electronics/index.html','',''));
-		treeData.add(new FolderNode('projects','elec','Projects','',''));
-			treeData.add(new LinkNode('projects','Electronic Dice','electronics/dice.html','',''));
-			treeData.add(new LinkNode('projects','Alarm Clock','electronics/alarm.html','',''));
-			treeData.add(new LinkNode('projects','Metronome','electronics/metronome.html','',''));
-			treeData.add(new LinkNode('projects','Binary Clock','electronics/clock.html','',''));
-			treeData.add(new LinkNode('projects','R6501 SBC','electronics/R6501.html','',''));
-			treeData.add(new LinkNode('projects','EM-65C02','electronics/em-65c02.html','',''));
-			treeData.add(new LinkNode('projects','SB-65C02','electronics/sb-6502.html','',''));
-		treeData.add(new FolderNode('proto','elec','Prototypes','',''));
-			treeData.add(new LinkNode('proto','Chess Computer','electronics/miranda.html','',''));
-			treeData.add(new LinkNode('proto','BASIC Computer','electronics/old-skool.html','',''));
-//			treeData.add(new LinkNode('proto','6502 Home Brew','electronics/R6502.html','',''));
-	treeData.add(new FolderNode('about','root','About...','',''));
-		treeData.add(new LinkNode('about','About this site','about.html','',''));
-		treeData.add(new LinkNode('about','Privacy','privacy.html','',''));
-		treeData.add(new LinkNode('email','Andrew Jacobs','mailto:andrew-AT-obelisk.me.uk','','img-email.gif'));
-
-      // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-      // User defined variables:
-
-       structureStyle = 0;                   // 0 for light background, 1 for dark background
-
-      backgroundColor = '#FFFFFF';           // sets the bgColor of the menu
-            textColor = '#000000';           // sets the color of the text used in the menu
-            linkColor = '#0000AA';           // sets the color of any text links (usually defined in additional HTML sources)
-           aLinkColor = '#FF0000';           // sets the active link color (when you click on the link)
-           vLinkColor = '#880088';           // sets the visited link color
-
-      backgroundImage = '';                  // give the complete path to a gif or jpeg to use as a background image
-
-      defaultTargetFrame = 'pageFrame';      // the name of the frame that links will load into by default
-         defaultImageURL = 'images/';        // the URL or path where the OmenTree images are located
-
-       defaultLinkIcon = 'img-page-globe.gif';  // the default icon image used for links
-
-          omenTreeFont = 'Verdana,MS Sans Serif,Arial,Helvetica';  // the font used for the menu
-      omenTreeFontSize = 1;                                // its size - don't make it too big!
-
-      // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-      // Additional HTML sources:
-
-      prefixHTML = "<B>Site Index:</B><HR>";
-      suffixHTML = "<HR><B>Site contents<BR>Copyright (C)1999-2015<BR><a style=\"color: black; text-decoration: none;\" target=\"_top\" href=\"http://forum.6502.org/viewtopic.php?t=6466\">Andrew John Jacobs</a></B><P><B>OmenTree</B> navigation menu provided by <B>OmenSoft</B>.";
-}
-
-</script>
-<frameset cols="180,*" onload="start()">
-    <frame name="treeFrame" src="preload.html" marginwidth="2"
-    marginheight="2" scrolling="Auto">
-    <frame name="pageFrame" src="home.html" marginwidth="8"
-    marginheight="4" scrolling="Auto">
-    <noframes>
-    <body>
-
-    </body>
-    </noframes>
-</frameset>
+</main>
+</div>
+<script src="sidebar.js"></script>
+</body>
 </html>

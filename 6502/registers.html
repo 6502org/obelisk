@@ -1,135 +1,144 @@
-<HTML>
-	<HEAD>
-		<TITLE>6502 Registers</TITLE>
-		<META NAME="GENERATOR" CONTENT="Adobe PageMill 3.0 Win">
-		<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
-		<LINK REL="StyleSheet" HREF="../obelisk.css" TYPE="text/css" media="screen,print">
-	</HEAD>
-	<BODY>
-		<H2>The Registers</H2>
-		<P>The 6502 has only a small number of registers compared to other processor of the
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>6502 Registers - Obelisk by Andrew Jacobs</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="StyleSheet" href="../obelisk.css" type="text/css" media="screen,print">
+	</head>
+	<body>
+<div class="page-wrapper">
+<nav class="sidebar" id="sidebar"></nav>
+<main class="content">
+
+		<h2>The Registers</h2>
+		<p>The 6502 has only a small number of registers compared to other processor of the
 			same era. This makes it especially challenging to program as algorithms must
-			make efficient use of both registers and memory.</P>
-		<H3>Program Counter</H3>
-		<P>The program counter is a 16 bit register which points to the next instruction to
+			make efficient use of both registers and memory.</p>
+		<h3>Program Counter</h3>
+		<p>The program counter is a 16 bit register which points to the next instruction to
 			be executed. The value of program counter is modified automatically as
-			instructions are executed.</P>
-		<P>The value of the program counter can be modified by executing a jump, a relative
+			instructions are executed.</p>
+		<p>The value of the program counter can be modified by executing a jump, a relative
 			branch or a subroutine call to another memory address or by returning from a
-			subroutine or interrupt.</P>
-		<H3>Stack Pointer</H3>
-		<P>The processor supports a 256 byte stack located between $0100 and $01FF. The
+			subroutine or interrupt.</p>
+		<h3>Stack Pointer</h3>
+		<p>The processor supports a 256 byte stack located between $0100 and $01FF. The
 			stack pointer is an 8 bit register and holds the low 8 bits of the next free
-			location on the stack. The location of the stack is fixed and cannot be moved.</P>
-		<P>Pushing bytes to the stack causes the stack pointer to be decremented.
-			Conversely pulling bytes causes it to be incremented.</P>
-		<P>The CPU does not detect if the stack is overflowed by excessive pushing or
-			pulling operations and will most likely result in the program crashing.</P>
-		<H3>Accumulator</H3>
-		<P>The 8 bit accumulator is used all arithmetic and logical operations (with the
+			location on the stack. The location of the stack is fixed and cannot be moved.</p>
+		<p>Pushing bytes to the stack causes the stack pointer to be decremented.
+			Conversely pulling bytes causes it to be incremented.</p>
+		<p>The CPU does not detect if the stack is overflowed by excessive pushing or
+			pulling operations and will most likely result in the program crashing.</p>
+		<h3>Accumulator</h3>
+		<p>The 8 bit accumulator is used all arithmetic and logical operations (with the
 			exception of increments and decrements). The contents of the accumulator can be
-			stored and retrieved either from memory or the stack.</P>
-		<P>Most complex operations will need to use the accumulator for arithmetic and
-			efficient optimisation of its use is a key feature of time critical routines.</P>
-		<H3>Index Register X</H3>
-		<P>The 8 bit index register is most commonly used to hold counters or offsets for
+			stored and retrieved either from memory or the stack.</p>
+		<p>Most complex operations will need to use the accumulator for arithmetic and
+			efficient optimisation of its use is a key feature of time critical routines.</p>
+		<h3>Index Register X</h3>
+		<p>The 8 bit index register is most commonly used to hold counters or offsets for
 			accessing memory. The value of the X register can be loaded and saved in
-			memory, compared with values held in memory or incremented and decremented.</P>
-		<P>The X register has one special function. It can be used to get a copy of the
-			stack pointer or change its value.</P>
-		<H3>Index Register Y</H3>
-		<P>The Y register is similar to the X register in that it is available for holding
+			memory, compared with values held in memory or incremented and decremented.</p>
+		<p>The X register has one special function. It can be used to get a copy of the
+			stack pointer or change its value.</p>
+		<h3>Index Register Y</h3>
+		<p>The Y register is similar to the X register in that it is available for holding
 			counter or offsets memory access and supports the same set of memory load, save
 			and compare operations as wells as increments and decrements. It has no special
-			functions.</P>
-		<H3>Processor Status</H3>
-		<P>As instructions are executed a set of processor flags are set or clear to record
+			functions.</p>
+		<h3>Processor Status</h3>
+		<p>As instructions are executed a set of processor flags are set or clear to record
 			the results of the operation. This flags and some additional control flags are
 			held in a special status register. Each flag has a single bit within the
-			register.</P>
-		<P>Instructions exist to test the values of the various bits, to set or clear some
-			of them and to push or pull the entire set to or from the stack.</P>
-		<UL>
-			<LI>
-				<A NAME="C"></A>Carry Flag</LI>
-		</UL>
-		<BLOCKQUOTE>
-			<P>The carry flag is set if the last operation caused an overflow from bit 7 of the
+			register.</p>
+		<p>Instructions exist to test the values of the various bits, to set or clear some
+			of them and to push or pull the entire set to or from the stack.</p>
+		<ul>
+			<li>
+				<a name="C"></a>Carry Flag</li>
+		</ul>
+		<blockquote>
+			<p>The carry flag is set if the last operation caused an overflow from bit 7 of the
 				result or an underflow from bit 0. This condition is set during arithmetic,
 				comparison and during logical shifts. It can be explicitly set using the 'Set
-				Carry Flag' (<A HREF="reference.html#SEC">SEC</A>) instruction and cleared with
-				'Clear Carry Flag' (<A HREF="reference.html#CLC">CLC</A>).</P>
-		</BLOCKQUOTE>
-		<UL>
-			<LI>
-				<A NAME="Z"></A>Zero Flag</LI>
-		</UL>
-		<BLOCKQUOTE>
-			<P>The zero flag is set if the result of the last operation as was zero.</P>
-		</BLOCKQUOTE>
-		<UL>
-			<LI>
-				<A NAME="I"></A>Interrupt Disable</LI>
-		</UL>
-		<BLOCKQUOTE>
-			<P>The interrupt disable flag is set if the program has executed a 'Set Interrupt
-				Disable' (<A HREF="reference.html#SEI">SEI</A>) instruction. While this flag is
+				Carry Flag' (<a href="reference.html#SEC">SEC</a>) instruction and cleared with
+				'Clear Carry Flag' (<a href="reference.html#CLC">CLC</a>).</p>
+		</blockquote>
+		<ul>
+			<li>
+				<a name="Z"></a>Zero Flag</li>
+		</ul>
+		<blockquote>
+			<p>The zero flag is set if the result of the last operation as was zero.</p>
+		</blockquote>
+		<ul>
+			<li>
+				<a name="I"></a>Interrupt Disable</li>
+		</ul>
+		<blockquote>
+			<p>The interrupt disable flag is set if the program has executed a 'Set Interrupt
+				Disable' (<a href="reference.html#SEI">SEI</a>) instruction. While this flag is
 				set the processor will not respond to interrupts from devices until it is
-				cleared by a 'Clear Interrupt Disable' (<A HREF="reference.html#CLI">CLI</A>)
-				instruction.</P>
-		</BLOCKQUOTE>
-		<UL>
-			<LI>
-				<A NAME="D"></A>Decimal Mode</LI>
-		</UL>
-		<BLOCKQUOTE>
-			<P>While the decimal mode flag is set the processor will obey the rules of Binary
+				cleared by a 'Clear Interrupt Disable' (<a href="reference.html#CLI">CLI</a>)
+				instruction.</p>
+		</blockquote>
+		<ul>
+			<li>
+				<a name="D"></a>Decimal Mode</li>
+		</ul>
+		<blockquote>
+			<p>While the decimal mode flag is set the processor will obey the rules of Binary
 				Coded Decimal (BCD) arithmetic during addition and subtraction. The flag can be
-				explicitly set using 'Set Decimal Flag' (<A HREF="reference.html#SED">SED</A>)
-				and cleared with 'Clear Decimal Flag' (<A HREF="reference.html#CLD">CLD</A>).</P>
-		</BLOCKQUOTE>
-		<UL>
-			<LI>
-				<A NAME="B"></A>Break Command</LI>
-		</UL>
-		<BLOCKQUOTE>
-			<P>The break command bit is set when a <A HREF="reference.html#BRK">BRK</A> instruction
-				has been executed and an interrupt has been generated to process it.</P>
-		</BLOCKQUOTE>
-		<UL>
-			<LI>
-				<A NAME="V"></A>Overflow Flag</LI>
-		</UL>
-		<BLOCKQUOTE>
-			<P>The overflow flag is set during arithmetic operations if the result has yielded
+				explicitly set using 'Set Decimal Flag' (<a href="reference.html#SED">SED</a>)
+				and cleared with 'Clear Decimal Flag' (<a href="reference.html#CLD">CLD</a>).</p>
+		</blockquote>
+		<ul>
+			<li>
+				<a name="B"></a>Break Command</li>
+		</ul>
+		<blockquote>
+			<p>The break command bit is set when a <a href="reference.html#BRK">BRK</a> instruction
+				has been executed and an interrupt has been generated to process it.</p>
+		</blockquote>
+		<ul>
+			<li>
+				<a name="V"></a>Overflow Flag</li>
+		</ul>
+		<blockquote>
+			<p>The overflow flag is set during arithmetic operations if the result has yielded
 				an invalid 2's complement result (e.g. adding to positive numbers and ending up
 				with a negative result: 64 + 64 =&gt; -128). It is determined by looking at the
-				carry between bits 6 and 7 and between bit 7 and the carry flag.</P>
-		</BLOCKQUOTE>
-		<UL>
-			<LI>
-				<A NAME="N"></A>Negative Flag</LI>
-		</UL>
-		<BLOCKQUOTE>
-			<P>The negative flag is set if the result of the last operation had bit 7 set to a
-				one.</P>
-		</BLOCKQUOTE>
-		<P><TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="100%" HEIGHT="30">
-				<TR>
-					<TD WIDTH="25%" BGCOLOR="#aaaaff">&nbsp;<A HREF="architecture.html">&lt;&lt; Back</A></TD>
-					<TD WIDTH="25%" BGCOLOR="#aaaaff">
-						<P><CENTER><A HREF="../index.html" TARGET="_parent">Home</A></CENTER>
-					</TD>
-					<TD WIDTH="25%" BGCOLOR="#aaaaff">
-						<P><CENTER><A HREF="index.html">Contents</A></CENTER>
-					</TD>
-					<TD ALIGN="right" WIDTH="25%" BGCOLOR="#aaaaff"><A HREF="instructions.html">Next
-							&gt;&gt;</A></TD>
-				</TR>
-			</TABLE>
-		</P>
-		<P>
-<HR ALIGN="left">
+				carry between bits 6 and 7 and between bit 7 and the carry flag.</p>
+		</blockquote>
+		<ul>
+			<li>
+				<a name="N"></a>Negative Flag</li>
+		</ul>
+		<blockquote>
+			<p>The negative flag is set if the result of the last operation had bit 7 set to a
+				one.</p>
+		</blockquote>
+		<p><table class="nav-bar">
+				<tr>
+					<td>&nbsp;<a href="architecture.html">&lt;&lt; Back</a></td>
+					<td>
+						<p><a href="../index.html">Home</a>
+					</td>
+					<td>
+						<p><a href="index.html">Contents</a>
+					</td>
+					<td><a href="instructions.html">Next
+							&gt;&gt;</a></td>
+				</tr>
+			</table>
+		</p>
+		<p>
+<hr align="left">
 		This page was last updated on&nbsp;9th August 2003
-	</BODY>
-</HTML>
+	
+</main>
+</div>
+<script src="../sidebar.js"></script>
+</body>
+</html>

@@ -1,27 +1,33 @@
-<HTML>
-	<HEAD>
-		<TITLE>6502 Algorithms</TITLE>
-		<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
-		<LINK REL="StyleSheet" HREF="../obelisk.css" TYPE="text/css" media="screen,print">
-	</HEAD>
-	<BODY>
-		<H2><STRONG>Coding Algorithms</STRONG></H2>
-		<P>As you can see from the preceding descriptions the instruction set of the 6502
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>6502 Algorithms - Obelisk by Andrew Jacobs</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="StyleSheet" href="../obelisk.css" type="text/css" media="screen,print">
+	</head>
+	<body>
+<div class="page-wrapper">
+<nav class="sidebar" id="sidebar"></nav>
+<main class="content">
+
+		<h2><strong>Coding Algorithms</strong></h2>
+		<p>As you can see from the preceding descriptions the instruction set of the 6502
 			is quite basic, having only simple 8 bit operations. Complex operations such as
 			16 or 32 bit arithmetic and memory transfers have to be performed by executing
 			a sequence of simpler operations. This sections describes how to build these
-			algorithms and is based on code taken from my macro library (available from the <A href="downloads.html#source">
-				download section</A>).</P>
-		<P>If you find any bugs in the code, have routines to donate to the library, or can
-			suggest improvements then please mail me.</P>
-		<H3>Standard Conventions</H3>
-		<P>The 6502 processor expects addresses to be stored in 'little endian' order, with
+			algorithms and is based on code taken from my macro library (available from the <a href="downloads.html#source">
+				download section</a>).</p>
+		<p>If you find any bugs in the code, have routines to donate to the library, or can
+			suggest improvements then please mail me.</p>
+		<h3>Standard Conventions</h3>
+		<p>The 6502 processor expects addresses to be stored in 'little endian' order, with
 			the least significant byte first and the most significant byte second. If the
 			value stored was just a number (e.g. game score, etc.) then we could write code
 			to store and manipulate it in 'big endian' order if we wished, however the
 			algorithms presented here always use 'little endian' order so that they may be
 			applied either to simple numeric values or addresses without
-        modification.</P>
+        modification.</p>
         <dl>
           <dd><p><i>The terms 'big endian' and 'little endian' come from Gulliver's
         Travels. The people of Lilliput and Blefuscu have been fighting a war
@@ -29,18 +35,18 @@
         portion of a binary number is stored in the lower memory address.</i></p>
           </dd>
         </dl>
-		<P>To be safe the algorithms usually start by setting processor flags and registers
+		<p>To be safe the algorithms usually start by setting processor flags and registers
 			to safe initial values. If you need to squeeze a few extra bytes or cycles out
 			of the routine you might be able to remove some of these initializations
-			depending on the preceding instructions.</P>
-		<H3>Simple Memory Operations</H3>
-		<P>Probably the most fundamental memory operation is clearing an area of memory to
+			depending on the preceding instructions.</p>
+		<h3>Simple Memory Operations</h3>
+		<p>Probably the most fundamental memory operation is clearing an area of memory to
 			an initial value, such as zero. As the 6502 cannot directly move values to
 			memory clearing even a small region of memory requires the use of a register.
 			Any of A, X or Y could be used to hold the initial value, but in practice A is
 			normally used because it can be quickly saved and restored (with PHA and PLA)
-			leaving X and Y free for application use.</P>
-		<PRE>; Clearing 16 bits of memory
+			leaving X and Y free for application use.</p>
+		<pre>; Clearing 16 bits of memory
 _CLR16  LDA #0          ;Load constant zero into A
         STA MEM+0       ;Then clear the least significant byte
         STA MEM+1       ;... followed by the most significant
@@ -50,11 +56,11 @@ _CLR32  LDA #0          ;Load constant zero into A
         STA MEM+0       ;Clear from the least significant byte
         STA MEM+1       ;... up
         STA MEM+2       ;... to
-        STA MEM+3       ;... the most significant</PRE>
-		<P>Moving a small quantity of data requires a register to act as a temporary
+        STA MEM+3       ;... the most significant</pre>
+		<p>Moving a small quantity of data requires a register to act as a temporary
 			container during the transfer. Again any of A, X, or Y may be used, but as
-			before using A as the temporary register is often the most practical.</P>
-		<PRE>; Moving 16 bits of memory
+			before using A as the temporary register is often the most practical.</p>
+		<pre>; Moving 16 bits of memory
 _XFR16  LDA SRC+0       ;Move the least significant byte
         STA DST+0
         LDA SRC+1       ;Then the most significant
@@ -68,20 +74,20 @@ _XFR32  LDA SRC+0       ;Move from least significant byte
         LDA SRC+2       ;... to
         STA DST+2
         LDA SRC+3       ;... the most significant
-        STA DST+3</PRE>
-		<P>Provided the source and destination areas do not overlap then the order in which
+        STA DST+3</pre>
+		<p>Provided the source and destination areas do not overlap then the order in which
 			the bytes are moved is irrelevant, but it usually pays to be consistent in your
-			approach to make mistakes easier to spot.</P>
-		<P>All of the preceding examples can be extended to apply to larger memory areas
+			approach to make mistakes easier to spot.</p>
+		<p>All of the preceding examples can be extended to apply to larger memory areas
 			but will generate increasingly larger code as the number of bytes involved
 			grows. Algorithms that iterate using a counter and use index addressing to
 			access memory will result in smaller code but will be slightly slower to
-			execute.</P>
-		<P>This trade off between speed and size is a common issue in assembly language
+			execute.</p>
+		<p>This trade off between speed and size is a common issue in assembly language
 			programming and there are times when one approach is clearly better than the
 			other (e.g. when trying to squeeze code into a fixed size ROM - SIZE, or
-			manipulate data during a video blanking period - SPEED).</P>
-		<PRE>; Clear 32 bits of memory iteratively
+			manipulate data during a video blanking period - SPEED).</p>
+		<pre>; Clear 32 bits of memory iteratively
 _CLR32C LDX #3
         LDA #0
 _LOOP   STA MEM,X
@@ -93,15 +99,15 @@ _XFR32C LDX #3
 _LOOP   LDA SRC,X
         STA DST,X
         DEX
-        BPL _LOOP</PRE>
-		<P>Another basic operation is setting a 16 bit word to an initial constant value.
+        BPL _LOOP</pre>
+		<p>Another basic operation is setting a 16 bit word to an initial constant value.
 			The easiest way to do this is to load the low and high portions into A one at a
-			time and store them.</P>
-		<PRE>; Setting a 16 bit constant
+			time and store them.</p>
+		<pre>; Setting a 16 bit constant
 _SET16I LDA #LO NUM     ;Set the least significant byte of the constant
         STA MEM+0
         LDA #HI NUM     ;... then the most significant byte
-        STA MEM+1</PRE>
+        STA MEM+1</pre>
 		<h3>Logical Operations</h3>
 		<p>The simplest forms of operation on binary values are the logical AND, logical OR
 			and exclusive OR illustrated by the following truth tables.&nbsp;</p>
@@ -120,40 +126,18 @@ _SET16I LDA #LO NUM     ;Set the least significant byte of the constant
 							<tbody>
 								<tr>
 									<td width="33%"></td>
-									<td width="33%" bgColor="#000000"><font color="#ffffff">0</font></td>
-									<td width="34%" bgColor="#000000"><font color="#ffffff">1</font></td>
+									<td width="33%" bgcolor="#000000"><font color="#ffffff">0</font></td>
+									<td width="34%" bgcolor="#000000"><font color="#ffffff">1</font></td>
 								</tr>
 								<tr>
-									<td width="33%" bgColor="#000000"><font color="#ffffff">0</font></td>
-									<td width="33%" bgColor="#c0c0c0">0</td>
-									<td width="34%" bgColor="#c0c0c0">0</td>
+									<td width="33%" bgcolor="#000000"><font color="#ffffff">0</font></td>
+									<td width="33%" bgcolor="#c0c0c0">0</td>
+									<td width="34%" bgcolor="#c0c0c0">0</td>
 								</tr>
 								<tr>
-									<td width="33%" bgColor="#000000"><font color="#ffffff">1</font></td>
-									<td width="33%" bgColor="#c0c0c0">0</td>
-									<td width="34%" bgColor="#c0c0c0">1</td>
-								</tr>
-							</tbody>
-						</table>
-					</td>
-					<td width="10%"></td>
-					<td width="20%">
-						<table width="100%" border="0">
-							<tbody>
-								<tr>
-									<td width="33%"></td>
-									<td width="33%" bgColor="#000000"><font color="#ffffff">0</font></td>
-									<td width="34%" bgColor="#000000"><font color="#ffffff">1</font></td>
-								</tr>
-								<tr>
-									<td width="33%" bgColor="#000000"><font color="#ffffff">0</font></td>
-									<td width="33%" bgColor="#c0c0c0">0</td>
-									<td width="34%" bgColor="#c0c0c0">1</td>
-								</tr>
-								<tr>
-									<td width="33%" bgColor="#000000"><font color="#ffffff">1</font></td>
-									<td width="33%" bgColor="#c0c0c0">1</td>
-									<td width="34%" bgColor="#c0c0c0">1</td>
+									<td width="33%" bgcolor="#000000"><font color="#ffffff">1</font></td>
+									<td width="33%" bgcolor="#c0c0c0">0</td>
+									<td width="34%" bgcolor="#c0c0c0">1</td>
 								</tr>
 							</tbody>
 						</table>
@@ -164,18 +148,40 @@ _SET16I LDA #LO NUM     ;Set the least significant byte of the constant
 							<tbody>
 								<tr>
 									<td width="33%"></td>
-									<td width="33%" bgColor="#000000"><font color="#ffffff">0</font></td>
-									<td width="34%" bgColor="#000000"><font color="#ffffff">1</font></td>
+									<td width="33%" bgcolor="#000000"><font color="#ffffff">0</font></td>
+									<td width="34%" bgcolor="#000000"><font color="#ffffff">1</font></td>
 								</tr>
 								<tr>
-									<td width="33%" bgColor="#000000"><font color="#ffffff">0</font></td>
-									<td width="33%" bgColor="#c0c0c0">0</td>
-									<td width="34%" bgColor="#c0c0c0">1</td>
+									<td width="33%" bgcolor="#000000"><font color="#ffffff">0</font></td>
+									<td width="33%" bgcolor="#c0c0c0">0</td>
+									<td width="34%" bgcolor="#c0c0c0">1</td>
 								</tr>
 								<tr>
-									<td width="33%" bgColor="#000000"><font color="#ffffff">1</font></td>
-									<td width="33%" bgColor="#c0c0c0">1</td>
-									<td width="34%" bgColor="#c0c0c0">0</td>
+									<td width="33%" bgcolor="#000000"><font color="#ffffff">1</font></td>
+									<td width="33%" bgcolor="#c0c0c0">1</td>
+									<td width="34%" bgcolor="#c0c0c0">1</td>
+								</tr>
+							</tbody>
+						</table>
+					</td>
+					<td width="10%"></td>
+					<td width="20%">
+						<table width="100%" border="0">
+							<tbody>
+								<tr>
+									<td width="33%"></td>
+									<td width="33%" bgcolor="#000000"><font color="#ffffff">0</font></td>
+									<td width="34%" bgcolor="#000000"><font color="#ffffff">1</font></td>
+								</tr>
+								<tr>
+									<td width="33%" bgcolor="#000000"><font color="#ffffff">0</font></td>
+									<td width="33%" bgcolor="#c0c0c0">0</td>
+									<td width="34%" bgcolor="#c0c0c0">1</td>
+								</tr>
+								<tr>
+									<td width="33%" bgcolor="#000000"><font color="#ffffff">1</font></td>
+									<td width="33%" bgcolor="#c0c0c0">1</td>
+									<td width="34%" bgcolor="#c0c0c0">0</td>
 								</tr>
 							</tbody>
 						</table>
@@ -361,8 +367,8 @@ _SET16I LDA #LO NUM     ;Set the least significant byte of the constant
 			<li>
 				Exclusive OR allows selected bits to be set or inverted.</li>
 		</ul>
-		<p>In the 6502 these operations are implemented by the <A href="reference.html#AND">AND</A>,
-			<A href="reference.html#ORA">ORA</A> and <A href="reference.html#EOR">EOR</A> instructions.
+		<p>In the 6502 these operations are implemented by the <a href="reference.html#AND">AND</a>,
+			<a href="reference.html#ORA">ORA</a> and <a href="reference.html#EOR">EOR</a> instructions.
 			One of the values to be operated on will be the current contents of the
 			accumulator, the other is in memory either as an immediate value or at a
 			specified location. The result of the operation is placed in the accumulator
@@ -385,14 +391,14 @@ _SET16I LDA #LO NUM     ;Set the least significant byte of the constant
 			down (right). When the bits are moved a new value will be needed to fill the
 			vacant position created at one end of the value, and similarly the bit
 			displaced at the opposite end will need to be caught and stored.</p>
-		<P>Both shifts and rotates catch the displaced bit in the carry flag but they
+		<p>Both shifts and rotates catch the displaced bit in the carry flag but they
 			differ in how they fill the vacant position; shifts will always fill the vacant
 			bit with a zero whilst a rotate will fill it with the value of the carry flag
-			as it was at the start of the instruction.</P>
-		<P>For example the following diagram shows the result of applying an 'Arithmetic
-			Shift&nbsp;Left' (<A href="reference.html#ASL">ASL</A>) to the value $4D to
-			give $9A.</P>
-		<PRE>               +---+---+---+---+---+---+---+---+
+			as it was at the start of the instruction.</p>
+		<p>For example the following diagram shows the result of applying an 'Arithmetic
+			Shift&nbsp;Left' (<a href="reference.html#ASL">ASL</a>) to the value $4D to
+			give $9A.</p>
+		<pre>               +---+---+---+---+---+---+---+---+
 Initial:       | 0 | 1 | 0 | 0 | 1 | 1 | 0 | 1 |
                +---+---+---+---+---+---+---+---+
                  |   |   |   |   |   |   |   |
@@ -403,10 +409,10 @@ Initial:       | 0 | 1 | 0 | 0 | 1 | 1 | 0 | 1 |
             /    v   v   v   v   v   v   v   v
                +---+---+---+---+---+---+---+---+
 Result:   C=0&nbsp; |&nbsp;1 | 0 | 0 | 1 | 1 | 0 | 1 | 0 |
-               +---+---+---+---+---+---+---+---+</PRE>
-		<P>Whist the following shows the result of applying a 'Rotate Left' (<A href="reference.html#ROL">ROL</A>)
-			to the same value, but assuming that the carry contained the value one.</P>
-		<PRE>               +---+---+---+---+---+---+---+---+
+               +---+---+---+---+---+---+---+---+</pre>
+		<p>Whist the following shows the result of applying a 'Rotate Left' (<a href="reference.html#ROL">ROL</a>)
+			to the same value, but assuming that the carry contained the value one.</p>
+		<pre>               +---+---+---+---+---+---+---+---+
 Initial:       | 0 | 1 | 0 | 0 | 1 | 1 | 0 | 1 | C=1
                +---+---+---+---+---+---+---+---+
                  |   |   |   |   |   |   |   |   /
@@ -417,19 +423,19 @@ Initial:       | 0 | 1 | 0 | 0 | 1 | 1 | 0 | 1 | C=1
             /    v   v   v   v   v   v   v   v
                +---+---+---+---+---+---+---+---+
 Result:   C=0&nbsp; |&nbsp;1 | 0 | 0 | 1 | 1 | 0 | 1 | 1 |
-               +---+---+---+---+---+---+---+---+</PRE>
-		<P>Shifting the bits within a value (and introducing a zero as the least
+               +---+---+---+---+---+---+---+---+</pre>
+		<p>Shifting the bits within a value (and introducing a zero as the least
 			significant bit) has the effect of multiplying its value by two. In order to
 			apply this multiplication to a value larger than a single byte we use ASL
 			to&nbsp;shift the first byte and then ROL all the subsequent bytes as
 			necessary using the carry flag to temporarily hold the displaced bits as they
-			are moved from one byte to the next.</P>
-		<PRE>; Shift a 16bit value by one place left (e.g. multiply by two)
+			are moved from one byte to the next.</p>
+		<pre>; Shift a 16bit value by one place left (e.g. multiply by two)
 _ASL16  ASL MEM+0       ;Shift the LSB
-        ROL MEM+1       ;Rotate the MSB</PRE>
-		<P>The behavior of the right shift as rotates follows the same pattern. For
-			example we can apply a 'Logical Shift Right' (<A href="reference.html#LSR">LSR</A>
-			)&nbsp;to the value $4D to give $26.<PRE>               +---+---+---+---+---+---+---+---+
+        ROL MEM+1       ;Rotate the MSB</pre>
+		<p>The behavior of the right shift as rotates follows the same pattern. For
+			example we can apply a 'Logical Shift Right' (<a href="reference.html#LSR">LSR</a>
+			)&nbsp;to the value $4D to give $26.<pre>               +---+---+---+---+---+---+---+---+
 Initial:       | 0 | 1 | 0 | 0 | 1 | 1 | 0 | 1 |
                +---+---+---+---+---+---+---+---+
                  |   |   |   |   |   |   |   |
@@ -440,10 +446,10 @@ Initial:       | 0 | 1 | 0 | 0 | 1 | 1 | 0 | 1 |
                  v   v   v   v   v   v   v   v    \
                +---+---+---+---+---+---+---+---+
 Result:      &nbsp; |&nbsp;0 | 0 | 1 | 0 | 0 | 1 | 1 | 0 |  C=1
-               +---+---+---+---+---+---+---+---+</PRE>
-		<P>Or a 'Rotate Right' (<A href="reference.html#ROR">ROR</A>)&nbsp;of the same
-			value, but assuming that the carry contained the value one to give $A6.</P>
-		<PRE>               +---+---+---+---+---+---+---+---+
+               +---+---+---+---+---+---+---+---+</pre>
+		<p>Or a 'Rotate Right' (<a href="reference.html#ROR">ROR</a>)&nbsp;of the same
+			value, but assuming that the carry contained the value one to give $A6.</p>
+		<pre>               +---+---+---+---+---+---+---+---+
 Initial:   C=1 | 0 | 1 | 0 | 0 | 1 | 1 | 0 | 1 |
                +---+---+---+---+---+---+---+---+
              \   |   |   |   |   |   |   |   |
@@ -454,84 +460,84 @@ Initial:   C=1 | 0 | 1 | 0 | 0 | 1 | 1 | 0 | 1 |
                  v   v   v   v   v   v   v   v    \
                +---+---+---+---+---+---+---+---+
 Result:      &nbsp; |&nbsp;1 | 0 | 1 | 0 | 0 | 1 | 1 | 0 |  C=1
-               +---+---+---+---+---+---+---+---+</PRE>
-		<P>Not surprisingly if left shifts multiply a value by two then right shifts do an
+               +---+---+---+---+---+---+---+---+</pre>
+		<p>Not surprisingly if left shifts multiply a value by two then right shifts do an
 			unsigned division by two. Again if we are applying the division to&nbsp;a
 			multi-byte value we will typically use LSR on the first byte (the MSB this
-			time) and ROR on all subsequent bytes.</P>
+			time) and ROR on all subsequent bytes.</p>
 		<pre>; Shift a 16 bit value by one place right (e.g. divide by two)
 _LSR16  LSR MEM+1       ;Shift the MSB
         ROR MEM+0       ;Rotate the LSB</pre>
 		<p>There are a number of applications for shifts and rotates, not least the coding
 			of generic multiply and divide algorithms which are discussed later.</p>
-		<P>As was pointed out earlier right shifting a value two divide it by two only
+		<p>As was pointed out earlier right shifting a value two divide it by two only
 			works on unsigned values. This is because the LSR is will always place a zero
 			in the most significant bit of the MSB.&nbsp;To make this
 			algorithm&nbsp;work&nbsp;for all two complement coded values we need
 			to&nbsp;ensure that&nbsp;value of this bit is copied&nbsp;back into itself to
 			keep the value the same sign.&nbsp;We can use another shift to achieve
-        this.</P>
-		<PRE>; Divide a signed 16 bit value by two
+        this.</p>
+		<pre>; Divide a signed 16 bit value by two
 _DIV2   LDA MEM+1       ;Load the MSB
         ASL A           ;Copy the sign bit into C
         ROR MEM+1       ;And back into the MSB
-        ROR MEM+0       ;Rotate the LSB as normal</PRE>
-		<H3>Addition &amp; Subtraction</H3>
-		<P>The 6502 processor provides 8 bit addition and subtraction instructions and a
-			carry/borrow flag that is used to propagate the carry bit between operations.</P>
-		<P>To implement a 16 bit addition the programmer must code two pairs of additions;
+        ROR MEM+0       ;Rotate the LSB as normal</pre>
+		<h3>Addition &amp; Subtraction</h3>
+		<p>The 6502 processor provides 8 bit addition and subtraction instructions and a
+			carry/borrow flag that is used to propagate the carry bit between operations.</p>
+		<p>To implement a 16 bit addition the programmer must code two pairs of additions;
 			one for the least significant bytes and one for the most significant bytes. The
 			carry flag must be cleared before the first addition to ensure that an
-			additional increment isn't performed.</P>
-		<PRE>; 16 bit Binary Addition
+			additional increment isn't performed.</p>
+		<pre>; 16 bit Binary Addition
         CLC             ;Ensure carry is clear
         LDA VLA+0       ;Add the two least significant bytes
         ADC VLB+0
         STA RES+0       ;... and store the result
         LDA VLA+1       ;Add the two most significant bytes
         ADC VLB+1       ;... and any propagated carry bit
-        STA RES+1       ;... and store the result</PRE>
-		<P>Subtraction follows the same pattern but the carry must be set before the first
-			pair of bytes are subtracted to get the correct result.</P>
-		<PRE>; 16 bit Binary Subtraction
+        STA RES+1       ;... and store the result</pre>
+		<p>Subtraction follows the same pattern but the carry must be set before the first
+			pair of bytes are subtracted to get the correct result.</p>
+		<pre>; 16 bit Binary Subtraction
         SEC             ;Ensure carry is set
         LDA VLA+0       ;Subtract the two least significant bytes
         SBC VLB+0
         STA RES+0       ;... and store the result
         LDA VLA+1       ;Subtract the two most significant bytes
         SBC VLB+1       ;... and any propagated borrow bit
-        STA RES+1       ;... and store the result</PRE>
-		<P>Both the addition and subtraction algorithm can be extended to 32 bits by
+        STA RES+1       ;... and store the result</pre>
+		<p>Both the addition and subtraction algorithm can be extended to 32 bits by
 			repeating the LDA/ADC/STA or LDA/SBC/STA pattern for two further bytes worth of
-			data.</P>
-		<H3>Negation</H3>
-		<P>The traditional approach to negating a twos complement number is to reverse all
-			the bits (by EORing with $FF) and add one as shown below.</P>
-		<PRE>; 8 bit Binary Negation
+			data.</p>
+		<h3>Negation</h3>
+		<p>The traditional approach to negating a twos complement number is to reverse all
+			the bits (by EORing with $FF) and add one as shown below.</p>
+		<pre>; 8 bit Binary Negation
         CLC 		;Ensure carry is clear
 	EOR #$FF	;Invert all the bits
-	ADC #1		;... and add one</PRE>
-		<P>This technique works well with a
+	ADC #1		;... and add one</pre>
+		<p>This technique works well with a
 			single byte already held in the accumulator but not with bigger numbers. With
-			these it is easier just to subtract them from zero.</P>
-		<PRE>; 16 bit Binary Negation
+			these it is easier just to subtract them from zero.</p>
+		<pre>; 16 bit Binary Negation
         SEC             ;Ensure carry is set
         LDA #0          ;Load constant zero
         SBC SRC+0       ;... subtract the least significant byte
         STA DST+0       ;... and store the result
         LDA #0          ;Load constant zero again
         SBC SRC+1       ;... subtract the most significant byte
-        STA DST+1       ;... and store the result</PRE>
-		<H3>Decimal Arithmetic</H3>
-		<P>The behavior of the ADC and SBC instructions can be modified by setting or
+        STA DST+1       ;... and store the result</pre>
+		<h3>Decimal Arithmetic</h3>
+		<p>The behavior of the ADC and SBC instructions can be modified by setting or
 			clearing the decimal mode flag in the processor status register. Normally
 			decimal mode is disabled and ADC/SBC perform simple binary arithmetic (e.g. $99
 			+ $01 =&gt; $9A Carry = 0), but if the flag is set with a SED instruction the
 			processor will perform binary coded decimal arithmetic instead (e.g. $99 + $01
-			=&gt; $00 Carry = 1).</P>
-		<P>To make the 16 bit addition/subtraction code work in decimal mode simply include
-			an SED at the start and a CLD at the end (to restore the processor to normal).</P>
-		<PRE>; 16 bit Binary Code Decimal Addition
+			=&gt; $00 Carry = 1).</p>
+		<p>To make the 16 bit addition/subtraction code work in decimal mode simply include
+			an SED at the start and a CLD at the end (to restore the processor to normal).</p>
+		<pre>; 16 bit Binary Code Decimal Addition
         SED             ;Set decimal mode flag
         CLC             ;Ensure carry is clear
         LDA VLA+0       ;Add the two least significant bytes
@@ -540,10 +546,10 @@ _DIV2   LDA MEM+1       ;Load the MSB
         LDA VLA+1       ;Add the two most significant bytes
         ADC VLB+1       ;... and any propagated carry bit
         STA RES+1       ;... and store the result
-        CLD             ;Clear decimal mode</PRE>
-		<P>Binary coded values are more easily converted to displayable digits and are
-			useful for holding numbers such as high scores.</P>
-		<PRE>; Print the BCD value in A as two ASCII digits
+        CLD             ;Clear decimal mode</pre>
+		<p>Binary coded values are more easily converted to displayable digits and are
+			useful for holding numbers such as high scores.</p>
+		<pre>; Print the BCD value in A as two ASCII digits
         PHA             ;Save the BCD value
         LSR A           ;Shift the four most significant bits
         LSR A           ;... into the four least significant
@@ -554,13 +560,13 @@ _DIV2   LDA MEM+1       ;Load the MSB
         PLA             ;Recover the BCD value
         AND #$0F        ;Mask out all but the bottom 4 bits
         ORA #'0'        ;Make an ASCII digit
-        JSR PRINT       ;... and print it</PRE>
-<P>Another use for BCD is in the conversion of binary values to decimal ones.
+        JSR PRINT       ;... and print it</pre>
+<p>Another use for BCD is in the conversion of binary values to decimal ones.
 Some algorithms perform this conversion by counting the number of times that
 10000's, 1000's, 100's, 10's and 1's can be subtracted from the binary value before
 it underflows, but I normally use a simple fixed loop that shifts the bits out
 of the binary value one at a time&nbsp;and adds it&nbsp;to an
-intermediate&nbsp;result that is being doubled (in BCD) on each iteration.</P><PRE>; Convert an 16 bit binary value into a 24bit BCD value
+intermediate&nbsp;result that is being doubled (in BCD) on each iteration.</p><pre>; Convert an 16 bit binary value into a 24bit BCD value
 BIN2BCD LDA #0          ;Clear the result area
         STA RES+0
         STA RES+1
@@ -580,51 +586,51 @@ _LOOP   ASL VAL+0       ;Shift a bit out of the binary
         STA RES+2
         DEX             ;More bits to process?
         BNE _LOOP
-        CLD             ;Leave decimal mode</PRE>
-<P>One final odd use of decimal arithmetic&nbsp;is the conversion of hexadecimal
+        CLD             ;Leave decimal mode</pre>
+<p>One final odd use of decimal arithmetic&nbsp;is the conversion of hexadecimal
 digits to printable ASCII characters. The usual&nbsp;way to perform&nbsp;this
 conversion is to add $30 to the digit ($00 - $0F)&nbsp;to make an intermediate
 result which is then&nbsp;examined to see if it&nbsp;is greater than or equal to
 $3A. If it is then an additional $06 is added to make the result fall in the
-range $41 - $46&nbsp;(e.g. 'A' - 'F').</P><PRE>; Convert a hex digit ($00-$0F) to ASCII ('0'-'9' or 'A'-'F')
+range $41 - $46&nbsp;(e.g. 'A' - 'F').</p><pre>; Convert a hex digit ($00-$0F) to ASCII ('0'-'9' or 'A'-'F')
 HEX2ASC ORA #$30        ;Form the basic character code
         CMP #$3A        ;Does the result need adjustment?
         BCC .+4
-        ADC #$05        ;Add 6 (5 and the carry) if needed</PRE>
-<P>It turns out that in&nbsp;decimal mode the processor&nbsp;does&nbsp;basically
+        ADC #$05        ;Add 6 (5 and the carry) if needed</pre>
+<p>It turns out that in&nbsp;decimal mode the processor&nbsp;does&nbsp;basically
 the same correction after an addition&nbsp;and with the&nbsp;right arguments we
 can convert the digit to its ASCII character without performing any comparisons
-as shown in the following code.</P><PRE>; Convert a hex digit ($00-$0F) to ASCII ('0'-'9' or 'A'-'F')
+as shown in the following code.</p><pre>; Convert a hex digit ($00-$0F) to ASCII ('0'-'9' or 'A'-'F')
 HEX2ASC SED             ;Enter BCD mode
         CLC             ;Ensure the carry is clear
         ADC #$90        ;Produce $90-$99 (C=0) or $00-$05 (C=1)
         ADC #$40        ;Produce $30-$39 or $41-$46
-        CLD             ;Leave BCD mode</PRE>
-<H3>Increments &amp; Decrements</H3>
-		<P>Assembly programs frequently use memory based counters that occasionally need
+        CLD             ;Leave BCD mode</pre>
+<h3>Increments &amp; Decrements</h3>
+		<p>Assembly programs frequently use memory based counters that occasionally need
 			incrementing or decrementing by one. One way to achieve this would be to load
-			the LSB and MSB in turn and add or subtract one with the <A href="reference.html#ADC">
-				ADC</A>/<A href="reference.html#SBC">SBC</A> instructions, but the 6502 has
-			a more efficient way to do this using <A href="reference.html#INC">INC</A> and <A href="reference.html#DEC">
-				DEC</A>.</P>
-		<P>Incrementing is straight forward, we just increment the least significant byte
+			the LSB and MSB in turn and add or subtract one with the <a href="reference.html#ADC">
+				ADC</a>/<a href="reference.html#SBC">SBC</a> instructions, but the 6502 has
+			a more efficient way to do this using <a href="reference.html#INC">INC</a> and <a href="reference.html#DEC">
+				DEC</a>.</p>
+		<p>Incrementing is straight forward, we just increment the least significant byte
 			until the result becomes zero. This indicates that the calculation has wrapped
 			round (e.g. $FF + $01 =&gt; $00) and an increment to the most significant byte
-			is needed.</P>
-		<PRE>; Increment a 16 bit value by one
+			is needed.</p>
+		<pre>; Increment a 16 bit value by one
 _INC16  INC MEM+0       ;Increment the LSB
         BNE _DONE       ;If the result was not zero we're done
         INC MEM+1       ;Increment the MSB if LSB wrapped round
-_DONE   EQU *</PRE>
-		<P>Decrementing is a little trickier because we need to know when the least
+_DONE   EQU *</pre>
+		<p>Decrementing is a little trickier because we need to know when the least
 			significant byte is about to underflow from $00 to $FF. The answer is to test
-			it first by loading it into the accumulator to set the processor flags.</P>
-		<PRE>; Decrement a 16 bit value by one
+			it first by loading it into the accumulator to set the processor flags.</p>
+		<pre>; Decrement a 16 bit value by one
 _DEC16  LDA MEM+0       ;Test if the LSB is zero
         BNE _SKIP       ;If it isn't we can skip the next instruction
         DEC MEM+1       ;Decrement the MSB when the LSB will underflow
-_SKIP   DEC MEM+0       ;Decrement the LSB</PRE>
-		<H3>Complex Memory Transfers</H3>
+_SKIP   DEC MEM+0       ;Decrement the LSB</pre>
+		<h3>Complex Memory Transfers</h3>
         <p>Moving data from one place to another is a common operation. If the
         amount of data to moved is 256 bytes or less and the source and target
         locations of the data are fixed then a simple loop around an indexed LDA
@@ -680,7 +686,7 @@ _FRAG	CPY LEN+0	;Then while the index has not reached
 	BNE _FRAG\?
 _DONE 	EQU *		;All done</pre>
 		<p>&nbsp;</p>
-		<H3>Character Classification</H3>
+		<h3>Character Classification</h3>
         <p>The standard C library provides a set of functions for classifying
         (e.g. is letter, is digit, is ASCII, is upper case, etc.) and modifying
         (e.g. to upper case and to lower case) characters defined in a header
@@ -946,295 +952,299 @@ PASS	EQU *
         then the comparison approach will generate less code but may be slightly
         slower (for the complex tests), otherwise the look up table is simple
         and fast.</p>
-		<H3>Some notes on my macro library</H3>
-		<P>As I said in the introduction to this section all of the algorithms presented
+		<h3>Some notes on my macro library</h3>
+		<p>As I said in the introduction to this section all of the algorithms presented
 			here are taken from my macro library. Coding simple algorithms like these as
 			macros has several advantages over subroutine libraries on the 6502 processor,
-			namely:</P>
-		<UL>
-			<LI>
+			namely:</p>
+		<ul>
+			<li>
 			The assembler adjusts them automatically to zero page or absolute addressing
 			depending on the parameters.
-			<LI>
+			<li>
 			They can be used either inline (for speed) or expanded into subroutines (to
 			save space) as needed.
-			<LI>
+			<li>
 			The same macro can be used several times but customized in each case to suit
 			its use at that time.
-			<LI>
+			<li>
 				The macros can optimize the code they generate under some circumstances (e.g.
 				_XFR16 detects when the source and target addresses are the same and does
-				nothing).</LI>
-		</UL>
-		<P>Another feature of the macros is that they will generate code for the 65SC02
+				nothing).</li>
+		</ul>
+		<p>Another feature of the macros is that they will generate code for the 65SC02
 			processor using the additional instructions on that processor if the assembler
 			defines the correct symbol. (This processor was used in the BBC Microcomputers
-			6502 second processor that's why I decided to support it).</P>
-		<P>The routines in the currently library are:</P>
-		<P><TABLE WIDTH="100%" BORDER="1" CELLSPACING="0" CELLPADDING="0">
-				<TR>
-					<TD WIDTH="22%"><B>Macro Name</B></TD>
-					<TD WIDTH="78%"><B>Description</B></TD>
-				</TR>
-				<TR>
-					<TD WIDTH="22%">_CLR16</TD>
-					<TD WIDTH="78%">Clears 16 bits of memory to zero</TD>
-				</TR>
-				<TR>
-					<TD WIDTH="22%">_CLR32</TD>
-					<TD WIDTH="78%">Clears 32 bits of memory to zero</TD>
-				</TR>
-				<TR>
-					<TD WIDTH="22%">_CLR32C</TD>
-					<TD WIDTH="78%">Clears 32 bits of memory to zero iteratively</TD>
-				</TR>
-				<TR>
-					<TD WIDTH="22%">_XFR16</TD>
-					<TD WIDTH="78%">Moves 16 bits of memory</TD>
-				</TR>
-				<TR>
-					<TD WIDTH="22%">_XFR32</TD>
-					<TD WIDTH="78%">Moves 32 bits of memory</TD>
-				</TR>
-				<TR>
-					<TD WIDTH="22%">_XFR32C</TD>
-					<TD WIDTH="78%">Moves 32 bits of memory iteratively</TD>
-				</TR>
-				<TR>
-					<TD WIDTH="22%">_SET16I</TD>
-					<TD WIDTH="78%">Load a 16 bit constant into memory</TD>
-				</TR>
-				<TR>
-					<TD WIDTH="22%">_NOT16</TD>
-					<TD WIDTH="78%">Compute the NOT of a 16 bit value</TD>
-				</TR>
-				<TR>
-					<TD WIDTH="22%">_NOT32</TD>
-					<TD WIDTH="78%">Compute the NOT of a 32 bit value</TD>
-				</TR>
-				<TR>
-					<TD WIDTH="22%">_NOT32C</TD>
-					<TD WIDTH="78%">Compute the NOT of a 32 bit value iteratively</TD>
-				</TR>
-				<TR>
-					<TD WIDTH="22%">_ORA16</TD>
-					<TD WIDTH="78%">Compute the OR of two 16 bit values</TD>
-				</TR>
-				<TR>
-					<TD WIDTH="22%">_ORA32</TD>
-					<TD WIDTH="78%">Compute the OR of two 32 bit values&nbsp;</TD>
-				</TR>
-				<TR>
-					<TD WIDTH="22%">_ORA32C</TD>
-					<TD WIDTH="78%">Compute the OR of two 32 bit values iteratively</TD>
-				</TR>
-				<TR>
-					<TD WIDTH="22%">_AND16</TD>
-					<TD WIDTH="78%">Compute the AND of two 16 bit values</TD>
-				</TR>
-				<TR>
-					<TD WIDTH="22%">_AND32</TD>
-					<TD WIDTH="78%">Compute the AND of two 32 bit values</TD>
-				</TR>
-				<TR>
-					<TD WIDTH="22%">_AND32C</TD>
-					<TD WIDTH="78%">Compute the AND of two 32 bit values iteratively</TD>
-				</TR>
-				<TR>
-					<TD WIDTH="22%">_EOR16</TD>
-					<TD WIDTH="78%">Compute the EOR of two 16 bit values</TD>
-				</TR>
-				<TR>
-					<TD WIDTH="22%">_EOR32</TD>
-					<TD WIDTH="78%">Compute the EOR of two 32 bit values</TD>
-				</TR>
-				<TR>
-					<TD WIDTH="22%">_EOR32C</TD>
-					<TD WIDTH="78%">Compute the EOR of two 32 bit values iteratively</TD>
-				</TR>
-				<TR>
-					<TD WIDTH="22%">_ASL16</TD>
-					<TD WIDTH="78%">Compute the arithmetic left shift of a 16 bit value</TD>
-				</TR>
-				<TR>
-					<TD WIDTH="22%">_ASL32</TD>
-					<TD WIDTH="78%">Compute the arithmetic left shift of a 32 bit value</TD>
-				</TR>
-				<TR>
-					<TD WIDTH="22%">_ROL16</TD>
-					<TD WIDTH="78%">Compute the left rotation of a 16 bit value</TD>
-				</TR>
-				<TR>
-					<TD WIDTH="22%">_ROL32</TD>
-					<TD WIDTH="78%">Compute the left rotation of a 32 bit value</TD>
-				</TR>
-				<TR>
-					<TD WIDTH="22%">_LSR16</TD>
-					<TD WIDTH="78%">Compute the logical right shift of a 16 bit value</TD>
-				</TR>
-				<TR>
-					<TD WIDTH="22%">_LSR32</TD>
-					<TD WIDTH="78%">Compute the logical right shift of a 32 bit value</TD>
-				</TR>
-				<TR>
-					<TD WIDTH="22%">_ROR16</TD>
-					<TD WIDTH="78%">Compute the right rotation of a 16 bit value</TD>
-				</TR>
-				<TR>
-					<TD WIDTH="22%">_ROR32</TD>
-					<TD WIDTH="78%">Compute the right rotation of a 32 bit value</TD>
-				</TR>
-				<TR>
-					<TD WIDTH="22%">_INC16</TD>
-					<TD WIDTH="78%">Increment a 16 bit value</TD>
-				</TR>
-				<TR>
-					<TD WIDTH="22%">_INC32</TD>
-					<TD WIDTH="78%">Increment a 32 bit value</TD>
-				</TR>
-				<TR>
-					<TD WIDTH="22%">_DEC16</TD>
-					<TD WIDTH="78%">Decrement a 16 bit value</TD>
-				</TR>
-				<TR>
-					<TD WIDTH="22%">_DEC32</TD>
-					<TD WIDTH="78%">Decrement a 32 bit value</TD>
-				</TR>
-				<TR>
-					<TD WIDTH="22%">_ADD16</TD>
-					<TD WIDTH="78%">Add two 16 bit values</TD>
-				</TR>
-				<TR>
-					<TD WIDTH="22%">_ADD32</TD>
-					<TD WIDTH="78%">Add two 32 bit values</TD>
-				</TR>
-				<TR>
-					<TD WIDTH="22%" HEIGHT="22">_SUB16&nbsp;</TD>
-					<TD WIDTH="78%" HEIGHT="22">Subtract two 16 bit values</TD>
-				</TR>
-				<TR>
-					<TD WIDTH="22%" HEIGHT="22">_SUB32</TD>
-					<TD WIDTH="78%" HEIGHT="22">Subtract two 32 bit values</TD>
-				</TR>
-				<TR>
-					<TD WIDTH="22%">_NEG16</TD>
-					<TD WIDTH="78%">Negate a 16 bit value</TD>
-				</TR>
-				<TR>
-					<TD WIDTH="22%">_NEG32</TD>
-					<TD WIDTH="78%">Negate a 32 bit value</TD>
-				</TR>
-				<TR>
-					<TD WIDTH="22%">_ABS16</TD>
-					<TD WIDTH="78%">Compute the absolute value of a 16 bit value</TD>
-				</TR>
-				<TR>
-					<TD WIDTH="22%">_ABS32</TD>
-					<TD WIDTH="78%">Compute the absolute value of a 32 bit value</TD>
-				</TR>
-				<TR>
-					<TD WIDTH="22%">_MUL16</TD>
-					<TD WIDTH="78%">Calculate the 16 bit product of two 16 bit values</TD>
-				</TR>
-				<TR>
-					<TD WIDTH="22%">_MUL16X</TD>
-					<TD WIDTH="78%">Calculate the 32 bit product of two 16 bit values</TD>
-				</TR>
-				<TR>
-					<TD WIDTH="22%">_MUL32</TD>
-					<TD WIDTH="78%">Calculate the 32 bit product of two 32 bit values</TD>
-				</TR>
-				<TR>
-					<TD WIDTH="22%">_MUL16I</TD>
-					<TD WIDTH="78%">Generate the code for a 16 bit constant multiply</TD>
-				</TR>
-				<TR>
-					<TD WIDTH="22%">_DIV16</TD>
-					<TD WIDTH="78%">Calculate the 16 bit quotient &amp; remainder of a 16
-						bit value and 16 bit dividend</TD>
-				</TR>
-				<TR>
-					<TD WIDTH="22%">_DIV16X</TD>
-					<TD WIDTH="78%">Calculate the 16 bit quotient &amp; remainder of a 32
-						bit value and 16 bit dividend</TD>
-				</TR>
-				<TR>
-					<TD WIDTH="22%">_DIV32</TD>
-					<TD WIDTH="78%">Calculate the 32 bit quotient &amp; remainder of a 32
-						bit value and 32 bit dividend</TD>
-				</TR>
-				<TR>
-					<TD WIDTH="22%">_CMP16</TD>
-					<TD WIDTH="78%">Compare two 16 bit values</TD>
-				</TR>
-				<TR>
-					<TD WIDTH="22%">_CMP32</TD>
-					<TD WIDTH="78%">Compare two 32 bit values</TD>
-				</TR>
-				<TR>
-					<TD WIDTH="22%">_MEMFWD&nbsp;</TD>
-					<TD WIDTH="78%">Move a block for memory a forward direction</TD>
-				</TR>
-				<TR>
-					<TD WIDTH="22%">_MEMREV</TD>
-					<TD WIDTH="78%">Not Implemented</TD>
-				</TR>
-				<TR>
-					<TD WIDTH="22%">_MEMCPY</TD>
-					<TD WIDTH="78%">Not Implemented</TD>
-				</TR>
-				<TR>
-					<TD WIDTH="22%">_STRLEN</TD>
-					<TD WIDTH="78%">Compute the length of a 'C' style string</TD>
-				</TR>
-				<TR>
-					<TD WIDTH="22%">_STRCPY</TD>
-					<TD WIDTH="78%">Copy a 'C' style string</TD>
-				</TR>
-				<TR>
-					<TD WIDTH="22%">_STRCMP</TD>
-					<TD WIDTH="78%">Compare two 'C' style strings</TD>
-				</TR>
-				<TR>
-					<TD WIDTH="22%">_STRNCMP</TD>
-					<TD WIDTH="78%">Not implemented</TD>
-				</TR>
-				<TR>
-					<TD WIDTH="22%">&nbsp;</TD>
-					<TD WIDTH="78%">&nbsp;</TD>
-				</TR>
-				<TR>
-					<TD WIDTH="22%">&nbsp;</TD>
-					<TD WIDTH="78%">&nbsp;</TD>
-				</TR>
-				<TR>
-					<TD WIDTH="22%">&nbsp;</TD>
-					<TD WIDTH="78%">&nbsp;</TD>
-				</TR>
-				<TR>
-					<TD WIDTH="22%">&nbsp;</TD>
-					<TD WIDTH="78%">&nbsp;</TD>
-				</TR>
-				<TR>
-					<TD WIDTH="22%">&nbsp;</TD>
-					<TD WIDTH="78%">&nbsp;</TD>
-				</TR>
-			</TABLE>
-		<P>Examine the code for more details on the macro parameters and usage.</P>
-		<P><TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="100%" HEIGHT="30">
-				<TR>
-					<TD WIDTH="25%" BGCOLOR="#aaaaff">&nbsp;<A href="addressing.html">&lt;&lt; Back</A></TD>
-					<TD WIDTH="25%" BGCOLOR="#aaaaff">
-						<P><CENTER><A href="../index.html" target=_parent>Home</A></CENTER>
-					</TD>
-					<TD WIDTH="25%" BGCOLOR="#aaaaff">
-						<P><CENTER><A href="index.html">Contents</A></CENTER>
-					</TD>
-					<TD ALIGN="right" WIDTH="25%" BGCOLOR="#aaaaff"><A href="reference.html">Next &gt;&gt;</A></TD>
-				</TR>
-			</TABLE>
-		<P>
-<HR ALIGN="left">
+			6502 second processor that's why I decided to support it).</p>
+		<p>The routines in the currently library are:</p>
+		<p><table width="100%" border="1" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="22%"><b>Macro Name</b></td>
+					<td width="78%"><b>Description</b></td>
+				</tr>
+				<tr>
+					<td width="22%">_CLR16</td>
+					<td width="78%">Clears 16 bits of memory to zero</td>
+				</tr>
+				<tr>
+					<td width="22%">_CLR32</td>
+					<td width="78%">Clears 32 bits of memory to zero</td>
+				</tr>
+				<tr>
+					<td width="22%">_CLR32C</td>
+					<td width="78%">Clears 32 bits of memory to zero iteratively</td>
+				</tr>
+				<tr>
+					<td width="22%">_XFR16</td>
+					<td width="78%">Moves 16 bits of memory</td>
+				</tr>
+				<tr>
+					<td width="22%">_XFR32</td>
+					<td width="78%">Moves 32 bits of memory</td>
+				</tr>
+				<tr>
+					<td width="22%">_XFR32C</td>
+					<td width="78%">Moves 32 bits of memory iteratively</td>
+				</tr>
+				<tr>
+					<td width="22%">_SET16I</td>
+					<td width="78%">Load a 16 bit constant into memory</td>
+				</tr>
+				<tr>
+					<td width="22%">_NOT16</td>
+					<td width="78%">Compute the NOT of a 16 bit value</td>
+				</tr>
+				<tr>
+					<td width="22%">_NOT32</td>
+					<td width="78%">Compute the NOT of a 32 bit value</td>
+				</tr>
+				<tr>
+					<td width="22%">_NOT32C</td>
+					<td width="78%">Compute the NOT of a 32 bit value iteratively</td>
+				</tr>
+				<tr>
+					<td width="22%">_ORA16</td>
+					<td width="78%">Compute the OR of two 16 bit values</td>
+				</tr>
+				<tr>
+					<td width="22%">_ORA32</td>
+					<td width="78%">Compute the OR of two 32 bit values&nbsp;</td>
+				</tr>
+				<tr>
+					<td width="22%">_ORA32C</td>
+					<td width="78%">Compute the OR of two 32 bit values iteratively</td>
+				</tr>
+				<tr>
+					<td width="22%">_AND16</td>
+					<td width="78%">Compute the AND of two 16 bit values</td>
+				</tr>
+				<tr>
+					<td width="22%">_AND32</td>
+					<td width="78%">Compute the AND of two 32 bit values</td>
+				</tr>
+				<tr>
+					<td width="22%">_AND32C</td>
+					<td width="78%">Compute the AND of two 32 bit values iteratively</td>
+				</tr>
+				<tr>
+					<td width="22%">_EOR16</td>
+					<td width="78%">Compute the EOR of two 16 bit values</td>
+				</tr>
+				<tr>
+					<td width="22%">_EOR32</td>
+					<td width="78%">Compute the EOR of two 32 bit values</td>
+				</tr>
+				<tr>
+					<td width="22%">_EOR32C</td>
+					<td width="78%">Compute the EOR of two 32 bit values iteratively</td>
+				</tr>
+				<tr>
+					<td width="22%">_ASL16</td>
+					<td width="78%">Compute the arithmetic left shift of a 16 bit value</td>
+				</tr>
+				<tr>
+					<td width="22%">_ASL32</td>
+					<td width="78%">Compute the arithmetic left shift of a 32 bit value</td>
+				</tr>
+				<tr>
+					<td width="22%">_ROL16</td>
+					<td width="78%">Compute the left rotation of a 16 bit value</td>
+				</tr>
+				<tr>
+					<td width="22%">_ROL32</td>
+					<td width="78%">Compute the left rotation of a 32 bit value</td>
+				</tr>
+				<tr>
+					<td width="22%">_LSR16</td>
+					<td width="78%">Compute the logical right shift of a 16 bit value</td>
+				</tr>
+				<tr>
+					<td width="22%">_LSR32</td>
+					<td width="78%">Compute the logical right shift of a 32 bit value</td>
+				</tr>
+				<tr>
+					<td width="22%">_ROR16</td>
+					<td width="78%">Compute the right rotation of a 16 bit value</td>
+				</tr>
+				<tr>
+					<td width="22%">_ROR32</td>
+					<td width="78%">Compute the right rotation of a 32 bit value</td>
+				</tr>
+				<tr>
+					<td width="22%">_INC16</td>
+					<td width="78%">Increment a 16 bit value</td>
+				</tr>
+				<tr>
+					<td width="22%">_INC32</td>
+					<td width="78%">Increment a 32 bit value</td>
+				</tr>
+				<tr>
+					<td width="22%">_DEC16</td>
+					<td width="78%">Decrement a 16 bit value</td>
+				</tr>
+				<tr>
+					<td width="22%">_DEC32</td>
+					<td width="78%">Decrement a 32 bit value</td>
+				</tr>
+				<tr>
+					<td width="22%">_ADD16</td>
+					<td width="78%">Add two 16 bit values</td>
+				</tr>
+				<tr>
+					<td width="22%">_ADD32</td>
+					<td width="78%">Add two 32 bit values</td>
+				</tr>
+				<tr>
+					<td width="22%" height="22">_SUB16&nbsp;</td>
+					<td width="78%" height="22">Subtract two 16 bit values</td>
+				</tr>
+				<tr>
+					<td width="22%" height="22">_SUB32</td>
+					<td width="78%" height="22">Subtract two 32 bit values</td>
+				</tr>
+				<tr>
+					<td width="22%">_NEG16</td>
+					<td width="78%">Negate a 16 bit value</td>
+				</tr>
+				<tr>
+					<td width="22%">_NEG32</td>
+					<td width="78%">Negate a 32 bit value</td>
+				</tr>
+				<tr>
+					<td width="22%">_ABS16</td>
+					<td width="78%">Compute the absolute value of a 16 bit value</td>
+				</tr>
+				<tr>
+					<td width="22%">_ABS32</td>
+					<td width="78%">Compute the absolute value of a 32 bit value</td>
+				</tr>
+				<tr>
+					<td width="22%">_MUL16</td>
+					<td width="78%">Calculate the 16 bit product of two 16 bit values</td>
+				</tr>
+				<tr>
+					<td width="22%">_MUL16X</td>
+					<td width="78%">Calculate the 32 bit product of two 16 bit values</td>
+				</tr>
+				<tr>
+					<td width="22%">_MUL32</td>
+					<td width="78%">Calculate the 32 bit product of two 32 bit values</td>
+				</tr>
+				<tr>
+					<td width="22%">_MUL16I</td>
+					<td width="78%">Generate the code for a 16 bit constant multiply</td>
+				</tr>
+				<tr>
+					<td width="22%">_DIV16</td>
+					<td width="78%">Calculate the 16 bit quotient &amp; remainder of a 16
+						bit value and 16 bit dividend</td>
+				</tr>
+				<tr>
+					<td width="22%">_DIV16X</td>
+					<td width="78%">Calculate the 16 bit quotient &amp; remainder of a 32
+						bit value and 16 bit dividend</td>
+				</tr>
+				<tr>
+					<td width="22%">_DIV32</td>
+					<td width="78%">Calculate the 32 bit quotient &amp; remainder of a 32
+						bit value and 32 bit dividend</td>
+				</tr>
+				<tr>
+					<td width="22%">_CMP16</td>
+					<td width="78%">Compare two 16 bit values</td>
+				</tr>
+				<tr>
+					<td width="22%">_CMP32</td>
+					<td width="78%">Compare two 32 bit values</td>
+				</tr>
+				<tr>
+					<td width="22%">_MEMFWD&nbsp;</td>
+					<td width="78%">Move a block for memory a forward direction</td>
+				</tr>
+				<tr>
+					<td width="22%">_MEMREV</td>
+					<td width="78%">Not Implemented</td>
+				</tr>
+				<tr>
+					<td width="22%">_MEMCPY</td>
+					<td width="78%">Not Implemented</td>
+				</tr>
+				<tr>
+					<td width="22%">_STRLEN</td>
+					<td width="78%">Compute the length of a 'C' style string</td>
+				</tr>
+				<tr>
+					<td width="22%">_STRCPY</td>
+					<td width="78%">Copy a 'C' style string</td>
+				</tr>
+				<tr>
+					<td width="22%">_STRCMP</td>
+					<td width="78%">Compare two 'C' style strings</td>
+				</tr>
+				<tr>
+					<td width="22%">_STRNCMP</td>
+					<td width="78%">Not implemented</td>
+				</tr>
+				<tr>
+					<td width="22%">&nbsp;</td>
+					<td width="78%">&nbsp;</td>
+				</tr>
+				<tr>
+					<td width="22%">&nbsp;</td>
+					<td width="78%">&nbsp;</td>
+				</tr>
+				<tr>
+					<td width="22%">&nbsp;</td>
+					<td width="78%">&nbsp;</td>
+				</tr>
+				<tr>
+					<td width="22%">&nbsp;</td>
+					<td width="78%">&nbsp;</td>
+				</tr>
+				<tr>
+					<td width="22%">&nbsp;</td>
+					<td width="78%">&nbsp;</td>
+				</tr>
+			</table>
+		<p>Examine the code for more details on the macro parameters and usage.</p>
+		<p><table class="nav-bar">
+				<tr>
+					<td>&nbsp;<a href="addressing.html">&lt;&lt; Back</a></td>
+					<td>
+						<p><a href="../index.html">Home</a>
+					</td>
+					<td>
+						<p><a href="index.html">Contents</a>
+					</td>
+					<td><a href="reference.html">Next &gt;&gt;</a></td>
+				</tr>
+			</table>
+		<p>
+<hr align="left">
 		This page was last updated on 19th March 2004
-	</BODY>
-</HTML>
+	
+</main>
+</div>
+<script src="../sidebar.js"></script>
+</body>
+</html>

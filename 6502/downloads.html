@@ -1,93 +1,101 @@
-<HTML>
-<HEAD>
-  <META NAME="GENERATOR" CONTENT="Microsoft FrontPage 4.0">
-  <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
-  <TITLE>6502 Downloads</TITLE>
-  <LINK REL="StyleSheet" HREF="../obelisk.css" TYPE="text/css" media="screen,print">
-</HEAD>
-<BODY>
-<H2><STRONG>Downloads</STRONG></H2>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>6502 Downloads - Obelisk by Andrew Jacobs</title>
+  <link rel="StyleSheet" href="../obelisk.css" type="text/css" media="screen,print">
+</head>
+<body>
+<div class="page-wrapper">
+<nav class="sidebar" id="sidebar"></nav>
+<main class="content">
 
-<P>This section contains tools and code that you can download
-from this site and use in your own projects.</P>
+<h2><strong>Downloads</strong></h2>
 
-<H3><A NAME="tools"></A><STRONG>Useful Tools</STRONG></H3>
+<p>This section contains tools and code that you can download
+from this site and use in your own projects.</p>
 
-<P>A quick search of the Internet yielded several 6502 macro assemblers
+<h3><a name="tools"></a><strong>Useful Tools</strong></h3>
+
+<p>A quick search of the Internet yielded several 6502 macro assemblers
 of varying degrees of quality. The one that I use was developed
 by Frank Vorstenbosch and creates binary output files for ROMs
 that work perfectly in the pcBBC emulator. Its also completely
-free.</P>
+free.</p>
 
-<TABLE CELLSPACING="0" CELLPADDING="0" WIDTH="100%" BORDER="1">
-  <TR>
-    <TD VALIGN="TOP" WIDTH="18%"><A HREF="../files/as65_111.zip">as65_111.zip</A></TD>
-    <TD VALIGN="TOP" WIDTH="82%">A very good 6502 (and 65SC02) assembler,
-      ideal for writing BBC Microcomputer ROMs.</TD>
-  </TR>
-</TABLE><p>Unfortunately Windows XP service pack 2 removed support for 16-bit
+<table cellspacing="0" cellpadding="0" width="100%" border="1">
+  <tr>
+    <td valign="top" width="18%"><a href="../files/as65_111.zip">as65_111.zip</a></td>
+    <td valign="top" width="82%">A very good 6502 (and 65SC02) assembler,
+      ideal for writing BBC Microcomputer ROMs.</td>
+  </tr>
+</table><p>Unfortunately Windows XP service pack 2 removed support for 16-bit
 MSDOS applications. I persuaded Frank to port he's assembler to Win 32 and you
 can down it (and others from <a href="http://www.kingswood-consulting.co.uk/assemblers/" target="_blank">here</a>).</p>
 
 <p id="Dev65">I have also been coding my own portable assembler development package based
 on Java. &nbsp;</p>
 
-<TABLE CELLSPACING="0" CELLPADDING="0" WIDTH="100%" BORDER="1">
-  <TR>
-    <TD VALIGN="TOP" WIDTH="18%"><a HREF="6502.zip">6502.zip</a></TD>
-    <TD VALIGN="TOP" WIDTH="82%">JAVA based 6502/65C02/65816
-      Relocatable Macro Assembler and Linker.</TD>
-  </TR>
-</TABLE>
+<table cellspacing="0" cellpadding="0" width="100%" border="1">
+  <tr>
+    <td valign="top" width="18%"><a href="6502.zip">6502.zip</a></td>
+    <td valign="top" width="82%">JAVA based 6502/65c02/65816
+      Relocatable Macro Assembler and Linker.</td>
+  </tr>
+</table>
 
-<H3><A NAME="source"></A><STRONG>Source Code</STRONG></H3>
+<h3><a name="source"></a><strong>Source Code</strong></h3>
 
-<P>Here are some 6502 assembly files that I've developed as part
+<p>Here are some 6502 assembly files that I've developed as part
 of my own projects. This first set of files are operating system
-independent and have some support for the 65SC02 processor.</P>
+independent and have some support for the 65SC02 processor.</p>
 
-<P><TABLE CELLSPACING="0" CELLPADDING="0" WIDTH="100%" BORDER="1">
-  <TR>
-    <TD VALIGN="TOP" WIDTH="18%"><A HREF="maclib.inc">maclib.inc</A></TD>
-    <TD VALIGN="TOP" WIDTH="82%">Various general purpose algorithms
+<p><table cellspacing="0" cellpadding="0" width="100%" border="1">
+  <tr>
+    <td valign="top" width="18%"><a href="maclib.inc">maclib.inc</a></td>
+    <td valign="top" width="82%">Various general purpose algorithms
       (e.g. arithmetic, memory, etc.) coded in the form of macros so
       that they can be used either inline or expanded as subroutines.
       It has not been thoroughly debugged yet and some routines are
-      missing.</TD>
-  </TR>
-</TABLE>
+      missing.</td>
+  </tr>
+</table>
 
-<P>The following source files are useful for developing BBC Microcomputer
-applications or ROMs.</P>
+<p>The following source files are useful for developing BBC Microcomputer
+applications or ROMs.</p>
 
-<P><TABLE CELLSPACING="0" CELLPADDING="0" WIDTH="100%" BORDER="1">
-  <TR>
-    <TD VALIGN="TOP" WIDTH="18%"><A HREF="bbc.inc">bbc.inc</A></TD>
-    <TD VALIGN="TOP" WIDTH="82%">Symbol definitions for all the standard
-      vector locations and operating system entry points.</TD>
-  </TR>
-  <TR>
-    <TD VALIGN="TOP" WIDTH="18%"><A HREF="debug.inc">debug.inc</A></TD>
-    <TD VALIGN="TOP" WIDTH="82%">A useful debugging routine that
-      prints all the registers and status flags.</TD>
-  </TR>
-</TABLE>
+<p><table cellspacing="0" cellpadding="0" width="100%" border="1">
+  <tr>
+    <td valign="top" width="18%"><a href="bbc.inc">bbc.inc</a></td>
+    <td valign="top" width="82%">Symbol definitions for all the standard
+      vector locations and operating system entry points.</td>
+  </tr>
+  <tr>
+    <td valign="top" width="18%"><a href="debug.inc">debug.inc</a></td>
+    <td valign="top" width="82%">A useful debugging routine that
+      prints all the registers and status flags.</td>
+  </tr>
+</table>
 
-<P><TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="100%"
-HEIGHT="30">
-  <TR>
-    <TD WIDTH="25%" BGCOLOR="#aaaaff">&nbsp;<A HREF="reference.html">&lt;&lt;
-      Back</A></TD>
-    <TD WIDTH="25%" BGCOLOR="#aaaaff">
-      <P><CENTER><A HREF="../index.html" TARGET="_parent">Home</A></CENTER></TD>
-    <TD WIDTH="25%" BGCOLOR="#aaaaff">
-      <P><CENTER><A HREF="index.html">Contents</A></CENTER></TD>
-    <TD ALIGN="RIGHT" WIDTH="25%" BGCOLOR="#aaaaff"><A HREF="links.html">Next
-      &gt;&gt;</A></TD>
-  </TR>
-</TABLE>
+<p><table class="nav-bar">
+  <tr>
+    <td>&nbsp;<a href="reference.html">&lt;&lt;
+      Back</a></td>
+    <td>
+      <p><a href="../index.html">Home</a></td>
+    <td>
+      <p><a href="index.html">Contents</a></td>
+    <td><a href="links.html">Next
+      &gt;&gt;</a></td>
+  </tr>
+</table>
 
-<P>
-<HR ALIGN=LEFT>This page was last updated on 5th October 2007
-</BODY>
-</HTML>
+<p>
+<hr align=left>This page was last updated on 5th October 2007
+
+</main>
+</div>
+<script src="../sidebar.js"></script>
+</body>
+</html>
